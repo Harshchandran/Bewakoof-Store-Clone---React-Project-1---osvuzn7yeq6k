@@ -1,0 +1,14 @@
+.accordionSummaryTitle {
+  font-weight: 500;
+  color: #333333;
+  font-size: 0.5rem;
+  white-space: nowrap;
+}
+
+.accordionChildren {
+  color: #2d2d2d;
+  opacity: 0.7;
+  font-weight: 400;
+  font-size: 0.5rem;
+  white-space: noWrap;
+}

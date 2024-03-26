@@ -1,0 +1,142 @@
+.bestSellersSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bestSellersContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.bestSellersIndividualBox {
+  margin: 0.5rem 0.3rem;
+  flex: 1;
+  max-width: calc(20% - 2rem); /* Adjusted width calculation with gap */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0rem 0rem 0.1rem black;
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+
+.bestSellersImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.bestSellersNameContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.bestSellerNameBox {
+  display: flex;
+  flex-direction: column;
+  gap: auto;
+  overflow: hidden;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bestSellersNameContainer h5 {
+  font-size: calc(0.28vw + 0.28vh + 1vmin);
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bestSellerName {
+  font-size: calc(0.25vw + 0.25vh + 0.5vmin);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bestSellersPriceTag {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: calc(0.3vw + 0.3vh + 1vmin);
+  font-weight: bolder;
+}
+
+.previousImageBestSeller {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  z-index: 100;
+}
+
+.nextImageBestSeller {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+}
+
+/* .bestSellersContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.bestSellersIndividualBox {
+  width: calc(17% - 0.2rem);
+  margin-right: 0.2rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0rem 0rem 0.1rem black;
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+
+.bestSellersImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.bestSellersNameContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.bestSellerNameBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.bestSellersNameContainer h4 {
+  font-size: 0.8rem;
+  display: flex;
+}
+
+.bestSellerName {
+  max-width: 80%;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */

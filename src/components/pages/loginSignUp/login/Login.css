@@ -1,0 +1,255 @@
+.loginContainer {
+  padding: 0 5rem;
+  display: flex;
+  flex-direction: row;
+  background-color: #fef4c6;
+}
+
+/* *****************************************
+            Login Right Container
+***************************************** */
+
+.loginRightDiv {
+  width: calc(50% - 1rem);
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 11rem;
+  background-image: linear-gradient(158deg, #ffffff 0%, #fff4c4 100%);
+}
+
+.loginMainText {
+  padding: 0rem 1rem;
+}
+
+.loginImageBox {
+  padding: 0rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginImage {
+  width: 100%;
+  display: flex;
+  height: auto;
+  object-fit: cover;
+}
+
+/* *****************************************
+            Login Left Container
+***************************************** */
+.loginLeftDiv2 {
+  width: calc(50% - 1rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  background-color: #fff;
+}
+
+.loginLeftDiv {
+  width: calc(50% - 1rem);
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  background-color: #fff;
+}
+
+.loginTextContainer {
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+
+.loginText {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.socialContainerSignUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginNumberForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobileNumberInputContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobileNumberInputBox {
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border-radius: 0.2rem;
+}
+
+.mobileImageBox {
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.3rem;
+  align-items: center;
+  background-color: rgb(231, 230, 230);
+  border-radius: 0.2rem;
+}
+
+.countryCode {
+  color: gray;
+  font-size: 0.7rem;
+}
+
+.indiaImg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.phoneNumberInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.8rem;
+  font-weight: bolder;
+}
+
+.error-message {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: red;
+}
+
+.submitloginFormButton {
+  width: 80%;
+  padding: 0.8rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #42a2a2;
+  border-radius: 0.2rem;
+  border: none;
+}
+
+.loginSignupDivider {
+  margin: 1rem 0;
+  position: relative;
+  text-align: center;
+}
+
+.loginSignupDivider span {
+  padding: 0 0.2rem;
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 1;
+}
+
+.loginSignupDivider::before,
+.loginSignupDivider::after {
+  content: "";
+  position: absolute;
+  top: 60%;
+  width: 800%;
+  border-top: 1px solid #8f8f8f;
+  z-index: 0;
+}
+
+.loginSignupDivider::before {
+  right: 100%;
+}
+
+.loginSignupDivider::after {
+  left: 100%;
+}
+
+.loginSocialMediaButtonBox {
+  margin: 0rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loginEmailButton {
+  width: 20.5rem;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #585858;
+  border-radius: 0.2rem;
+  background-color: #fff;
+  border: 0.1px solid #878787;
+}
+
+.loginSocialMediaButton {
+  width: 10rem;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #585858;
+  border-radius: 0.2rem;
+  background-color: #fff;
+  border: 0.1px solid #878787;
+}
+
+.LoginSocialMedialogo {
+  width: 1rem;
+}
+
+.loginTermsConditionsText {
+  font-size: 0.6rem;
+  color: gray;
+}
+
+@media only screen and (max-width: 991px) {
+  .loginContainer {
+    padding: 0 5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #fef4c6;
+  }
+
+  .loginLeftDiv {
+    width: 100%;
+  }
+
+  .loginRightDiv {
+    width: 100%;
+  }
+
+  .loginLeftDiv2 {
+    width: 100%;
+  }
+}

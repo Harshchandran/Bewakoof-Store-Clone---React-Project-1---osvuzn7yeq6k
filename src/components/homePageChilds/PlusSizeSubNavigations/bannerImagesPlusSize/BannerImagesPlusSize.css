@@ -1,0 +1,19 @@
+.bannerImagesPlusSizeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+
+.bannerImagesPlusSizeBox {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.bannerImagesPlusSizeImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

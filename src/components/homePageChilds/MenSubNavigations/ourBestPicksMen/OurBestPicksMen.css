@@ -1,0 +1,32 @@
+.ourBestPicksMen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ourBestPicksMen h4 {
+  margin: 0.5rem 0rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.ourBestPicksMenContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  overflow: hidden;
+}
+
+.ourBestPicksMenBox {
+  width: calc(50% - 0.5rem);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ourBestPicksMenImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

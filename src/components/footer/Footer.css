@@ -1,0 +1,22 @@
+footer {
+  background-color: black;
+}
+
+.footerSecondaryBox {
+  margin: 1rem 10%;
+  padding: 2rem;
+  color: #ffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: justify;
+}
+
+.footerSecondaryHeader {
+  font-size: 1.125rem;
+  font-weight: 900;
+}
+
+.footerSecondaryText {
+  font-size: 1rem;
+}

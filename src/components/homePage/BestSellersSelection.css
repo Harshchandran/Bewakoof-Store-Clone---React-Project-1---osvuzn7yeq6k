@@ -1,0 +1,50 @@
+.bestSellersSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.sellerDataCard {
+    margin: 2rem 2rem;
+    width: 12rem;
+    height: 25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0px 0px 1px black;
+}
+
+
+
+.sellerDataImg {
+    width: 12rem;
+    height: 16rem;
+}
+
+
+.sellerDetailsBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sellerName {
+    margin: 0;
+}
+
+.sellerproductDetails {
+    overflow: hidden;
+    margin: 0;
+}
+
+
+.sellersDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.sellersFavoriteIcon {
+    color: red;
+}

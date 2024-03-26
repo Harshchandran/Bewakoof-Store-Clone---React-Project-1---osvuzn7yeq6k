@@ -1,0 +1,23 @@
+.ProductReviewsVerifiedBuyerBox {
+  padding: 0.2rem;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  color: #2ca003;
+  font-size: 0.563rem;
+  background: #f4faf2;
+  border: none;
+  border-radius: 0.2rem;
+}
+
+.ProductReviewsDivider {
+  margin: 0.8rem 0rem;
+  border: none;
+  height: 0.1rem;
+}
+
+.ProductReviewsCustomerReview {
+  color: #333333;
+  font-size: 0.75rem;
+}

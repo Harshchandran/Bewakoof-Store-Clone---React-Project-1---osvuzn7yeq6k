@@ -1,0 +1,47 @@
+.trendingCategoryText {
+  font-size: calc(0.55vw + 0.55vh + 1vmin);
+  font-weight: 900;
+  text-align: center;
+}
+
+.listOfProductsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.listOfProductsBox {
+  width: calc(20% - 2rem);
+}
+
+.listOfProductsImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.trendingCategoryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.trendingCategoryBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0rem;
+}
+.trendingCategory {
+  width: calc(16.5% - 0rem);
+}
+
+.trendingCategoryImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

@@ -1,0 +1,20 @@
+.heroImagePlusSizeContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0rem;
+  overflow: hidden;
+}
+
+.heroImagePlusSizeBox {
+  width: calc(50% - 0.5rem);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.heroImagePlusSizeImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

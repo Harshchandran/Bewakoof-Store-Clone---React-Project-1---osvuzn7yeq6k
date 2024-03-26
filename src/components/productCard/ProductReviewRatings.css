@@ -1,0 +1,62 @@
+.ProductReviewRatingsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ProductReviewRatingsPercentageText {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ProductReviewRatingsDetailsBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ProductReviewRatingsDetailsContent {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ProductReviewRatingsDetailsBox h1 {
+  font-size: 2.25rem;
+}
+
+.ProductReviewRatingsProgressContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.ProductReviewRatingsProgressBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 0.3rem;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+.ProductReviewRatingsNumber {
+  font-size: 0.688rem;
+  font-weight: 900;
+}
+
+.ProductReviewRatingsDetailsButton {
+  padding: 0.5rem 1rem;
+  color: #207bb4;
+  background: #ffff;
+  font-weight: bolder;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+  border: 0.1rem solid #dedede;
+}

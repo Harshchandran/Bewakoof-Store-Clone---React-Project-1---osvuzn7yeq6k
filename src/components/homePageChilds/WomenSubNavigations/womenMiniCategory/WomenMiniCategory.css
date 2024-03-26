@@ -1,0 +1,36 @@
+.WomenMiniSubNavigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.WomenMiniSubNavigationContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.WomenMiniSubNavigationBox {
+  width: calc(8rem - 0.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.WomenMiniSubNavigationImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.WomenMiniSubNavigationName {
+  font-size: calc(0.2vw + 0.2vh + 1vmin);
+  text-align: center;
+  font-weight: bolder;
+}

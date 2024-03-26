@@ -1,0 +1,36 @@
+.searchDataContainer {
+  padding: 0.48rem 0.3rem;
+  min-width: 14rem;
+  width: 16rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  background-color: #eeeeee;
+  border-radius: 0.3rem;
+}
+
+.searchDataContainer:focus-within {
+  outline: 0.01rem solid #717171;
+  background-color: white;
+  border: 1rem;
+}
+
+#searchData {
+  width: 90%;
+  height: 1.25rem;
+  font-size: 0.6rem;
+  color: #717171;
+  background-color: #eeeeee;
+  border: none;
+  outline: none;
+}
+
+#searchData:focus {
+  background-color: white;
+}
+
+.searchIcon {
+  color: #717171;
+}

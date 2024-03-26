@@ -1,0 +1,36 @@
+.plusSizeMiniCategory {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.plusSizeMiniCategoryContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.plusSizeMiniCategoryBox {
+  width: calc(8rem - 0.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.plusSizeMiniCategoryImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.plusSizeMiniCategoryName {
+  font-size: calc(0.2vw + 0.2vh + 1vmin);
+  text-align: center;
+  font-weight: bolder;
+}

@@ -1,0 +1,32 @@
+.dontMissMen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dontMissMen h4 {
+  margin: 0.5rem 0rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.dontMissMenContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  overflow: hidden;
+}
+
+.dontMissMenBox {
+  width: calc(50% - 0.5rem);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dontMissMenImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

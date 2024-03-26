@@ -1,0 +1,308 @@
+.productDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.productDetailsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.productDetailsSellerName {
+  color: #4f5362;
+  font-size: 1.125rem;
+  font-weight: bolder;
+}
+
+.productDetailsProductName {
+  color: #737373;
+  font-size: 1rem;
+}
+
+.productDetailsRatingBox {
+  width: 4rem;
+  padding: 0.2rem 0.6rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.2rem;
+  color: #333333;
+  font-weight: bolder;
+  background: #f7f7f7;
+  border: 0.12rem solid #a4a4a4;
+  border-radius: 0.1rem;
+  font-size: 0.875rem;
+}
+
+.productDetailsCurrencyBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.3rem;
+}
+
+.productDetailsCurrency {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: end;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.productDetailsCurrencyText {
+  color: #949494;
+  font-size: 0.75rem;
+}
+
+.productDetailsMemberShipBox {
+  font-size: 0.75rem;
+}
+
+.productDetailsMembershipSpan {
+  color: #42a2a2;
+  font-weight: 500;
+}
+
+.productDetailsSizesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.productDetailsSizesTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.productDetailsSizesButtonBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+.productDetailsSizesButton {
+  width: 3rem;
+  padding: 0.8rem 0.8rem;
+  border: 0.14rem solid black;
+  border-radius: 0.3rem;
+  background: #ffffff;
+}
+
+.productDetailsSizesButton:hover {
+  border: 0.14rem solid #42a2a2;
+}
+
+.productDetailsSizesDividerLine {
+  border: 0;
+  height: 0.25rem;
+  background: #f1f1f1;
+}
+
+.productDetailsButtonWishListsBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.productDetailsButtonAddToBagButton {
+  width: calc(100% - 1rem);
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.2rem;
+  border: none;
+  font-weight: bolder;
+  background: #ffd84d;
+}
+
+.productDetailsButtonWishListsButton {
+  width: calc(100% - 1rem);
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-weight: bolder;
+  color: #949494;
+  border-radius: 0.2rem;
+  background: #ffffff;
+  border: 0.1rem solid rgba(148, 148, 148, 0.5);
+}
+
+.productDetailsDeliveryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.productDetailsCheckAddress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bolder;
+}
+
+.productDetailsDelivery {
+  display: flex;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  align-items: center;
+}
+
+.productDetailsCountryBox {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #207bb4;
+  font-weight: bold;
+}
+
+.productDetailsIndianFlag {
+  width: 1rem;
+}
+
+.productDetailsTrustDeliveryBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.productDetailsTrustDelivery {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  font-size: 0.5rem;
+  color: #8f98a9;
+  font-weight: bold;
+}
+
+.productDetailsTrustDeliveryImage {
+  width: 3rem;
+}
+
+/* Modal  */
+
+.bewakoofBlackLogo {
+  width: 16%;
+}
+
+.membershipLogoContainer {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.membershipLogoHeading {
+  width: 60%;
+  font-size: 0.875rem;
+}
+.memberShipOffersContainer {
+  padding: 0rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.memberShipOffersBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 0.5rem;
+  align-items: flex-start;
+  text-align: start;
+}
+
+.memberShipOfferTextBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: start;
+}
+
+.memberShipOfferSubHeading {
+  font-size: 0.875rem;
+  font-weight: bolder;
+}
+
+.memberShipOfferText {
+  font-size: 0.75rem;
+}
+
+.memberShipOfferButtonBox {
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #f2f2f2;
+}
+
+.memberShipOfferButtonBox h5 {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.addMemberShipToCartButton {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+}
+
+.addMemberShipToCartButton p {
+  font-size: 0.75rem;
+}
+
+.addMemberShipToCartButton h3 {
+  font-size: 1.125rem;
+}
+
+.dressSizesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dressSizesContainer h4 {
+  font-size: 1rem;
+  text-decoration: underline #42a2a2;
+  text-underline-offset: 0.3rem;
+}
+
+.dressSizes {
+  width: 40%;
+  height: auto;
+  object-fit: cover;
+}
+
+.dressSizesImageBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dressSizesImages {
+  height: auto;
+  object-fit: cover;
+  width: 80%;
+}

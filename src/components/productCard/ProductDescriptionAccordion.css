@@ -1,0 +1,40 @@
+.ProductDescriptionAccordionBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ProductDescriptionAccordionSummaryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ProductDescriptionAccordionImage {
+  width: 2rem;
+  height: 2rem;
+}
+
+.ProductDescriptionAccordionSummaryBox h5 {
+  font-size: 0.875rem;
+}
+
+.ProductDescriptionAccordionSummaryBox p {
+  font-size: 0.75rem;
+  color: #878787;
+}
+
+.ProductDescriptionAccordionDetails {
+  font-size: 0.75rem;
+  color: #878787;
+}
+
+.ProductDescriptionAccordionDetails span {
+  color: #000;
+  font-weight: 900;
+}
+
+.ProductDescriptionAccordionDetailsClick {
+  color: #42a2a2;
+  font-weight: 900;
+}

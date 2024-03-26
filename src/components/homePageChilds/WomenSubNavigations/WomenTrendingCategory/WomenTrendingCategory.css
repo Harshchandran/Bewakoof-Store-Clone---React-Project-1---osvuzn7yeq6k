@@ -1,0 +1,29 @@
+.womenTrendingCategoryText {
+  margin: 0.4rem 0rem;
+  font-size: calc(0.55vw + 0.55vh + 1vmin);
+  font-weight: 900;
+  text-align: center;
+}
+
+.womenTrendingCategoryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+.womenTrendingCategoryBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 0rem;
+}
+
+.womenTrendingCategory {
+  width: calc(20% - 2rem);
+}
+
+.womenTrendingCategoryImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

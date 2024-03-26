@@ -1,0 +1,9 @@
+.homepageCoverImageContainer {
+  margin: 1rem 0rem;
+}
+
+.homepageCoverImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

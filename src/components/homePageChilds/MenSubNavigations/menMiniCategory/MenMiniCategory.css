@@ -1,0 +1,36 @@
+.MenMiniSubNavigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.MenMiniSubNavigationContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.MenMiniSubNavigationBox {
+  width: calc(8rem - 0.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.MenMiniSubNavigationImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.MenMiniSubNavigationName {
+  font-size: calc(0.2vw + 0.2vh + 1vmin);
+  text-align: center;
+  font-weight: bolder;
+}

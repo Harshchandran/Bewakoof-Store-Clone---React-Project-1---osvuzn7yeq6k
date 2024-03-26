@@ -1,0 +1,31 @@
+.menBestOfBewakoof {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menBestOfBewakoof h4 {
+  margin: 0.5rem 0rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.menBestOfBewakoofContainer {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.menBestOfBewakoofBox {
+  width: calc(33.3% - 0.5rem);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.menBestOfBewakoofImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

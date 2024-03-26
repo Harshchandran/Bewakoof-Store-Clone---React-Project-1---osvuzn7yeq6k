@@ -1,0 +1,71 @@
+.womenHeroBannerContainer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+}
+
+.womenHeroImagesContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.womenHeroImagesLink {
+  width: calc(33% - 1rem);
+}
+
+.womenHeroBannerImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.pageNavigation {
+  height: 1rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%); /* Added */
+  opacity: 0.6rem;
+}
+
+.heroRightSideNavigation {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  color: rgb(58, 58, 58);
+  font-size: large;
+  font-weight: 100;
+  background-color: rgba(170, 169, 169, 0.4);
+  position: absolute;
+  top: 48%;
+  left: 0.5%;
+  border-radius: 20rem;
+}
+
+.heroLeftSideNavigation {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  color: rgb(58, 58, 58);
+  font-weight: 100;
+  background-color: rgba(170, 169, 169, 0.4);
+  position: absolute;
+  top: 48%;
+  right: 0.5%;
+  border-radius: 20rem;
+}
+
+.womenHeroImagesContainer {
+  display: flex;
+  flex-direction: row;
+}

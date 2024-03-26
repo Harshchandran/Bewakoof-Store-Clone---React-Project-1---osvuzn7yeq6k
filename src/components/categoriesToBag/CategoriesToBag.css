@@ -1,0 +1,29 @@
+.categoriesToBagTitle {
+  font-size: calc(0.55vw + 0.55vh + 1vmin);
+  font-weight: 900;
+  text-align: center;
+}
+.categoriesToBagSection {
+  margin: 0.5rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.categoriesToBagContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.individualCategoryToBag {
+  width: calc(16.5% - 0rem);
+  height: auto;
+  display: flex;
+}
+
+.CategoryToBagImage {
+  display: flex;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

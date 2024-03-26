@@ -1,0 +1,51 @@
+.addressButton {
+  padding: 0.8rem 1rem;
+  width: 100%;
+  font-size: 1rem;
+  background: #42a2a2;
+  color: #ffff;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+.dividerAddressBox {
+  margin: 0.8rem 0;
+  border: none;
+  height: 0.1rem;
+}
+
+.AddressHeader {
+  color: #333333;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.addressSubmitButtonBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.addressSubmitButton {
+  width: 48%;
+  background: #42a2a2;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  color: #ffff;
+  border: none;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+}
+
+.addressCancelButton {
+  width: 48%;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background: #ffff;
+  border: none;
+  border: 0.1rem solid #42a2a2;
+  color: #42a2a2;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+}
