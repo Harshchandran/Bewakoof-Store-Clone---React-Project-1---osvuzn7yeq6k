@@ -11,6 +11,7 @@ export const OrderHistory = () => {
   const [orderHistoryData, setOrderHistoryData] = useState([]);
   const [orderHistoryItems, setOrderHistoryItems] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [orderCount, setOrderCount] = useState(0);
 
   const GetOrderHistoryURL =
     "https://academics.newtonschool.co/api/v1/ecommerce/order/";
@@ -20,6 +21,7 @@ export const OrderHistory = () => {
     if (localStorage.getItem("token")) {
       const JWTToken = JSON.parse(localStorage.getItem("token"));
       setToken(JWTToken);
+      console.log(JWTToken);
       const getOrderHistory = async () => {
         try {
           const response = await fetch(GetOrderHistoryURL, {
@@ -33,6 +35,8 @@ export const OrderHistory = () => {
           const data = await response.json();
           setLoader(false);
           setOrderHistoryData(data.data);
+          console.log(data);
+          setOrderCount(data.results);
 
           setOrderHistoryItems(data.order);
         } catch (error) {
@@ -53,13 +57,13 @@ export const OrderHistory = () => {
         <h2 className="OrderHistoryHeading">My Orders</h2>
 
         {token ? (
-          orderHistoryData.results === 0 ? (
+          orderCount === 0 ? (
             <>
-              <LoaderPage loader={loader} />
               <EmptyOrderHistory />
             </>
           ) : (
             <section>
+              <LoaderPage loader={loader} />
               <div>
                 <div className="OrderHistoryProductContainer">
                   {orderHistoryData.map((order, index) => (

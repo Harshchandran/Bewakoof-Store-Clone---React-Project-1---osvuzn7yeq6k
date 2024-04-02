@@ -9,9 +9,7 @@ import CampaignWomen from "./homePageChilds/WomenSubNavigations/Women";
 import { IndividualCategoryProducts } from "./individualCategoryProductsPage/IndividualCategoryProducts";
 import NavigationMenu from "./navigationMenu/NavigationMenu";
 import Home from "./pages/Home";
-import Men from "./pages/Men/Men";
 import PageNotFound from "./pages/PageNotFound";
-import Women from "./pages/Women";
 import Cart from "./pages/cart/Cart";
 import { PaymentPage } from "./pages/cart/payment/PaymentPage";
 import { LoginPage } from "./pages/loginSignUp/LoginPage/LoginPage";
@@ -42,6 +40,7 @@ function App() {
         setNoOfItemsInCart={setNoOfItemsInCart}
       />
       <ScrollToTop />
+
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
