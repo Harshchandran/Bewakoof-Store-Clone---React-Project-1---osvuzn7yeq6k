@@ -88,7 +88,6 @@ export const AddSizeToUpdateCart = ({
     <React.Fragment>
       <button
         variant="outlined"
-        // onClick={updateSize === "" ? handleClickOpen  : updateItemToCart}
         onClick={() => {
           if (updateSize === "") {
             handleClickOpen();

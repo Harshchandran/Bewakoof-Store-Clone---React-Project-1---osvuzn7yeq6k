@@ -165,7 +165,9 @@ export const ProductDetails = ({
             }}
             icon={false}
           >
-            Product Added to Cart Successfully..!
+            {token
+              ? "Product Added to Cart Successfully..!"
+              : " Log in / Sign up to add products to cart"}
           </Alert>
         </Snackbar>
       </div>
