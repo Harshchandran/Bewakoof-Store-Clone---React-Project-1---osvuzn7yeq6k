@@ -16,8 +16,6 @@ export const ProductCard = ({ updateCartItemNumber }) => {
 
   const [loader, setLoader] = useState(true);
 
-  const [activeMiniProductImage, setActiveMiniProductImage] = useState(0);
-
   const [mainImage, setMainImage] = useState(productDetails?.displayImage);
 
   useEffect(() => {
@@ -74,22 +72,6 @@ export const ProductCard = ({ updateCartItemNumber }) => {
     setMainImage(imageSrc);
   };
 
-  const prevSlide = () => {
-    setActiveMiniProductImage((prevIndex) => {
-      const newIndex = prevIndex - 5;
-      const totalImages = productDetails?.images?.length;
-      return newIndex < 0 ? Math.max(totalImages - 5, 0) : newIndex;
-    });
-  };
-
-  const nextSlide = () => {
-    setActiveMiniProductImage((prevIndex) => {
-      const newIndex = prevIndex + 5;
-      const totalImages = productDetails?.images?.length;
-      return newIndex >= totalImages ? 0 : newIndex;
-    });
-  };
-
   return (
     <>
       <section className="productCart">
@@ -97,31 +79,11 @@ export const ProductCard = ({ updateCartItemNumber }) => {
         <div key={productDetails?._id} className="productCardContainer">
           <div className="cardProductImagesContainer">
             <div className="cardProductImagesBox">
-              <ExpandLessIcon
-                className="previousImageProductCart"
-                onClick={prevSlide}
-                sx={{
-                  fontSize: "1.5rem",
-                  fontWeight: "200",
-                }}
-              />
-
-              {productDetails?.images
-                ?.slice(activeMiniProductImage, activeMiniProductImage + 5)
-                .map((data, index) => (
-                  <div key={index} onClick={() => handleImageClick(data)}>
-                    <img className="cardProductImages" src={data} alt={data} />
-                  </div>
-                ))}
-
-              <ExpandMoreIcon
-                className="nextImageProductCart"
-                onClick={nextSlide}
-                sx={{
-                  fontSize: "1.5rem",
-                  fontWeight: "200",
-                }}
-              />
+              {productDetails?.images?.map((data, index) => (
+                <div key={index} onClick={() => handleImageClick(data)}>
+                  <img className="cardProductImages" src={data} alt={data} />
+                </div>
+              ))}
             </div>
 
             <div className="cardProductMainImageBox">
