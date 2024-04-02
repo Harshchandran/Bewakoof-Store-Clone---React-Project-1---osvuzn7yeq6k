@@ -21,7 +21,7 @@ export const OrderHistory = () => {
     if (localStorage.getItem("token")) {
       const JWTToken = JSON.parse(localStorage.getItem("token"));
       setToken(JWTToken);
-      console.log(JWTToken);
+
       const getOrderHistory = async () => {
         try {
           const response = await fetch(GetOrderHistoryURL, {
@@ -35,7 +35,7 @@ export const OrderHistory = () => {
           const data = await response.json();
           setLoader(false);
           setOrderHistoryData(data.data);
-          console.log(data);
+
           setOrderCount(data.results);
 
           setOrderHistoryItems(data.order);
