@@ -8,6 +8,7 @@ import { LoaderPage } from "../pages/pageLoader/LoaderPage";
 
 export const ProductCard = ({ updateCartItemNumber }) => {
   const location = useLocation();
+
   const productID = location.state ? location.state.id : null;
 
   const [productDetails, setProductDetails] = useState([]);
@@ -100,7 +101,7 @@ export const ProductCard = ({ updateCartItemNumber }) => {
                 className="previousImageProductCart"
                 onClick={prevSlide}
                 sx={{
-                  fontSize: "2rem",
+                  fontSize: "1.5rem",
                   fontWeight: "200",
                 }}
               />
@@ -117,7 +118,7 @@ export const ProductCard = ({ updateCartItemNumber }) => {
                 className="nextImageProductCart"
                 onClick={nextSlide}
                 sx={{
-                  fontSize: "2rem",
+                  fontSize: "1.5rem",
                   fontWeight: "200",
                 }}
               />
