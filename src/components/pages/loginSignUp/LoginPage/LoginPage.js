@@ -126,8 +126,7 @@ export const LoginPage = () => {
       <section className="loginPage">
         <div className="loginForm">
           <div className="container">
-            <div className=" loginFormHeader">
-              {/* {action} */}
+            <div className="loginFormHeader">
               <h4 className="text">Log in / Sign up</h4>
               <p className="subText">
                 for Latest trends, exciting offers and everything Bewakoof®!
