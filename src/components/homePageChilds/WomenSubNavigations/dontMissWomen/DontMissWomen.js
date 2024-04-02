@@ -10,19 +10,31 @@ export const DontMissWomen = () => {
   const DontMissWomenImages = [
     {
       url: Jeans,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+        gender: "Women",
+      },
     },
     {
       url: BoyFriendTShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+      },
     },
     {
       url: Pants,
-      category: "trouser",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
     {
       url: TShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+      },
     },
   ];
 
@@ -36,7 +48,7 @@ export const DontMissWomen = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="dontMissWomenImage"

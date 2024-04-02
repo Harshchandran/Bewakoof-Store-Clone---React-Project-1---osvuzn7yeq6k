@@ -23,60 +23,108 @@ export const ShopForMenWomen = () => {
   const ShopForMenImages = [
     {
       url: TShirtMen,
-      category: "tshirt",
+      filter: {
+        subCategory: "shirt",
+        gender: "Men",
+        size: "XXL",
+      },
     },
     {
       url: PajamasMen,
-      category: "pyjamas",
+      filter: {
+        subCategory: "pyjamas",
+        gender: "Men",
+        size: "XXL",
+      },
     },
     {
       url: TShirtMenLoose,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Men",
+        size: "XXL",
+      },
     },
     {
       url: ShortsMen,
-      category: "shorts",
+      filter: {
+        subCategory: "shorts",
+        gender: "Men",
+        size: "XXL",
+      },
     },
     {
       url: TShirtMenFit,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Men",
+        size: "XXL",
+      },
     },
     {
       url: ShirtMen,
-      category: "shirt",
+      filter: {
+        subCategory: "shirt",
+        gender: "Men",
+        size: "XXL",
+      },
     },
   ];
 
   const ShopForWomenImages = [
     {
       url: TShirtWomen,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+        size: "XXL",
+      },
     },
     {
       url: PantsWomen,
-      category: "trouser",
+      filter: {
+        subCategory: "jeans",
+        gender: "Women",
+        size: "XXL",
+      },
     },
     {
       url: BoyFriendTShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+        size: "XXL",
+      },
     },
     {
       url: JoggersWomen,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+        gender: "Women",
+        size: "XXL",
+      },
     },
     {
       url: TopWearWomen,
-      category: "kurti",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
     {
       url: DressesWomen,
-      category: "tshirt",
+
+      filter: {
+        subCategory: "tshirt",
+        size: "XXL",
+        gender: "Women",
+      },
     },
   ];
   return (
     <>
       <section className="ShopForMenWomenCategory">
-        <div>
+        <div className="ShopForMenWomenSoloImageBox">
           <img
             className="ShopForMenWomenSoloImage"
             src={ShopForMen}
@@ -90,7 +138,7 @@ export const ShopForMenWomen = () => {
                 to="/productPage"
                 className=""
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="ShopForMenWomenImage"
@@ -104,7 +152,7 @@ export const ShopForMenWomen = () => {
       </section>
 
       <section className="ShopForMenWomenCategory">
-        <div>
+        <div className="ShopForMenWomenSoloImageBox">
           <img
             className="ShopForMenWomenSoloImage"
             src={ShopForWomen}
@@ -118,7 +166,7 @@ export const ShopForMenWomen = () => {
                 to="/productPage"
                 className=""
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="ShopForMenWomenImage"

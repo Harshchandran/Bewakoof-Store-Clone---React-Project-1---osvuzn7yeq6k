@@ -1,54 +1,30 @@
-import React, { useEffect, useState } from "react";
-import "./IndividualCategoryProducts.css";
-import { FiltersSection } from "./FiltersSection";
-import { SortBy } from "./SortBy";
 import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import { FiltersSection } from "./FiltersSection";
+import "./IndividualCategoryProducts.css";
+import { SortBy } from "./SortBy";
 
 export const IndividualCategoryProducts = () => {
   const [categoryData, setCategoryData] = useState([]);
 
+  const [filterApplied, setFiltersApplied] = useState({});
+
+  const [sortByType, setSortByType] = useState(false);
+
   const location = useLocation();
-  const category = location.state ? location.state.category : null;
 
-  // if (category === "bestSellers") {
-  //   useEffect(() => {
-  //     const BestSellerApi = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?sort={"rating":-1}`;
+  const filterData = location.state && location.state.filter;
 
-  //     const projectId = "f105bi07c590";
+  const [notFound, setNotFound] = useState(false);
 
-  //     async function getBestSellersSelection(api) {
-  //       try {
-  //         const response = await fetch(api, {
-  //           method: "GET",
-  //           headers: {
-  //             projectId: projectId,
-  //           },
-  //         });
-
-  //         const data = await response.json();
-
-  //         console.log(data);
-  //         setCategoryData(data.data);
-
-  //         console.log(categoryData);
-  //       } catch (error) {
-  //         console.error("Error fetching Best Sellers Selection:", error);
-  //       }
-  //     }
-
-  //     console.log(categoryData);
-  //     console.log(categoryData.length);
-
-  //     getBestSellersSelection(BestSellerApi);
-  //   }, []);
-  // }
+  const [filterClearButton, setFilterClearButton] = useState(false);
 
   useEffect(() => {
-    if (category) {
-      const categoryDataApi = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter={"subCategory":"${category}"}`;
+    if (filterData) {
+      const categoryDataApi = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter=${encodeURIComponent(
+        JSON.stringify(filterData)
+      )}`;
 
       const projectId = "f104bi07c490";
 
@@ -61,68 +37,157 @@ export const IndividualCategoryProducts = () => {
             },
           });
 
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
           const data = await response.json();
+          console.log(data.data);
 
           setCategoryData(data.data);
         } catch (error) {
-          console.error("Error fetching Best Sellers Selection:", error);
+          console.error("Error fetching Category Data:", error);
         }
       }
 
       getCategoryData(categoryDataApi);
     }
-  }, [category]);
+  }, [filterData]);
+
+  const projectId = "f104bi07c490";
+
+  const UpdateFiltersOnData = async () => {
+    const mergedFilters = { ...filterData, ...filterApplied };
+
+    const UpdateFilterUrl = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?filter=${encodeURIComponent(
+      JSON.stringify(mergedFilters)
+    )}`;
+
+    try {
+      const response = await fetch(UpdateFilterUrl, {
+        method: "GET",
+        headers: {
+          projectId: projectId,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+
+      setCategoryData(data.data);
+
+      if (data.status === "success") {
+        setNotFound(false);
+      } else {
+        setNotFound(true);
+      }
+    } catch (error) {
+      console.error("Error updating Filter Data:", error);
+    }
+  };
+
+  const handleClearAllFilter = () => {
+    setFiltersApplied({});
+    setFilterClearButton(false);
+    UpdateFiltersOnData();
+  };
+
+  const sortByPriceLowToHigh = () => {
+    const sorted = [...categoryData].sort((a, b) => a.price - b.price);
+    setCategoryData(sorted);
+  };
+
+  const sortByPriceHighToLow = () => {
+    const sorted = [...categoryData].sort((a, b) => b.price - a.price);
+    setCategoryData(sorted);
+  };
 
   return (
     <>
-      <h5>IndividualCategoryProducts</h5>
-
       <section className="individualCategorySection">
-        <h5>{category}</h5>
         <div className="individualCategoryContainer">
           <div className="individualCategoryLeftContainer">
-            <h6>FILTERS</h6>
-            <FiltersSection />
+            <div className="individualCategoryFilterSectionHeaders">
+              <h6 className="individualCategoryFilterHeading">FILTERS</h6>
+              {filterClearButton && (
+                <h6 style={{ color: "#42a2a2" }} onClick={handleClearAllFilter}>
+                  Clear
+                </h6>
+              )}
+            </div>
+            <FiltersSection
+              setFiltersApplied={setFiltersApplied}
+              filterApplied={filterApplied}
+              UpdateFiltersOnData={UpdateFiltersOnData}
+              setSortByType={setSortByType}
+              sortByType={sortByType}
+              sortByPriceHighToLow={sortByPriceHighToLow}
+              sortByPriceLowToHigh={sortByPriceLowToHigh}
+              setFilterClearButton={setFilterClearButton}
+            />
           </div>
           <div className="individualCategoryRightContainer">
             <div className="individualCategorySortingBox">
-              <SortBy />
+              <SortBy
+                sortByPriceLowToHigh={sortByPriceLowToHigh}
+                sortByPriceHighToLow={sortByPriceHighToLow}
+                setFiltersApplied={setFiltersApplied}
+              />
             </div>
-            <div className="individualCategoryDataContainer01">
-              {categoryData.map((data, index) => (
-                <Link
-                  to="/productCard"
-                  className="individualCategoryDataBox03"
-                  key={index}
-                  state={{ id: data._id }}
-                >
-                  <div className="individualCategoryDataBox02" key={index}>
-                    <img
-                      className="individualCategorySingleProductImage"
-                      src={data.displayImage}
-                      alt={`Image ${index}`}
-                    />
-                    <div className="individualCategorySingleProductBox">
-                      <div className="individualCategorySingleProductDetail">
-                        <p className="individualCategorySingleProductSellerName">
-                          {data.seller.name}
-                        </p>
-                        <p className="individualCategorySingleProductProductName">
-                          {data.name}
-                        </p>
-                      </div>
-                      <div className="individualCategorySingleProductProductFavIconBox">
+            {notFound ? (
+              <div className="individualCategoryDataNotFoundBox">
+                <h2 className="individualCategoryDataNotFound">
+                  Sorry, We couldn’t Find any matches!
+                </h2>
+
+                {filterClearButton && (
+                  <button
+                    className="individualCategoryDataNotFoundClearButton"
+                    onClick={handleClearAllFilter}
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="individualCategoryDataContainer01">
+                {categoryData?.map((data, index) => (
+                  <Link
+                    to={`/productCard/${data._id}`}
+                    className="individualCategoryDataBox03"
+                    key={index}
+                    state={{ id: data._id }}
+                  >
+                    <div className="individualCategoryDataBox02" key={index}>
+                      <img
+                        className="individualCategorySingleProductImage"
+                        src={data.displayImage}
+                        alt={`Image ${index}`}
+                      />
+                      <div className="individualCategorySingleProductBox">
+                        <div className="individualCategorySingleProductDetail">
+                          <p className="individualCategorySingleProductSellerName">
+                            {data.seller.name}
+                          </p>
+                          <p className="individualCategorySingleProductProductName">
+                            {data.name}
+                          </p>
+                        </div>
+                        {/* <div className="individualCategorySingleProductProductFavIconBox">
                         <FavoriteBorderRoundedIcon />
+                      </div> */}
+                      </div>
+                      <div className="individualCategorySingleProductPrice">
+                        <CurrencyRupeeSharpIcon sx={{ fontSize: "0.675rem" }} />
+                        <p>{data.price}</p>
                       </div>
                     </div>
-                    <div className="individualCategorySingleProductPrice">
-                      <CurrencyRupeeSharpIcon sx={{ fontSize: "0.675rem" }} />
-                      <p>{data.price}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

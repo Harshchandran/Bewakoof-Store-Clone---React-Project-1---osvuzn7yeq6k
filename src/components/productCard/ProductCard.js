@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "../productCard/ProductCard.css";
 import { ProductDetails } from "./ProductDetails";
-import { useLocation } from "react-router-dom";
 
-export const ProductCard = () => {
-  // const [productID, setProductID] = useState("652675cddaf00355a78386d0");
-
+export const ProductCard = ({ updateCartItemNumber }) => {
   const location = useLocation();
   const productID = location.state ? location.state.id : null;
 
   const [productDetails, setProductDetails] = useState([]);
   const [productReview, setProductReview] = useState([]);
+
+  const [mainImage, setMainImage] = useState(productDetails?.displayImage);
 
   useEffect(() => {
     if (productID) {
@@ -62,35 +62,40 @@ export const ProductCard = () => {
     }
   }, [productID]);
 
+  const handleImageClick = (imageSrc) => {
+    setMainImage(imageSrc);
+  };
+
   return (
     <>
-      <div>ProductCard</div>
+      <section className="productCart">
+        <div key={productDetails?._id} className="productCardContainer">
+          <div className="cardProductImagesBox">
+            {productDetails.images &&
+              productDetails.images.map((data, index) => (
+                <div key={index} onClick={() => handleImageClick(data)}>
+                  <img className="cardProductImages" src={data} alt={data} />
+                </div>
+              ))}
+          </div>
 
-      <div key={productDetails._id} className="productCardContainer">
-        <div className="cardProductImagesBox">
-          {productDetails.images &&
-            productDetails.images.map((data, index) => (
-              <div key={index}>
-                <img className="cardProductImages" src={data} alt={data} />
-              </div>
-            ))}
-        </div>
+          <div className="cardProductMainImageBox">
+            <img
+              className="cardProductMainImage"
+              src={mainImage || productDetails.displayImage}
+              alt={productDetails.title}
+            />
+          </div>
 
-        <div className="cardProductMainImageBox">
-          <img
-            className="cardProductMainImage"
-            src={productDetails.displayImage}
-            alt={""}
-          />
+          <div className="cardProductDetailsContainer">
+            <ProductDetails
+              productDetails={productDetails}
+              productReview={productReview}
+              updateCartItemNumber={updateCartItemNumber}
+            />
+          </div>
         </div>
-
-        <div className="cardProductDetailsContainer">
-          <ProductDetails
-            productDetails={productDetails}
-            productReview={productReview}
-          />
-        </div>
-      </div>
+      </section>
     </>
   );
 };

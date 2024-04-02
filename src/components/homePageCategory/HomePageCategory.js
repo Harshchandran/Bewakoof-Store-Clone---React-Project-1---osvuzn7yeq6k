@@ -11,23 +11,38 @@ export const HomePageCategory = () => {
   const homePageMiniCategoryImages = [
     {
       url: CategoryImage1,
-      category: "Bestsellers",
+      filter: {
+        sellerTag: "best seller",
+      },
+      type: "Bestsellers",
     },
     {
       url: CategoryImage2,
-      category: "New Arrivals",
+      filter: {
+        sellerTag: "new arrival",
+      },
+      type: "New Arrivals",
     },
     {
       url: CategoryImage3,
-      category: "Plus Size",
+      filter: {
+        size: "XXL",
+      },
+      type: "Plus Size",
     },
     {
       url: CategoryImage4,
-      category: "Sweaters",
+      filter: {
+        subCategory: "sweater",
+      },
+      type: "Sweaters",
     },
     {
       url: CategoryImage5,
-      category: "Trending",
+      filter: {
+        sellerTag: "trending",
+      },
+      type: "Trending",
     },
   ];
   return (
@@ -39,14 +54,14 @@ export const HomePageCategory = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="homePageSubCategoryImage"
                   src={data.url}
                   alt={`hero${index}`}
                 />
-                <p className="homePageCategoryName">{data.category}</p>
+                <p className="homePageCategoryName">{data.type}</p>
               </Link>
             </div>
           ))}

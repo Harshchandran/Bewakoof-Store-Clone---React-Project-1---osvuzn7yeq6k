@@ -1,0 +1,30 @@
+.emptyWishListContainer {
+  margin: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emptyWishlistButton {
+  padding: 0.5rem 1rem;
+  background: #42a2a2;
+  border: none;
+  font-weight: 800;
+  border-radius: 0.2rem;
+  font-size: 0.875rem;
+  color: #ffff;
+}
+
+.emptyWishListText {
+  font-size: 0.75rem;
+  color: #8f98a9;
+  text-align: center;
+}
+
+.emptyWishListHeading {
+  font-size: 0.75rem;
+  color: #292d35;
+  font-weight: 800;
+}

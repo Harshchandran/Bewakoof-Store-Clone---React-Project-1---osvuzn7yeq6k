@@ -1,0 +1,36 @@
+.emptyOrderHistory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyOrderHistoryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+}
+
+.emptyOrderHistoryText {
+  font-size: 1.25rem;
+  margin: 2rem 1rem;
+  color: #181818;
+  opacity: 0.6;
+  font-weight: 500;
+}
+
+.emptyOrderHistoryImage {
+  width: 10rem;
+}
+
+.emptyOrderHistoryButton {
+  padding: 0.8rem 2rem;
+  color: #51cccc;
+  border: 0.1rem solid #51cccc;
+  border-radius: 0.2rem;
+  background: #ffff;
+  font-weight: 900;
+  font-size: 0.875rem;
+}

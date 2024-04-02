@@ -16,43 +16,72 @@ export const MenTrendingCategory = () => {
   const CategoryData = [
     {
       url: HoodiesMen,
-      category: "hoodie",
+      filter: {
+        subCategory: "hoodie",
+        gender: "Men",
+      },
     },
     {
       url: TShirtMen,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Men",
+      },
     },
     {
       url: JeansMen,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+        gender: "Men",
+      },
     },
     {
       url: KurtasMen,
-      category: "kurta",
+      filter: {
+        subCategory: "kurta",
+      },
     },
     {
       url: CasualPantsMen,
-      category: "jumpsuit",
+      filter: {
+        subCategory: "trouser",
+        gender: "Men",
+      },
     },
     {
       url: ShirtsMen,
-      category: "shirt",
+      filter: {
+        subCategory: "shirt",
+        gender: "Men",
+      },
     },
     {
       url: JoggersMen,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+        gender: "Men",
+      },
     },
     {
       url: SweatersMen,
-      category: "sweater",
+      filter: {
+        subCategory: "sweater",
+        gender: "Men",
+      },
     },
     {
       url: PajamasMen,
-      category: "pajamas",
+      filter: {
+        subCategory: "pyjamas",
+        gender: "Men",
+      },
     },
     {
       url: ShortsMen,
-      category: "shorts",
+      filter: {
+        subCategory: "shorts",
+        gender: "Men",
+      },
     },
   ];
 
@@ -67,7 +96,7 @@ export const MenTrendingCategory = () => {
                 to="/productPage"
                 className="mensTrendingCategory"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <div>
                   <img
@@ -86,7 +115,7 @@ export const MenTrendingCategory = () => {
                 to="/productPage"
                 className="mensTrendingCategory"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <div>
                   <img

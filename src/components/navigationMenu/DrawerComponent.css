@@ -24,3 +24,15 @@
   color: black;
   font-size: 0.7rem;
 }
+
+.HamburgerNavigationMenWomen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.HamburgerNavigationMenWomen ListItemIcon {
+  align-items: self-end;
+}

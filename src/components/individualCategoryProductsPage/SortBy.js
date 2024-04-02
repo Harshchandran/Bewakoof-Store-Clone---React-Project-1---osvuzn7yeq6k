@@ -1,11 +1,15 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import "./SortBy.css";
 
-export const SortBy = () => {
+export const SortBy = ({
+  sortByPriceLowToHigh,
+  sortByPriceHighToLow,
+  setFiltersApplied,
+}) => {
   const [sortBy, setSortBy] = useState("Popular");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -15,6 +19,32 @@ export const SortBy = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [sortedData, setSortedData] = useState([]);
+
+  const SortingUrl = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?sort={"rating":-1}`;
+  const projectId = "f105bi07c590";
+
+  async function getSortingFilters(api) {
+    try {
+      const response = await fetch(api, {
+        method: "GET",
+        headers: {
+          projectId: projectId,
+        },
+      });
+
+      const data = await response.json();
+
+      setSortedData(data.data);
+    } catch (error) {
+      console.error("Error fetching Sorting", error);
+    }
+  }
+
+  useEffect(() => {
+    getSortingFilters(SortingUrl);
+  }, []);
 
   return (
     <div>
@@ -40,33 +70,41 @@ export const SortBy = () => {
         }}
       >
         <MenuItem
-          onClick={(e) => {
+          sx={{ fontSize: "0.75rem", color: "#000" }}
+          onClick={() => {
             handleClose();
-            setSortBy(e.target.textContent);
+            setSortBy("Popular");
+            setFiltersApplied({ sellerTag: "trending" });
           }}
         >
           Popular
         </MenuItem>
         <MenuItem
-          onClick={(e) => {
+          sx={{ fontSize: "0.75rem", color: "#000" }}
+          onClick={() => {
             handleClose();
-            setSortBy(e.target.textContent);
+            setSortBy("New");
+            setFiltersApplied({ sellerTag: "new arrival" });
           }}
         >
           New
         </MenuItem>
         <MenuItem
-          onClick={(e) => {
+          sx={{ fontSize: "0.75rem", color: "#000" }}
+          onClick={() => {
             handleClose();
-            setSortBy(e.target.textContent);
+            setSortBy("Price : High to Low");
+            sortByPriceHighToLow();
           }}
         >
           Price : High to Low
         </MenuItem>
         <MenuItem
-          onClick={(e) => {
+          sx={{ fontSize: "0.75rem", color: "#000" }}
+          onClick={() => {
             handleClose();
-            setSortBy(e.target.textContent);
+            setSortBy("Price : Low to High");
+            sortByPriceLowToHigh();
           }}
         >
           Price : Low to High

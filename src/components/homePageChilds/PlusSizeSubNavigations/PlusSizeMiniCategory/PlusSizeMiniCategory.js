@@ -9,21 +9,28 @@ export const PlusSizeMiniCategory = () => {
   const MenMiniSubNavigationImages = [
     {
       url: NewArrivals,
-      category: "tshirt",
+      filter: {
+        sellerTag: "new arrival",
+        size: "XXL",
+      },
     },
     {
       url: TrendingNow,
-      category: "jogger",
+      filter: {
+        sellerTag: "trending",
+        size: "XXL",
+      },
     },
     {
       url: PlusSize,
-      category: "jeans",
+      filter: {
+        size: "XXL",
+      },
     },
   ];
 
   return (
     <>
-      <div>plusSizeMiniCategory</div>
       <section className="plusSizeMiniCategory">
         <div className="plusSizeMiniCategoryContainer">
           {MenMiniSubNavigationImages.map((data, index) => (
@@ -32,7 +39,7 @@ export const PlusSizeMiniCategory = () => {
                 to="/productPage"
                 className=""
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="plusSizeMiniCategoryImage"

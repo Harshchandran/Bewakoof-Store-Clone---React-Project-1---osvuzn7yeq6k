@@ -8,11 +8,18 @@ export const OurBestPicksWomen = () => {
   const ourBestPicksWomenImages = [
     {
       url: TShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+      },
     },
     {
       url: PlusSize,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+        size: "XXL",
+      },
     },
   ];
 
@@ -26,7 +33,7 @@ export const OurBestPicksWomen = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="ourBestPicksWomenImage"

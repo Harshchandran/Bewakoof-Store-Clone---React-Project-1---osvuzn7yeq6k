@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import CampaignMen from "../components/homePageChilds/MenSubNavigations/Men";
 import "../components/styles/App.css";
 import BewakoofAir from "./homePageChilds/BewakoofAirSubNavigations/BewakoofAir";
@@ -15,11 +15,33 @@ import { LoginPage } from "./pages/loginSignUp/LoginPage/LoginPage";
 import Login from "./pages/loginSignUp/login/Login";
 import Wishlist from "./pages/wishList/Wishlist";
 import { ProductCard } from "./productCard/ProductCard";
+import { PaymentPage } from "./pages/cart/payment/PaymentPage";
+import { OrderHistory } from "./pages/orderHistory/OrderHistory";
+import { useState } from "react";
+import { ScrollToTop } from "./scrollToTop/ScrollToTop";
+import { IndividualOrderCard } from "./pages/orderHistory/individualOrderCard/IndividualOrderCard";
+import { Footer } from "./footer/Footer";
+import { SubFooter } from "./footer/footerSub/SubFooter";
+import { FooterTextComponent } from "./footer/footerText/FooterTextComponent";
 
 function App() {
+  const [noOfItemsInCart, setNoOfItemsInCart] = useState("");
+
+  const updateCartItemNumber = () => {
+    if (localStorage.getItem("cartItemsNumber")) {
+      const ItemsInCart = JSON.parse(localStorage.getItem("cartItemsNumber"));
+      setNoOfItemsInCart(ItemsInCart);
+    }
+  };
+
   return (
     <>
-      <NavigationMenu />
+      <div className="marginHandler"></div>
+      <NavigationMenu
+        noOfItemsInCart={noOfItemsInCart}
+        setNoOfItemsInCart={setNoOfItemsInCart}
+      />
+      <ScrollToTop />
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
@@ -33,15 +55,22 @@ function App() {
         <Route path="/women-clothing" element={<Women />} />
         <Route path="/login" element={<Login />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/productPage" element={<IndividualCategoryProducts />} />\
-        <Route path="/productCard" element={<ProductCard />} />
+        <Route
+          path="/cart"
+          element={<Cart updateCartItemNumber={updateCartItemNumber} />}
+        />
+        <Route path="/productPage" element={<IndividualCategoryProducts />} />
+        <Route
+          path="/productCard/:id"
+          element={<ProductCard updateCartItemNumber={updateCartItemNumber} />}
+        />
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/orders" element={<OrderHistory />} />
+        <Route path="/orders/Individual" element={<IndividualOrderCard />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      {/* to="/productPage"
-                key={index}
-                state={{ category: data.category }} */}
+      <Footer />
     </>
   );
 }

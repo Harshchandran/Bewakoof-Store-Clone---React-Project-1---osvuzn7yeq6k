@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import TextField from "@mui/material/TextField";
+import React, { useEffect, useState } from "react";
 import "./AddressBlock.css";
+import { useNavigate } from "react-router-dom";
 
-export const AddressBlock = (itemQuantity) => {
+export const AddressBlock = ({
+  productIds,
+  productQuantities,
+  handleClearCart,
+}) => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const [addressProductId, setAddressProductId] = useState("");
   const [name, setName] = useState("");
 
   const [updateAddress, setUpdateAddress] = useState([]);
+
+  const navigate = useNavigate();
 
   const [addressData, setAddressData] = useState({
     productId: "",
@@ -42,38 +47,73 @@ export const AddressBlock = (itemQuantity) => {
     }
   }, []);
 
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = async () => {
+    // e.preventDefault();
     try {
-      const JWTToken = JSON.parse(localStorage.getItem("token"));
-      const AddressUrl =
-        "https://academics.newtonschool.co/api/v1/ecommerce/order";
-      const projectId = "f105bi07c590";
+      for (let i = 0; i < productIds.length; i++) {
+        const JWTToken = JSON.parse(localStorage.getItem("token"));
+        const AddressUrl =
+          "https://academics.newtonschool.co/api/v1/ecommerce/order";
+        const projectId = "f105bi07c590";
 
-      const response = await fetch(AddressUrl, {
-        method: "Post",
-        headers: {
-          Authorization: `Bearer ${JWTToken}`,
-          projectId: projectId,
-        },
-        body: JSON.stringify(addressData),
-      });
+        const productId = productIds[i];
 
-      const data = await response.json();
-      console.log("Response from server order:", data);
+        const productQuantity = productQuantities[i];
 
-      updateAddress(data);
+        const requestBody = {
+          ...addressData,
+          productId,
+          quantity: productQuantity,
+        };
+
+        const response = await fetch(AddressUrl, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${JWTToken}`,
+            projectId: projectId,
+            Accept: "*/*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        });
+
+        const data = await response.json();
+
+        setUpdateAddress(data);
+      }
     } catch (error) {
       console.error("Error fetching Login Data:", error);
     }
   };
 
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setAddressData((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setAddressData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    if (["street", "city", "state", "country", "zipCode"].includes(name)) {
+      setAddressData((prevState) => ({
+        ...prevState,
+
+        address: {
+          ...prevState.address,
+
+          [name]: value,
+        },
+      }));
+    } else {
+      setAddressData((prevState) => ({
+        ...prevState,
+
+        [name]: value,
+      }));
+    }
   };
 
   const handleClickOpen = (scrollType) => () => {
@@ -95,8 +135,13 @@ export const AddressBlock = (itemQuantity) => {
     }
   }, [open]);
 
+  const handlePaymentNavigate = () => {
+    navigate("/payment");
+  };
+
   return (
     <React.Fragment>
+      <div></div>
       <button onClick={handleClickOpen("body")} className="addressButton">
         ADD ADDRESS
       </button>
@@ -116,143 +161,144 @@ export const AddressBlock = (itemQuantity) => {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <form>
-              <Box
-                component="form"
-                sx={{
-                  "& .MuiTextField-root": { m: 1, width: "95%" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <div>
-                  <TextField
-                    id="outlined-basic"
-                    name="fullName"
-                    label="Full Name"
-                    variant="outlined"
-                    value={name}
-                    required
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Mobile Number"
-                    variant="outlined"
-                    type="tel"
-                    required
-                  />
-                  <hr className="dividerAddressBox"></hr>
-                  <TextField
-                    id="zipCode"
-                    name="zipCode"
-                    type="number"
-                    inputProps={{
-                      min: 100000,
-                      max: 999999,
-                    }}
-                    label="Pincode/Postal Code/Zipcode"
-                    variant="outlined"
-                    value={addressData.zipCode}
-                    onChange={handleChange}
-                    required
-                  />
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <TextField
-                      id="country"
-                      name="country"
-                      label="Country"
-                      variant="outlined"
-                      value={addressData.address.country}
-                      onChange={handleChange}
-                      required
-                    />
-                    <TextField
-                      id="state"
-                      name="state"
-                      label="State"
-                      variant="outlined"
-                      value={addressData.address.state}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <TextField
-                    id="city"
-                    name="city"
-                    label="City"
-                    variant="outlined"
-                    value={addressData.address.city}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <TextField
-                    id="street"
-                    name="street"
-                    label="Flat no/Building, Street name"
-                    variant="outlined"
-                    value={addressData.address.street}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <TextField
-                    id="outlined-basic"
-                    label="Landmark (Optional)"
-                    variant="outlined"
-                    onChange={handleChange}
-                  />
-                </div>
-              </Box>
-              <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">
-                  Save Address As
-                </FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="addressType"
-                  value={addressData.addressType}
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "95%" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  name="fullName"
+                  label="Full Name"
+                  variant="outlined"
+                  value={name}
+                  required
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Mobile Number"
+                  variant="outlined"
+                  type="tel"
+                  required
+                />
+                <hr className="dividerAddressBox"></hr>
+                <TextField
+                  id="zipCode"
+                  name="zipCode"
+                  type="number"
+                  inputProps={{
+                    min: 100000,
+                    max: 999999,
+                  }}
+                  label="Pincode/Postal Code/Zipcode"
+                  variant="outlined"
+                  value={addressData.zipCode}
                   onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value="home"
-                    control={<Radio />}
-                    label="  HOME"
-                  />
-                  <FormControlLabel
-                    value="office"
-                    control={<Radio />}
-                    label="OFFICE"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                  />
-                </RadioGroup>
-              </FormControl>
-              <div className="addressSubmitButtonBox">
-                <button
-                  className="addressSubmitButton"
-                  onClick={() => {
-                    handleClose();
-                    handleLoginSubmit();
+                  required
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
-                  SAVE ADDRESS
-                </button>
-                <button className="addressCancelButton" onClick={handleClose}>
-                  CANCEL
-                </button>
+                  <TextField
+                    id="country"
+                    name="country"
+                    label="Country"
+                    variant="outlined"
+                    value={addressData.address.country}
+                    onChange={handleChange}
+                    required
+                  />
+                  <TextField
+                    id="state"
+                    name="state"
+                    label="State"
+                    variant="outlined"
+                    value={addressData.address.state}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <TextField
+                  id="city"
+                  name="city"
+                  label="City"
+                  variant="outlined"
+                  value={addressData.address.city}
+                  onChange={handleChange}
+                  required
+                />
+
+                <TextField
+                  id="street"
+                  name="street"
+                  label="Flat no/Building, Street name"
+                  variant="outlined"
+                  value={addressData.address.street}
+                  onChange={handleChange}
+                  required
+                />
+
+                <TextField
+                  id="outlined-basic"
+                  label="Landmark (Optional)"
+                  variant="outlined"
+                  // onChange={handleChange}
+                />
               </div>
-            </form>
+            </Box>
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">
+                Save Address As
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="addressType"
+                value={addressData.addressType}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value="HOME"
+                  control={<Radio />}
+                  label="HOME"
+                />
+                <FormControlLabel
+                  value="OTHER"
+                  control={<Radio />}
+                  label="OFFICE"
+                />
+                <FormControlLabel
+                  value="OTHER"
+                  control={<Radio />}
+                  label="Other"
+                />
+              </RadioGroup>
+            </FormControl>
+            <div className="addressSubmitButtonBox">
+              <button
+                className="addressSubmitButton"
+                type="submit"
+                onClick={() => {
+                  handleClose();
+                  handleLoginSubmit();
+                  handlePaymentNavigate();
+                  handleClearCart();
+                }}
+              >
+                SAVE ADDRESS
+              </button>
+              <button className="addressCancelButton" onClick={handleClose}>
+                CANCEL
+              </button>
+            </div>
           </DialogContentText>
         </DialogContent>
       </Dialog>

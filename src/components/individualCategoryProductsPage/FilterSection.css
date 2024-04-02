@@ -12,3 +12,9 @@
   font-size: 0.5rem;
   white-space: noWrap;
 }
+
+.accordianFilterColorBox {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.2rem;
+}

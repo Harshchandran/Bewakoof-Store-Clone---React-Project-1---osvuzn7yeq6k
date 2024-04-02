@@ -17,27 +17,39 @@ export const HeroBanner = () => {
   const images = [
     {
       url: HeroBannerOne,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+      },
     },
     {
       url: HeroBannerTwo,
-      category: "sweater",
+      filter: {
+        subCategory: "sweater",
+      },
     },
     {
       url: HeroBannerSix,
-      category: "pyjamas",
+      filter: {
+        subCategory: "pyjamas",
+      },
     },
     {
       url: HeroBannerThree,
-      category: "shorts",
+      filter: {
+        subCategory: "shorts",
+      },
     },
     {
       url: HeroBannerFour,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+      },
     },
     {
       url: HeroBannerFive,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+      },
     },
   ];
 
@@ -111,7 +123,7 @@ export const HeroBanner = () => {
                 to="/productPage"
                 className=""
                 key={index}
-                state={{ category: pic.category }}
+                state={{ filter: pic.filter }}
               >
                 <div
                   key={index}

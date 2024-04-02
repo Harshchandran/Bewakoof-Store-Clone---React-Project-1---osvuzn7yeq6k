@@ -10,19 +10,35 @@ export const MenMiniCategory = () => {
   const MenMiniSubNavigationImages = [
     {
       url: NewArrivals,
-      category: "New Arrivals",
+      filter: {
+        sellerTag: "new arrival",
+        gender: "Men",
+      },
+      type: "New Arrivals",
     },
     {
       url: BestSellers,
-      category: "Bestsellers",
+      filter: {
+        sellerTag: "best seller",
+        gender: "Men",
+      },
+      type: "Bestsellers",
     },
     {
       url: TrendingNow,
-      category: "Trending",
+      filter: {
+        sellerTag: "trending",
+        gender: "Men",
+      },
+      type: "Trending",
     },
     {
       url: PlusSize,
-      category: "Plus Size",
+      filter: {
+        size: "XXL",
+        gender: "Men",
+      },
+      type: "Plus Size",
     },
   ];
 
@@ -36,14 +52,14 @@ export const MenMiniCategory = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="MenMiniSubNavigationImage"
                   src={data.url}
                   alt={`hero${index}`}
                 />
-                <p className="MenMiniSubNavigationName">{data.category}</p>
+                <p className="MenMiniSubNavigationName">{data.type}</p>
               </Link>
             </div>
           ))}

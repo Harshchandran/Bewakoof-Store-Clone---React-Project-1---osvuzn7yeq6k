@@ -16,44 +16,72 @@ export const WomenTrendingCategory = () => {
   const CategoryData = [
     {
       url: HoodiesWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "kurti",
+      },
     },
     {
       url: CargosWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
 
     {
       url: TShirtWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+      },
     },
     {
       url: JeansWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "jeans",
+        gender: "Women",
+      },
     },
     {
       url: CasualPantsWomen,
-      category: "trouser",
+      filter: {
+        gender: "Women",
+      },
     },
     {
       url: JumpSuitsWomen,
-      category: "jumpsuit",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
     {
       url: JoggersWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "jogger",
+        gender: "Women",
+      },
     },
     {
       url: SweatersWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "shirt",
+        gender: "Women",
+      },
     },
     {
       url: PajamasWomen,
-      category: "hoodie",
+      filter: {
+        gender: "Women",
+      },
     },
     {
       url: PlusSizeWomen,
-      category: "hoodie",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+        size: "XXL",
+      },
     },
   ];
   return (
@@ -68,7 +96,7 @@ export const WomenTrendingCategory = () => {
                 to="/productPage"
                 className="womenTrendingCategory"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <div>
                   <img
@@ -87,7 +115,7 @@ export const WomenTrendingCategory = () => {
                 to="/productPage"
                 className="womenTrendingCategory"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <div>
                   <img

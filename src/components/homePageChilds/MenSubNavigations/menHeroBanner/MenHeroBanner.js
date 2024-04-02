@@ -16,23 +16,38 @@ export const MenHeroBanner = () => {
   const MenHeroBannerImages = [
     {
       url: Jeans,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+        gender: "Men",
+      },
     },
     {
       url: TShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Men",
+      },
     },
     {
       url: Pajamas,
-      category: "pyjamas",
+      filter: {
+        subCategory: "pyjamas",
+        gender: "Men",
+      },
     },
     {
       url: Joggers,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+        gender: "Men",
+      },
     },
     {
       url: Shorts,
-      category: "shorts",
+      filter: {
+        subCategory: "shorts",
+        gender: "Men",
+      },
     },
   ];
 
@@ -106,7 +121,7 @@ export const MenHeroBanner = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: image.category }}
+                state={{ filter: image.filter }}
               >
                 <div
                   key={index}

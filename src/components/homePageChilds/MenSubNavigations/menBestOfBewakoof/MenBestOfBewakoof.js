@@ -9,15 +9,24 @@ export const MenBestOfBewakoof = () => {
   const menMiniSubNavigationImages = [
     {
       url: Pajamas,
-      category: "pyjamas",
+      filter: {
+        subCategory: "pyjamas",
+        gender: "Men",
+      },
     },
     {
       url: Joggers,
-      category: "jumpsuit",
+      filter: {
+        subCategory: "tracksuit",
+        gender: "Men",
+      },
     },
     {
       url: TShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Men",
+      },
     },
   ];
 
@@ -31,7 +40,7 @@ export const MenBestOfBewakoof = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="menBestOfBewakoofImage"

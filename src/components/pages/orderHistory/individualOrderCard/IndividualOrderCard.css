@@ -1,0 +1,145 @@
+.OrderStatusProductIndividualContainer {
+  margin: 5% 15%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.OrderStatusProductContainer {
+  width: calc(100% - 0.2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.OrderStatusProductIndividualDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.orderStatusProductOrderId {
+  font-size: 0.75rem;
+}
+
+.orderStatusProductTime {
+  font-size: 0.75rem;
+  color: #000;
+  font-weight: 700;
+}
+
+.orderStatusProductTime span {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.orderStatusProductDetailsBox {
+  width: 100%;
+  padding: 1rem;
+  border: 0.02rem solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.orderStatusProductImageBox {
+  width: 30%;
+}
+
+.orderStatusProductImage {
+  width: 80%;
+}
+
+.orderStatusProductDetails {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.orderStatusProductName {
+  font-size: 0.75rem;
+  color: #000000;
+  font-weight: 600;
+}
+
+.orderStatusProductPrice {
+  font-size: 0.75rem;
+  color: #181818;
+  font-weight: 600;
+}
+
+.orderStatusProductSize {
+  font-size: 0.688rem;
+  color: #8f98a9;
+  font-weight: 600;
+}
+
+.orderStatusProductStatus {
+  margin: 1rem 0;
+  font-size: 0.75rem;
+  color: #72fe00;
+  font-weight: 600;
+  padding: 0.6rem 0.5rem;
+  background: rgb(114, 254, 0, 0.2);
+  border-radius: 0.2rem;
+  width: fit-content;
+}
+
+.orderProductShipmentStatus {
+  margin: 1rem 0;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.5rem;
+  color: #fe8f00;
+  width: fit-content;
+  border-radius: 0.2rem;
+  background: rgba(254, 143, 0, 0.2);
+  border: 0.02rem solid #fe8f00;
+}
+
+.orderProductShipmentDetailsBox {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 0.02rem solid rgba(0, 0, 0, 0.2);
+}
+
+.orderProductShipmentAddress {
+  font-size: 0.75rem;
+  color: #4e5664;
+}
+
+.orderProductShipmentUserName {
+  color: #292d35;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 991px) {
+  .OrderStatusProductIndividualContainer {
+    margin: 5% 10%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .orderStatusProductImageBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+  }
+
+  .orderStatusProductImage {
+    width: 80%;
+  }
+}

@@ -17,23 +17,38 @@ export const WomenHeroBanner = () => {
   const WomenHeroBannerImages = [
     {
       url: Jeans,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+        gender: "Women",
+      },
     },
     {
       url: TShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+      },
     },
     {
       url: Pajamas,
-      category: "pyjamas",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
     {
       url: Joggers,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+        gender: "Women",
+      },
     },
     {
       url: Shorts,
-      category: "shorts",
+      filter: {
+        subCategory: "jogger",
+        gender: "Women",
+      },
     },
   ];
 
@@ -108,7 +123,7 @@ export const WomenHeroBanner = () => {
                 to="/productPage"
                 className=""
                 key={index}
-                state={{ category: image.category }}
+                state={{ filter: image.filter }}
               >
                 <div
                   key={index}

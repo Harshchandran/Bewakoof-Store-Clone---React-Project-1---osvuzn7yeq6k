@@ -1,3 +1,8 @@
+.productCart {
+  margin: auto;
+  padding: 2% 2%;
+}
+
 .productCardContainer {
   display: flex;
   flex-direction: row;
@@ -11,6 +16,11 @@
   flex-direction: column;
   width: calc(8% - 2rem);
   min-width: calc(6%);
+  overflow-x: auto;
+}
+
+.cardProductImagesBox div {
+  margin-right: 0.8rem;
 }
 
 .cardProductImages:hover {
@@ -22,6 +32,7 @@
   height: auto;
   object-fit: cover;
   border: 0.1rem solid transparent;
+  cursor: pointer;
 }
 
 .cardProductMainImageBox {

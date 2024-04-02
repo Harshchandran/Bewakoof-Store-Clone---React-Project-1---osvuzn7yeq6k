@@ -19,56 +19,88 @@ export const TrendingCategories = () => {
   const CategoryData = [
     {
       url: HoodiesMen,
-      category: "hoodie",
+      filter: {
+        subCategory: "hoodie",
+        gender: "Men",
+      },
     },
     {
       url: JeansMen,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+        gender: "Men",
+      },
     },
     {
       url: Joggers,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+        gender: "Men",
+      },
     },
     {
       url: shirts,
-      category: "shirt",
+      filter: {
+        subCategory: "shirt",
+        gender: "Men",
+      },
     },
     {
       url: Sweaters,
-      category: "sweater",
+      filter: {
+        subCategory: "sweater",
+        gender: "Men",
+      },
     },
     {
       url: PajamasMen,
-      category: "pyjamas",
+      filter: {
+        subCategory: "pyjamas",
+        gender: "Men",
+      },
     },
 
     {
       url: Hoodies,
-      category: "hoodie",
+      filter: {
+        subCategory: "shirt",
+        gender: "Women",
+      },
     },
     {
       url: JeansWomen,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+        gender: "Women",
+      },
     },
     {
       url: Dresses,
-      category: "kurta",
+      filter: {
+        subCategory: "kurti",
+      },
     },
     {
       url: OverSizedTShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+        size: "XXL",
+      },
     },
     {
       url: SweatersWomen,
-      category: "sweater",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
     {
       url: PajamasWomen,
-      category: "pyjamas",
-    },
-    {
-      url: Shorts,
-      category: "shorts",
+      filter: {
+        subCategory: "jogger",
+        gender: "Women",
+      },
     },
   ];
 
@@ -83,7 +115,7 @@ export const TrendingCategories = () => {
                 to="/productPage"
                 className="trendingCategory"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <div>
                   <img
@@ -102,7 +134,7 @@ export const TrendingCategories = () => {
                 to="/productPage"
                 className="trendingCategory"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <div>
                   <img

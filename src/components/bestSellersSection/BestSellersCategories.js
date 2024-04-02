@@ -55,58 +55,65 @@ export const BestSellersCategories = () => {
 
   return (
     <>
-      <div>BestSellersCategories</div>
       <section className="bestSellersSection">
-        <h4>BESTSELLERS</h4>
-
+        <div className="bestSellerHeadingTag">BESTSELLERS</div>
         <div className="bestSellersContainer">
-          {/* <ArrowBackIosNewIcon
+          <ArrowBackIosNewIcon
             className="previousImageBestSeller"
             onClick={prevSlide}
-            sx={{ fontSize: "2rem", fontWeight: "200" }}
-          /> */}
+            sx={{ fontSize: "1rem", fontWeight: "200" }}
+          />
 
           {bestSellersData
             .slice(activeBestsellerImage, activeBestsellerImage + 5)
             .map((data, index) => (
-              <div key={data._id} className="bestSellersIndividualBox">
-                <img
-                  className="bestSellersImage"
-                  src={data.displayImage}
-                  alt={`hero${index}`}
-                />
-                <div className="bestSellersNameContainer">
-                  <div className="bestSellerNameBox">
-                    <h5>{data.seller.name}</h5>
-                    <p className="bestSellerName">{data.name}</p>
-                  </div>
-                  <div>
-                    <FavoriteBorderRoundedIcon
-                      style={{ fontSize: "calc(0.5vw + 0.5vh + 1vmin)" }}
-                    />
-                  </div>
-                </div>
-                <p className="bestSellersPriceTag">
-                  <CurrencyRupeeSharpIcon
-                    style={{ fontSize: "calc(0.1vw + 0.1vh + 1vmin)" }}
+              <Link
+                to={`/productCard/${data._id}`}
+                key={index}
+                className="bestSellersIndividualBox"
+                state={{ id: data._id }}
+              >
+                <div key={data._id}>
+                  <img
+                    className="bestSellersImage"
+                    src={data.displayImage}
+                    alt={`hero${index}`}
                   />
-                  {data.price}
-                </p>
-              </div>
+                  <div className="bestSellersNameContainer">
+                    <div className="bestSellerNameBox">
+                      <h5>{data.seller.name}</h5>
+                      <p className="bestSellerName">{data.name}</p>
+                    </div>
+                    <div>
+                      <FavoriteBorderRoundedIcon
+                        style={{ fontSize: "calc(0.5vw + 0.5vh + 1vmin)" }}
+                      />
+                    </div>
+                  </div>
+                  <p className="bestSellersPriceTag">
+                    <CurrencyRupeeSharpIcon
+                      style={{ fontSize: "calc(0.1vw + 0.1vh + 1vmin)" }}
+                    />
+                    {data.price}
+                  </p>
+                </div>
+              </Link>
             ))}
 
-          {/* <ArrowForwardIosIcon
+          <ArrowForwardIosIcon
             className="nextImageBestSeller"
             onClick={nextSlide}
-            sx={{ fontSize: "2rem", fontWeight: "200" }}
-          /> */}
+            sx={{ fontSize: "1rem", fontWeight: "200" }}
+          />
         </div>
 
         <div>
-          <Link to="/productPage" state={{ category: "bestSellers" }}>
-            Explore All
+          <Link
+            to="/productPage"
+            state={{ filter: { sellerTag: "best seller" } }}
+          >
+            <button className="exploreMoreButton">Explore All </button>
           </Link>
-          <h4>Explore All</h4>
         </div>
       </section>
     </>

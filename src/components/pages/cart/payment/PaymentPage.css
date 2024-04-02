@@ -1,0 +1,181 @@
+.paymentPageSection {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.PaymentPageBankLogo {
+  width: 2.5rem;
+  height: auto;
+  object-fit: cover;
+}
+
+.paymentPageCardImage {
+  width: 1.5rem;
+  height: auto;
+}
+
+.paymentPageCardImageBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.cardDetailsBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.paymentPageCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+
+.paymentPageWalletContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.paymentPageWalletBox {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.paymentPageWalletImageBox {
+  width: 30%;
+}
+
+.paymentPageWalletBox p {
+  width: 60%;
+  color: #303030;
+  font-size: 0.875rem;
+}
+
+.paymentPageWalletBox input {
+  width: 10%;
+}
+
+.paymentPageWalletImage {
+  width: 2rem;
+  height: auto;
+  object-fit: cover;
+}
+
+.paymentPageUPIContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.paymentPageUPIDetailsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.paymentPageUPIImageBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+.paymentPageUPIImage {
+  width: 3rem;
+  height: auto;
+  object-fit: cover;
+}
+
+.paymentPageUPIText {
+  color: #737373;
+  font-size: 0.75rem;
+}
+
+.paymentPageButton {
+  margin-top: 0.5rem;
+  background: #42a2a2;
+  color: #ffff;
+  padding: 0.5rem 1.5rem;
+  width: calc(60%-1rem);
+  border: none;
+  border-radius: 0.22rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.paymentPageGrayButton {
+  background: #737373;
+  color: #333333;
+}
+
+.PaymentPageBankBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  text-align: start;
+}
+
+.PaymentPageBankBox p {
+  width: 60%;
+  margin-top: 0.5rem;
+}
+.PaymentPageBankBox input {
+  width: 10%;
+}
+
+.PaymentPageBankContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.paymentCashOnDeliveryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.paymentCashOnDeliveryBox {
+  padding: 1rem 0rem;
+  font-size: 1rem;
+  color: #4e5664;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.paymentCashOnDeliveryText {
+  font-size: 1rem;
+  color: #4e5664;
+}
+
+.paymentCashOnDeliveryButton {
+  background: #42a2a2;
+  color: #ffff;
+  padding: 0.8rem 2rem;
+  width: 80%;
+  border: none;
+  border-radius: 0.22rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+}

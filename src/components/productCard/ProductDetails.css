@@ -306,3 +306,8 @@
   object-fit: cover;
   width: 80%;
 }
+
+.productDetailsSizesButton.selected {
+  color: white;
+  background-color: black;
+}

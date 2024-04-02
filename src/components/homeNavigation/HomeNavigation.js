@@ -8,7 +8,14 @@ export default function HomeNavigation() {
       <div className="homeNavigationContainer">
         <ul className="homeNavigationMenu">
           <li>
-            <Link to="/productPage" state={{ category: "tshirt" }}>
+            <Link
+              to="/productPage"
+              state={{
+                filter: {
+                  sellerTag: "top rated",
+                },
+              }}
+            >
               LIVE NOW
             </Link>
           </li>
@@ -19,7 +26,14 @@ export default function HomeNavigation() {
             <Link to="/campaign/womens-home">WOMEN</Link>
           </li>
           <li>
-            <Link to="/productPage" state={{ category: "tshirt" }}>
+            <Link
+              to="/productPage"
+              state={{
+                filter: {
+                  sellerTag: "trending",
+                },
+              }}
+            >
               BEWAKOOF AIR
             </Link>
           </li>

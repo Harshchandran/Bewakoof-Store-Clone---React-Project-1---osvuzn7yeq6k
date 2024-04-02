@@ -1,10 +1,12 @@
-import React from "react";
-import Button from "@mui/material/Button";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import Fade from "@mui/material/Fade";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
-import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import React from "react";
 import "./NavigationLoginDropdown.css";
+import { Link } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
 export const NavigationLoginDropdown = ({ userName }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,6 +21,8 @@ export const NavigationLoginDropdown = ({ userName }) => {
   const Logout = () => {
     localStorage.removeItem("userData");
     localStorage.removeItem("token");
+    localStorage.removeItem("cartItemsNumber");
+
     // Navigate("/login/email");
     window.location.href = "/login";
   };
@@ -52,21 +56,30 @@ export const NavigationLoginDropdown = ({ userName }) => {
         >
           Hi, {userName}
         </MenuItem>
-        <MenuItem className="MenuItemNavigation" onClick={handleClose}>
+
+        <MenuItem sx={{ fontSize: "0.875rem" }} onClick={handleClose}>
+          <Link to="/orders" style={{ fontSize: "0.875rem" }}>
+            {/* <ShoppingCartCheckoutIcon />  */}
+            My Orders
+          </Link>
+        </MenuItem>
+
+        <MenuItem sx={{ fontSize: "0.875rem" }} onClick={Logout}>
+          {/* <LogoutIcon />  */}
+          Logout
+        </MenuItem>
+
+        {/* <MenuItem className="MenuItemNavigation" onClick={handleClose}>
           My Account
         </MenuItem>
+
         <MenuItem sx={{ fontSize: "0.875rem" }} onClick={handleClose}>
           My Wishlist
         </MenuItem>
-        <MenuItem sx={{ fontSize: "0.875rem" }} onClick={handleClose}>
-          My Orders
-        </MenuItem>
+
         <MenuItem sx={{ fontSize: "0.875rem" }} onClick={handleClose}>
           My Wallet
-        </MenuItem>
-        <MenuItem sx={{ fontSize: "0.875rem" }} onClick={Logout}>
-          Logout
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </div>
   );

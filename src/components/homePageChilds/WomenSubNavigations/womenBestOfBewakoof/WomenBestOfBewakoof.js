@@ -9,15 +9,24 @@ export const WomenBestOfBewakoof = () => {
   const womenBestOfBewakoofImages = [
     {
       url: Pajamas,
-      category: "pyjamas",
+      filter: {
+        subCategory: "jumpsuit",
+        gender: "Women",
+      },
     },
     {
       url: Joggers,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+        gender: "Women",
+      },
     },
     {
       url: TShirt,
-      category: "tshirt",
+      filter: {
+        subCategory: "tshirt",
+        gender: "Women",
+      },
     },
   ];
 
@@ -31,7 +40,7 @@ export const WomenBestOfBewakoof = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="womenBestOfBewakoofImage"

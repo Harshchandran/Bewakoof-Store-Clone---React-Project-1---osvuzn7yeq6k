@@ -11,27 +11,39 @@ export const CategoriesToBag = () => {
   const categoriesToBagData = [
     {
       imageUrl: Hoodies,
-      category: "hoodie",
+      filter: {
+        subCategory: "hoodie",
+      },
     },
     {
       imageUrl: Pajamas,
-      category: "pyjamas",
+      filter: {
+        subCategory: "pyjamas",
+      },
     },
     {
       imageUrl: Jeans,
-      category: "jeans",
+      filter: {
+        subCategory: "jeans",
+      },
     },
     {
       imageUrl: Joggers,
-      category: "jogger",
+      filter: {
+        subCategory: "jogger",
+      },
     },
     {
       imageUrl: Shorts,
-      category: "shorts",
+      filter: {
+        subCategory: "shorts",
+      },
     },
     {
       imageUrl: Shirts,
-      category: "shirt",
+      filter: {
+        subCategory: "shirt",
+      },
     },
   ];
 
@@ -45,7 +57,7 @@ export const CategoriesToBag = () => {
               <Link
                 to="/productPage"
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="CategoryToBagImage"

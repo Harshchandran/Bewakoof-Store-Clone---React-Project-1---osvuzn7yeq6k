@@ -25,6 +25,9 @@ import DressSize from "./men_full_sleeves_tshirts-1484025774.webp";
 import Cms from "./Cms.jpg";
 import In from "./In.jpg";
 import { AddSizeToUpdateCart } from "./addSizeToCart/AddSizeToUpdateCart";
+import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const style = {
   position: "absolute",
@@ -40,7 +43,11 @@ const style = {
   p: 0,
 };
 
-export const ProductDetails = ({ productDetails, productReview }) => {
+export const ProductDetails = ({
+  productDetails,
+  productReview,
+  updateCartItemNumber,
+}) => {
   const [openMemberShip, setOpenMemberShip] = useState(false);
   const handleOpenMemberShip = () => setOpenMemberShip(true);
   const handleCloseMemberShip = () => setOpenMemberShip(false);
@@ -60,17 +67,17 @@ export const ProductDetails = ({ productDetails, productReview }) => {
   };
 
   const [updateSize, setUpdateSize] = useState("");
-  const [itemQuantity, setItemQuantity] = useState(1);
   const SingleProductId = productDetails?._id;
   const [AddingItemToCart, setAddingItemToCart] = useState({
-    quantity: itemQuantity,
-    size: updateSize,
+    quantity: 1,
+    size: "",
   });
 
   const [UpdateResponse, setUpdateResponse] = useState([]);
 
+  const [UpdateWishlistResponse, setUpdateWishlistResponse] = useState([]);
+
   const productDetailsSize = productDetails?.size;
-  console.log("productDetailsSize", productDetailsSize);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -78,6 +85,7 @@ export const ProductDetails = ({ productDetails, productReview }) => {
       setToken(JWTToken);
     }
   }, []);
+
   const UpdateCartItemsApi = `https://academics.newtonschool.co/api/v1/ecommerce/cart/${SingleProductId}`;
   const projectId = "f105bi07c590";
 
@@ -99,23 +107,69 @@ export const ProductDetails = ({ productDetails, productReview }) => {
 
       setUpdateSize("");
     } catch (error) {
-      console.error("Error fetching Best Sellers Selection:", error);
+      console.error("Error updating item to cart:", error);
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const JWTToken = JSON.parse(localStorage.getItem("token"));
-      setToken(JWTToken);
-    }
-  }, []);
+  const handleSizeChange = (newSize) => {
+    setAddingItemToCart((prevState) => ({
+      ...prevState,
+      size: newSize,
+    }));
+  };
 
-  const handleItemQuantity = (selectedQuantity) => {
-    setItemQuantity(selectedQuantity);
+  const updateQuantity = (event) => {
+    const newQuantity = parseInt(event.target.value); // Convert string to number
+    setAddingItemToCart((prevState) => ({
+      ...prevState,
+      quantity: newQuantity,
+    }));
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
     <>
+      <div>
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            variant="filled"
+            sx={{
+              width: "100%",
+              backgroundColor: "#ffd84d",
+              color: "black",
+              "& .MuiAlert-icon": {
+                display: "none",
+              },
+            }}
+            icon={false}
+          >
+            Product Added to Cart Successfully..!
+          </Alert>
+        </Snackbar>
+      </div>
       <div className="productDetailsContainer">
         <div className="productDetailsBox" key={productDetails?._id}>
           <p className="productDetailsSellerName">
@@ -321,14 +375,42 @@ export const ProductDetails = ({ productDetails, productReview }) => {
             {productDetails?.size?.map((data, index) => (
               <button
                 key={index}
-                className="productDetailsSizesButton"
+                className={`productDetailsSizesButton ${
+                  updateSize === data ? "selected" : ""
+                }`}
                 onClick={() => {
                   setUpdateSize(data);
+                  handleSizeChange(data);
                 }}
               >
                 {data}
               </button>
             ))}
+          </div>
+          <div>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "10ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                id="outlined-number"
+                label="Quantity"
+                type="number"
+                value={AddingItemToCart.quantity}
+                onChange={updateQuantity}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  min: 1,
+                  max: 1000,
+                }}
+              />
+            </Box>
           </div>
         </div>
         <div className="productDetailsButtonWishListsBox">
@@ -337,11 +419,19 @@ export const ProductDetails = ({ productDetails, productReview }) => {
             productDetailsSize={productDetailsSize}
             updateItemToCart={updateItemToCart}
             updateSize={updateSize}
+            handleSizeChange={handleSizeChange}
+            handleClick={handleClick}
+            updateCartItemNumber={updateCartItemNumber}
           />
-          <button className="productDetailsButtonWishListsButton">
+          {/* <button
+            className="productDetailsButtonWishListsButton"
+            onClick={() => {
+              updateWishlist();
+            }}
+          >
             <FavoriteBorderSharpIcon style={{ color: "#4f5362 [500] " }} />
             WISHLIST
-          </button>
+          </button> */}
         </div>
 
         <hr className="productDetailsSizesDividerLine"></hr>

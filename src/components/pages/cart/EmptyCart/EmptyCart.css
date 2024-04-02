@@ -1,0 +1,34 @@
+.emptyCartContainer {
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emptyCartImage {
+  width: 10rem;
+  height: auto;
+  object-fit: cover;
+}
+
+.emptyCartText {
+  font-size: 1.125rem;
+}
+
+.emptyCartButton {
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  font-size: 1.125rem;
+  border: 0.1rem solid #51cccc;
+  color: #51cccc;
+  background: #ffff;
+}
+
+.emptyCartDividerLine {
+  margin-top: 2rem;
+  height: 0.1rem;
+  border: none;
+  width: 90%;
+}

@@ -7,8 +7,6 @@ import { ShopForMenWomen } from "./shopForMenWomen/ShopForMenWomen";
 export const PlusSize = () => {
   return (
     <>
-      <div>PlusSize</div>
-
       <HeroImagePlusSize />
 
       <PlusSizeMiniCategory />

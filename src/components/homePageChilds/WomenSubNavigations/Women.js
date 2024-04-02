@@ -9,8 +9,6 @@ import { WomenHeroBanner } from "./womenHeroBanner/WomenHeroBanner";
 export default function Women() {
   return (
     <>
-      <div>Women</div>
-
       <WomenHeroBanner />
 
       <WomenMiniCategory />

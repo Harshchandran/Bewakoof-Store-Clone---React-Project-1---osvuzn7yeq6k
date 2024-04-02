@@ -14,8 +14,12 @@ import { DrawerComponent } from "./DrawerComponent";
 import "./NavigationMenu.css";
 import Logo from "./bwkf-trademark-logo.svg";
 
-export default function NavigationMenu() {
+export default function NavigationMenu({
+  noOfItemsInCart,
+  setNoOfItemsInCart,
+}) {
   const [showDropdown, setShowDropdown] = useState(false);
+  // const [noOfItemsInCart, setNoOfItemsInCart] = useState("");
 
   const [userName, setUserName] = useState("");
   const Navigate = useNavigate();
@@ -28,16 +32,28 @@ export default function NavigationMenu() {
     setShowDropdown(false);
   };
 
+  const updateCartItemNumber = () => {
+    if (localStorage.getItem("cartItemsNumber")) {
+      const ItemsInCart = JSON.parse(localStorage.getItem("cartItemsNumber"));
+      setNoOfItemsInCart(ItemsInCart);
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("userData")) {
       const userData = JSON.parse(localStorage.getItem("userData"));
       setUserName(userData.name);
     }
+
+    if (localStorage.getItem("cartItemsNumber")) {
+      const ItemsInCart = JSON.parse(localStorage.getItem("cartItemsNumber"));
+      setNoOfItemsInCart(ItemsInCart);
+    }
   }, []);
 
   return (
     <>
-      <nav>
+      <nav className="mainNavigation">
         <div className="navigationBarContainer">
           <ul className="navigationBar">
             <li>
@@ -47,7 +63,13 @@ export default function NavigationMenu() {
             </li>
             <li>
               <Link
-                to="/men-clothing"
+                // to="/men-clothing"
+                to="/productPage"
+                state={{
+                  filter: {
+                    gender: "Men",
+                  },
+                }}
                 className="navigationBarData"
                 onMouseOver={handleDropdown}
                 onMouseLeave={handleDropdownClose}
@@ -57,7 +79,13 @@ export default function NavigationMenu() {
             </li>
             <li>
               <Link
-                to="/women-clothing"
+                // to="/women-clothing"
+                to="/productPage"
+                state={{
+                  filter: {
+                    gender: "Women",
+                  },
+                }}
                 className="navigationBarData"
                 onMouseOver={handleDropdown}
                 onMouseLeave={handleDropdownClose}
@@ -79,14 +107,23 @@ export default function NavigationMenu() {
                 <Link to="/login">Login</Link>
               )}
             </li>
-            <li>
+            {/* <li>
               <Link to="/wishlist">
                 <FavoriteBorderOutlinedIcon />
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/cart">
-                <ShoppingBagOutlinedIcon style={{ fontWeight: light }} />
+                <div className="NavigationBarCartBox">
+                  <ShoppingBagOutlinedIcon style={{ fontWeight: light }} />
+                  {noOfItemsInCart > 0 ? (
+                    <sup className="superSetCartItemsNumber">
+                      {noOfItemsInCart}
+                    </sup>
+                  ) : (
+                    ""
+                  )}
+                </div>
               </Link>
             </li>
           </ul>
@@ -117,14 +154,23 @@ export default function NavigationMenu() {
                 <SearchRoundedIcon />
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/wishlist">
                 <FavoriteBorderRoundedIcon />
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/cart">
-                <LocalMallOutlinedIcon />
+                <div className="NavigationBarCartBox">
+                  <LocalMallOutlinedIcon />
+                  {noOfItemsInCart > 0 ? (
+                    <sup className="superSetCartItemsNumber">
+                      {noOfItemsInCart}
+                    </sup>
+                  ) : (
+                    ""
+                  )}
+                </div>
               </Link>
             </li>
           </ul>

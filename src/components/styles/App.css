@@ -40,3 +40,14 @@ h6 {
 span {
   font-size: 0.8rem;
 }
+
+button {
+  cursor: pointer;
+}
+a {
+  cursor: pointer;
+}
+
+.marginHandler {
+  margin-top: 3.5rem;
+}

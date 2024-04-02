@@ -3,11 +3,18 @@
   flex-direction: column;
   justify-content: center;
 }
+.ShopForMenWomenSoloImageBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 .ShopForMenWomenSoloImage {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .ShopForMenWomenImageContainer {

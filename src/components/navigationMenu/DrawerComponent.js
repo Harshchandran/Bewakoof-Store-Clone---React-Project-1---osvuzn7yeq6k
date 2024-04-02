@@ -5,18 +5,36 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Men from "./Circle-icon-men.webp";
 import Women from "./Circle-icon-women.webp";
 import "./DrawerComponent.css";
 import Hamburger from "./hamburger.svg";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 export const DrawerComponent = () => {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+  };
+
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("userData")) {
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      setUserName(userData.name);
+    }
+  }, []);
+
+  const Logout = () => {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("token");
+    localStorage.removeItem("cartItemsNumber");
+    // Navigate("/login/email");
+    window.location.href = "/login";
   };
 
   return (
@@ -41,19 +59,21 @@ export const DrawerComponent = () => {
                     fontWeight: 900,
                   }}
                 >
-                  Welcome Guest
+                  {userName === "" ? "Welcome Guest" : userName}
                 </ListSubheader>
               }
             >
               <ListItem>
-                <ListItemText
-                  primaryTypographyProps={{
-                    fontSize: "0.8rem",
-                    color: "#757575",
-                    fontWeight: "600",
-                  }}
-                  primary="Login / Sign Up"
-                />
+                <Link to="/login" onClick={() => setOpen(false)}>
+                  <ListItemText
+                    primaryTypographyProps={{
+                      fontSize: "0.8rem",
+                      color: "#757575",
+                      fontWeight: "600",
+                    }}
+                    primary="Login / Sign Up"
+                  />
+                </Link>
               </ListItem>
             </List>
             <Divider />
@@ -67,88 +87,79 @@ export const DrawerComponent = () => {
                     fontWeight: 600,
                     fontSize: "0.688rem",
                   }}
-                  // className="navBarSubHeader"
                 >
                   SHOP IN
                 </ListSubheader>
               }
             >
               <ListItem>
-                <ListItemText primary="Men" className="drawerListItemText" />
-                <ListItemIcon>
-                  <img className="navBarMenuImage" src={Men} alt="Men" />
-                </ListItemIcon>
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  style={{
-                    color: "black",
-                    fontWeight: 600,
-                    fontSize: "0.688rem",
+                <Link
+                  to="/productPage"
+                  className="HamburgerNavigationMenWomen"
+                  state={{
+                    filter: {
+                      gender: "Men",
+                    },
                   }}
-                  primary="Women"
-                />
-                <ListItemIcon>
-                  <img className="navBarMenuImage" src={Women} alt="Women" />
-                </ListItemIcon>
-              </ListItem>
-            </List>
-
-            <List
-              subheader={
-                <ListSubheader
-                  component="div"
-                  style={{
-                    color: "#cacaca",
-                    fontWeight: 600,
-                    fontSize: "0.688rem",
-                  }}
-                  // className="navBarSubHeader"
+                  onClick={() => setOpen(false)}
                 >
-                  CONTACT US
-                </ListSubheader>
-              }
-            >
-              <ListItem>
-                <ListItemText primary="Help & Support" />
+                  <ListItemText primary="Men" className="drawerListItemText" />
+                  <ListItemIcon>
+                    <img className="navBarMenuImage" src={Men} alt="Men" />
+                  </ListItemIcon>
+                </Link>
               </ListItem>
               <ListItem>
-                <ListItemText primary="Feedback & Suggestions" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Become a Seller" />
-              </ListItem>
-            </List>
-
-            <List
-              subheader={
-                <ListSubheader
-                  component="div"
-                  style={{
-                    color: "#cacaca",
-                    fontWeight: 600,
-                    fontSize: "0.688rem",
+                <Link
+                  to="/productPage"
+                  state={{
+                    filter: {
+                      gender: "Women",
+                    },
                   }}
-                  // className="navBarSubHeader"
+                  className="HamburgerNavigationMenWomen"
+                  onClick={() => setOpen(false)}
                 >
-                  ABOUT US
-                </ListSubheader>
-              }
-            >
-              <ListItem>
-                <ListItemText primary="Our Story" />
+                  <ListItemText
+                    style={{
+                      color: "black",
+                      fontWeight: 600,
+                      fontSize: "0.688rem",
+                    }}
+                    primary="Women"
+                  />
+                  <ListItemIcon>
+                    <img className="navBarMenuImage" src={Women} alt="Women" />
+                  </ListItemIcon>
+                </Link>
               </ListItem>
               <ListItem>
-                <ListItemText primary="Fanbook" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Blog" />
+                <Link
+                  to="/orders"
+                  className="HamburgerNavigationMenWomen"
+                  onClick={() => setOpen(false)}
+                >
+                  <ListItemText
+                    style={{
+                      color: "black",
+                      fontWeight: 600,
+                      fontSize: "0.688rem",
+                    }}
+                    primary="My Orders"
+                  />
+                </Link>
               </ListItem>
             </List>
 
             <List>
               <ListItem>
-                <ListItemText primary="Login" />
+                <Link to="/login" onClick={() => setOpen(false)}>
+                  {userName === "" ? (
+                    <ListItemText primary="Login" />
+                  ) : (
+                    <ListItemText onClick={Logout} primary="Logout" />
+                  )}
+                </Link>
               </ListItem>
             </List>
           </Box>

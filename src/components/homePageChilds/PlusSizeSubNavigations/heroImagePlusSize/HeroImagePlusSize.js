@@ -8,11 +8,17 @@ export const HeroImagePlusSize = () => {
   const heroImagePlusSize = [
     {
       url: MenPlusSize,
-      category: "pyjamas",
+      filter: {
+        gender: "Men",
+        size: "XXL",
+      },
     },
     {
       url: WomenPlusSize,
-      category: "jogger",
+      filter: {
+        size: "XXL",
+        gender: "Women",
+      },
     },
   ];
 
@@ -26,7 +32,7 @@ export const HeroImagePlusSize = () => {
                 to="/productPage"
                 className=""
                 key={index}
-                state={{ category: data.category }}
+                state={{ filter: data.filter }}
               >
                 <img
                   className="heroImagePlusSizeImage"

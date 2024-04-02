@@ -9,7 +9,10 @@ export const BannerImagesPlusSize = () => {
     <section className="bannerImagesPlusSize">
       <div className="bannerImagesPlusSizeContainer">
         <div className="bannerImagesPlusSizeBox">
-          <Link to="/productPage" state={{ category: "shirt" }}>
+          <Link
+            to="/productPage"
+            state={{ filter: { size: "XXL", sellerTag: "trending" } }}
+          >
             <img
               className="bannerImagesPlusSizeImage"
               src={NewArrivals}
@@ -19,7 +22,10 @@ export const BannerImagesPlusSize = () => {
         </div>
 
         <div className="bannerImagesPlusSizeBox">
-          <Link to="/productPage" state={{ category: "hoodie" }}>
+          <Link
+            to="/productPage"
+            state={{ filter: { size: "XXL", sellerTag: "new arrival" } }}
+          >
             <img
               className="bannerImagesPlusSizeImage"
               src={PlusSize}

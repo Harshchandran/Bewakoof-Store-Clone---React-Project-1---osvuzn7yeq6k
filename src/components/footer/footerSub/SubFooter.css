@@ -1,0 +1,158 @@
+.subFooterContainer {
+  margin: 1rem 10%;
+  padding: 2rem 0rem;
+  font-size: 0.75rem;
+  color: #ffff;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.subFooterContactContainer {
+  padding: 1rem 0 3rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  font-size: 0.75rem;
+}
+
+.subFooterHeading {
+  margin-bottom: 1.5rem;
+  color: #fdd835;
+  font-weight: 900;
+  background: #000;
+  border: none;
+  text-align: start;
+}
+
+.subFooterNavButtons {
+  border: none;
+  background: #000;
+  color: #ffff;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.subFooterContactBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+
+.subFooterContactLinkBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.subFooterSocialIconsBox {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.subFooterEmailSubmitButton {
+  padding: 0.35rem 1rem;
+  background: #fdd835;
+  color: #000;
+  font-size: 0.75rem;
+  border: none;
+}
+.subFooterAPPStoreBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.subFooterAppStoreImg {
+  width: 6rem;
+  cursor: pointer;
+}
+
+.subFooterNavLinksContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.subFooterContactContainerMini {
+  display: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .subFooterContainer {
+    margin: 1rem 2rem;
+  }
+
+  .subFooterContactContainer {
+    display: none;
+  }
+
+  .subFooterContactContainerMini {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subFooterContactBoxMini {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .subFooterContactLinkBoxMini {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-weight: 600;
+    flex-wrap: wrap;
+  }
+
+  .subFooterSocialIconsBoxMini {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
+
+  .subFooterAPPStoreBoxMini {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .subFooterAPPStoreBoxMini {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
+
+  .subFooterContactLinkBoxMiniNav {
+    margin: 1.5rem 0 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    cursor: pointer;
+  }
+}
