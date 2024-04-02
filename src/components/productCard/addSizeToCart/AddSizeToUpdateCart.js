@@ -94,6 +94,7 @@ export const AddSizeToUpdateCart = ({
             handleClickOpen();
           } else {
             updateItemToCart();
+
             handleClick();
             setTimeout(() => {
               getCartProducts();
@@ -159,6 +160,7 @@ export const AddSizeToUpdateCart = ({
           }}
           onClick={() => {
             updateItemToCart();
+
             handleClose();
             handleClick();
 

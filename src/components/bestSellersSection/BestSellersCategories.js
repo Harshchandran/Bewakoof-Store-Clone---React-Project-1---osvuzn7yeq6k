@@ -5,10 +5,12 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import React, { useEffect, useState } from "react";
 import "../bestSellersSection/BestSellersCategories.css";
 import { Link } from "react-router-dom";
+import { LoaderPage } from "../pages/pageLoader/LoaderPage";
 
 export const BestSellersCategories = () => {
   const [bestSellersData, setBestSellersData] = useState([]);
   const [activeBestsellerImage, setActiveBestsellerImage] = useState(0);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const BestSellerApi = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?sort={"rating":-1}`;
@@ -23,7 +25,7 @@ export const BestSellersCategories = () => {
             projectId: projectId,
           },
         });
-
+        setLoader(false);
         const data = await response.json();
 
         setBestSellersData(data.data);
@@ -55,6 +57,7 @@ export const BestSellersCategories = () => {
 
   return (
     <>
+      <LoaderPage loader={loader} />
       <section className="bestSellersSection">
         <div className="bestSellerHeadingTag">BESTSELLERS</div>
         <div className="bestSellersContainer">

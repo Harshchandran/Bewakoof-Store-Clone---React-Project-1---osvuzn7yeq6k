@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import CampaignMen from "../components/homePageChilds/MenSubNavigations/Men";
 import "../components/styles/App.css";
+import { Footer } from "./footer/Footer";
 import BewakoofAir from "./homePageChilds/BewakoofAirSubNavigations/BewakoofAir";
 import { PlusSize } from "./homePageChilds/PlusSizeSubNavigations/PlusSize";
 import CampaignWomen from "./homePageChilds/WomenSubNavigations/Women";
@@ -11,18 +13,14 @@ import Men from "./pages/Men/Men";
 import PageNotFound from "./pages/PageNotFound";
 import Women from "./pages/Women";
 import Cart from "./pages/cart/Cart";
+import { PaymentPage } from "./pages/cart/payment/PaymentPage";
 import { LoginPage } from "./pages/loginSignUp/LoginPage/LoginPage";
 import Login from "./pages/loginSignUp/login/Login";
+import { OrderHistory } from "./pages/orderHistory/OrderHistory";
+import { IndividualOrderCard } from "./pages/orderHistory/individualOrderCard/IndividualOrderCard";
 import Wishlist from "./pages/wishList/Wishlist";
 import { ProductCard } from "./productCard/ProductCard";
-import { PaymentPage } from "./pages/cart/payment/PaymentPage";
-import { OrderHistory } from "./pages/orderHistory/OrderHistory";
-import { useState } from "react";
 import { ScrollToTop } from "./scrollToTop/ScrollToTop";
-import { IndividualOrderCard } from "./pages/orderHistory/individualOrderCard/IndividualOrderCard";
-import { Footer } from "./footer/Footer";
-import { SubFooter } from "./footer/footerSub/SubFooter";
-import { FooterTextComponent } from "./footer/footerText/FooterTextComponent";
 
 function App() {
   const [noOfItemsInCart, setNoOfItemsInCart] = useState("");
@@ -33,6 +31,8 @@ function App() {
       setNoOfItemsInCart(ItemsInCart);
     }
   };
+
+  const pagePath = useLocation();
 
   return (
     <>
@@ -51,8 +51,8 @@ function App() {
           <Route path="/campaign/plus-size-store" element={<PlusSize />} />
           <Route path="/login/email" element={<LoginPage />} />
         </Route>
-        <Route path="/men-clothing" element={<Men />} />
-        <Route path="/women-clothing" element={<Women />} />
+        {/* <Route path="/men-clothing" element={<Men />} />
+        <Route path="/women-clothing" element={<Women />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route
@@ -70,7 +70,8 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      <Footer />
+      {/* <Footer /> */}
+      {pagePath.pathname === "/cart" ? null : <Footer />}
     </>
   );
 }

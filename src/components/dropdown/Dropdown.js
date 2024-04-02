@@ -54,7 +54,16 @@ const Dropdown = ({ show, setShow }) => {
         <ul className="navigationBarDropdown">
           {categories.map((individualData, index) => (
             <li key={index}>
-              <Link to="/">{individualData}</Link>
+              <Link
+                to="/productPage"
+                state={{
+                  filter: {
+                    subCategory: individualData,
+                  },
+                }}
+              >
+                {individualData}
+              </Link>
             </li>
           ))}
         </ul>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { EmptyOrderHistory } from "../emptyOrderHistory/EmptyOrderHistory";
 import "./IndividualOrderCard.css";
+import { LoaderPage } from "../../pageLoader/LoaderPage";
 
 export const IndividualOrderCard = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ export const IndividualOrderCard = () => {
   const [token, setToken] = useState("");
   const [userName, setUserName] = useState("");
   const [orderProductDetails, setOrderProductDetails] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem("userData")) {
@@ -37,7 +39,7 @@ export const IndividualOrderCard = () => {
           });
 
           const data = await response.json();
-
+          setLoader(false);
           console.log(data.data);
 
           setOrderProductDetails(data.data);
@@ -61,6 +63,7 @@ export const IndividualOrderCard = () => {
       <section>
         {token ? (
           <div className="OrderStatusProductIndividualContainer">
+            <LoaderPage loader={loader} />
             <div className="OrderStatusProductContainer">
               <div className="OrderStatusProductIndividualDetails">
                 <p className="orderStatusProductTime">

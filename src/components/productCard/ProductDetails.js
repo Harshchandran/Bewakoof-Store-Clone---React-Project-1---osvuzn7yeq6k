@@ -102,7 +102,6 @@ export const ProductDetails = ({
       });
 
       const data = await response.json();
-
       setUpdateResponse(data);
 
       setUpdateSize("");

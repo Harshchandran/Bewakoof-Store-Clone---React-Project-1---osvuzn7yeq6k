@@ -12,12 +12,15 @@ import TextField from "@mui/material/TextField";
 import React, { useEffect, useState } from "react";
 import "./AddressBlock.css";
 import { useNavigate } from "react-router-dom";
+import { LoaderPage } from "../../pageLoader/LoaderPage";
 
 export const AddressBlock = ({
   productIds,
   productQuantities,
   handleClearCart,
 }) => {
+  const [loader, setLoader] = useState(true);
+
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const [addressProductId, setAddressProductId] = useState("");
@@ -45,6 +48,7 @@ export const AddressBlock = ({
       const userData = JSON.parse(localStorage.getItem("userData"));
       setName(userData.name);
     }
+    setLoader(false);
   }, []);
 
   const handleLoginSubmit = async () => {
@@ -78,7 +82,7 @@ export const AddressBlock = ({
         });
 
         const data = await response.json();
-
+        setLoader(false);
         setUpdateAddress(data);
       }
     } catch (error) {
@@ -141,7 +145,9 @@ export const AddressBlock = ({
 
   return (
     <React.Fragment>
-      <div></div>
+      <div>
+        <LoaderPage loader={loader} />
+      </div>
       <button onClick={handleClickOpen("body")} className="addressButton">
         ADD ADDRESS
       </button>
@@ -291,6 +297,7 @@ export const AddressBlock = ({
                   handleLoginSubmit();
                   handlePaymentNavigate();
                   handleClearCart();
+                  setLoader(true);
                 }}
               >
                 SAVE ADDRESS

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
-import { useNavigate, useRoutes } from "react-router-dom";
 
 export const LoginPage = () => {
   const [Login, setLogin] = useState([]);
@@ -34,8 +34,8 @@ export const LoginPage = () => {
 
   const [action, setAction] = useState("Log in to your account");
 
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = async () => {
+    // e.preventDefault();
     try {
       const response = await fetch(LoginApi, {
         method: "Post",
@@ -47,7 +47,6 @@ export const LoginPage = () => {
       });
 
       const data = await response.json();
-      console.log("Response from server:", data);
 
       if (
         data.status === "fail" &&
@@ -74,8 +73,8 @@ export const LoginPage = () => {
     }
   };
 
-  const handleSignUpSubmit = async (e) => {
-    e.preventDefault();
+  const handleSignUpSubmit = async () => {
+    // e.preventDefault();
     try {
       const response = await fetch(SignUpApi, {
         method: "Post",
@@ -87,7 +86,6 @@ export const LoginPage = () => {
       });
 
       const data = await response.json();
-      console.log("Response from server:", data);
 
       if (data.status === "success") {
         localStorage.setItem("token", JSON.stringify(data.token));
@@ -122,12 +120,6 @@ export const LoginPage = () => {
       });
     }
   };
-  // data.user.name
-  // console.log("******");
-  // console.log(signUp);
-  // console.log(signUp.data);
-  // console.log(signUp.data.user);
-  // console.log(signUp.data.user.name);
 
   return (
     <>
@@ -189,20 +181,22 @@ export const LoginPage = () => {
               </div>
             </div>
 
-            {action === "Sign Up" ? null : (
+            {/* {action === "Sign Up" ? null : (
               <div>
                 <div className="forgot-password">
                   Lost Password? <span>Click Here!</span>
                 </div>
               </div>
-            )}
+            )} */}
 
             <div className="submit-container">
               {action === "Sign Up" ? (
                 <button
                   className="submit"
                   type="submit"
-                  onClick={handleSignUpSubmit}
+                  onClick={() => {
+                    handleSignUpSubmit();
+                  }}
                 >
                   Sign Up
                 </button>
@@ -210,7 +204,9 @@ export const LoginPage = () => {
                 <button
                   className="submit"
                   type="submit "
-                  onClick={handleLoginSubmit}
+                  onClick={() => {
+                    handleLoginSubmit();
+                  }}
                 >
                   Login
                 </button>

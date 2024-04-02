@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import "./OrderHistory.css";
 
 import { EmptyOrderHistory } from "./emptyOrderHistory/EmptyOrderHistory";
+import { LoaderPage } from "../pageLoader/LoaderPage";
 
 export const OrderHistory = () => {
   const [token, setToken] = useState("");
 
   const [orderHistoryData, setOrderHistoryData] = useState([]);
   const [orderHistoryItems, setOrderHistoryItems] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   const GetOrderHistoryURL =
     "https://academics.newtonschool.co/api/v1/ecommerce/order/";
@@ -29,7 +31,7 @@ export const OrderHistory = () => {
           });
 
           const data = await response.json();
-
+          setLoader(false);
           setOrderHistoryData(data.data);
 
           setOrderHistoryItems(data.order);
@@ -39,17 +41,23 @@ export const OrderHistory = () => {
       };
 
       getOrderHistory();
+    } else {
+      setLoader(false);
     }
   }, []);
 
   return (
     <>
+      <LoaderPage loader={loader} />
       <div>
         <h2 className="OrderHistoryHeading">My Orders</h2>
 
         {token ? (
           orderHistoryData.results === 0 ? (
-            <EmptyOrderHistory />
+            <>
+              <LoaderPage loader={loader} />
+              <EmptyOrderHistory />
+            </>
           ) : (
             <section>
               <div>

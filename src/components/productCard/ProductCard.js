@@ -1,7 +1,10 @@
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../productCard/ProductCard.css";
 import { ProductDetails } from "./ProductDetails";
+import { LoaderPage } from "../pages/pageLoader/LoaderPage";
 
 export const ProductCard = ({ updateCartItemNumber }) => {
   const location = useLocation();
@@ -9,6 +12,10 @@ export const ProductCard = ({ updateCartItemNumber }) => {
 
   const [productDetails, setProductDetails] = useState([]);
   const [productReview, setProductReview] = useState([]);
+
+  const [loader, setLoader] = useState(true);
+
+  const [activeMiniProductImage, setActiveMiniProductImage] = useState(0);
 
   const [mainImage, setMainImage] = useState(productDetails?.displayImage);
 
@@ -27,7 +34,7 @@ export const ProductCard = ({ updateCartItemNumber }) => {
           });
 
           const data = await response.json();
-
+          setLoader(false);
           setProductDetails(data.data);
         }
 
@@ -52,7 +59,7 @@ export const ProductCard = ({ updateCartItemNumber }) => {
         });
 
         const data = await response.json();
-
+        setLoader(false);
         setProductReview(data.data);
       }
 
@@ -66,25 +73,63 @@ export const ProductCard = ({ updateCartItemNumber }) => {
     setMainImage(imageSrc);
   };
 
+  const prevSlide = () => {
+    setActiveMiniProductImage((prevIndex) => {
+      const newIndex = prevIndex - 5;
+      const totalImages = productDetails?.images?.length;
+      return newIndex < 0 ? Math.max(totalImages - 5, 0) : newIndex;
+    });
+  };
+
+  const nextSlide = () => {
+    setActiveMiniProductImage((prevIndex) => {
+      const newIndex = prevIndex + 5;
+      const totalImages = productDetails?.images?.length;
+      return newIndex >= totalImages ? 0 : newIndex;
+    });
+  };
+
   return (
     <>
       <section className="productCart">
+        <LoaderPage loader={loader} />
         <div key={productDetails?._id} className="productCardContainer">
-          <div className="cardProductImagesBox">
-            {productDetails.images &&
-              productDetails.images.map((data, index) => (
-                <div key={index} onClick={() => handleImageClick(data)}>
-                  <img className="cardProductImages" src={data} alt={data} />
-                </div>
-              ))}
-          </div>
+          <div className="cardProductImagesContainer">
+            <div className="cardProductImagesBox">
+              <ExpandLessIcon
+                className="previousImageProductCart"
+                onClick={prevSlide}
+                sx={{
+                  fontSize: "2rem",
+                  fontWeight: "200",
+                }}
+              />
 
-          <div className="cardProductMainImageBox">
-            <img
-              className="cardProductMainImage"
-              src={mainImage || productDetails.displayImage}
-              alt={productDetails.title}
-            />
+              {productDetails?.images
+                ?.slice(activeMiniProductImage, activeMiniProductImage + 5)
+                .map((data, index) => (
+                  <div key={index} onClick={() => handleImageClick(data)}>
+                    <img className="cardProductImages" src={data} alt={data} />
+                  </div>
+                ))}
+
+              <ExpandMoreIcon
+                className="nextImageProductCart"
+                onClick={nextSlide}
+                sx={{
+                  fontSize: "2rem",
+                  fontWeight: "200",
+                }}
+              />
+            </div>
+
+            <div className="cardProductMainImageBox">
+              <img
+                className="cardProductMainImage"
+                src={mainImage || productDetails.displayImage}
+                alt={productDetails.title}
+              />
+            </div>
           </div>
 
           <div className="cardProductDetailsContainer">

@@ -179,12 +179,3 @@ export default function NavigationMenu({
     </>
   );
 }
-
-{
-  /* <h1>hello1</h1>
-      <h2>hello2</h2>
-      <h3>hello3</h3>
-      <h4>hello4</h4>
-      <h5>hello5</h5>
-      <h6>hello6</h6> */
-}

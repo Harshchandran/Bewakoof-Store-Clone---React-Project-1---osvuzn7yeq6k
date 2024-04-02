@@ -14,6 +14,7 @@ import CartEasyReturn from "./cart-easy-return.svg";
 import CartQuality from "./quality-check.svg";
 import Payments from "./secure-payments-image.webp";
 import Alert from "@mui/material/Alert";
+import { LoaderPage } from "../pageLoader/LoaderPage";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -25,6 +26,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const Cart = ({ updateCartItemNumber }) => {
+  const [loader, setLoader] = useState(true);
+
   const [token, setToken] = useState("");
   const [cartProducts, setCartProducts] = useState({});
   const [cartItems, setCartItems] = useState([]);
@@ -52,10 +55,10 @@ const Cart = ({ updateCartItemNumber }) => {
       });
 
       const data = await response.json();
-
       setCartProducts(data);
 
       localStorage.setItem("cartItemsNumber", JSON.stringify(data.results));
+      setLoader(false);
 
       setCartItems(data.data.items);
 
@@ -99,21 +102,19 @@ const Cart = ({ updateCartItemNumber }) => {
         },
       });
       const data = await response.json();
+      setLoader(false);
 
-      // setCartItems((currentItems) =>
-      //   currentItems.filter((item) => item._id !== productId)
-      // );
       setDeleteItemResponse(data);
       getCartProducts();
+      setLoader(true);
     } catch (error) {
       console.error("Error deleting item from cart:", error);
     }
   };
 
   const handleRemoveProductFromCart = (id) => {
-    // setProductId(id);
-    // getCartProducts();
     DeleteItemFromCartUrl(id);
+    setLoader(true);
   };
 
   const [clearingCartResponse, setClearingCartResponse] = useState([]);
@@ -132,10 +133,11 @@ const Cart = ({ updateCartItemNumber }) => {
         },
       });
       const data = await response.json();
-
+      setLoader(false);
       setClearingCartResponse(data);
 
       getCartProducts();
+      setLoader(true);
 
       // setCartItems((currentItems) =>
       //   currentItems.filter((item) => item._id !== productId)
@@ -173,6 +175,7 @@ const Cart = ({ updateCartItemNumber }) => {
 
   return (
     <>
+      <LoaderPage loader={loader} />
       <section className="cart">
         <div>
           <Snackbar
@@ -322,6 +325,7 @@ const Cart = ({ updateCartItemNumber }) => {
                         className="clearCartButton"
                         onClick={() => {
                           handleClearCart();
+                          setLoader(true);
                           handleCartClearClick();
                         }}
                       >
@@ -432,7 +436,6 @@ const Cart = ({ updateCartItemNumber }) => {
           <EmptyCart />
         )}
       </section>
-
       <div>{/* <Payment /> */}</div>
     </>
   );

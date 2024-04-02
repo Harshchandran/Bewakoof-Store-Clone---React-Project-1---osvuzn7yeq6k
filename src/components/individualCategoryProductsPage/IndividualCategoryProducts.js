@@ -1,6 +1,7 @@
 import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { LoaderPage } from "../pages/pageLoader/LoaderPage";
 import { FiltersSection } from "./FiltersSection";
 import "./IndividualCategoryProducts.css";
 import { SortBy } from "./SortBy";
@@ -19,6 +20,8 @@ export const IndividualCategoryProducts = () => {
   const [notFound, setNotFound] = useState(false);
 
   const [filterClearButton, setFilterClearButton] = useState(false);
+
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     if (filterData) {
@@ -43,6 +46,8 @@ export const IndividualCategoryProducts = () => {
 
           const data = await response.json();
           console.log(data.data);
+
+          setLoader(false);
 
           setCategoryData(data.data);
         } catch (error) {
@@ -80,6 +85,7 @@ export const IndividualCategoryProducts = () => {
 
       if (data.status === "success") {
         setNotFound(false);
+        setLoader(false);
       } else {
         setNotFound(true);
       }
@@ -107,6 +113,7 @@ export const IndividualCategoryProducts = () => {
   return (
     <>
       <section className="individualCategorySection">
+        <LoaderPage loader={loader} />
         <div className="individualCategoryContainer">
           <div className="individualCategoryLeftContainer">
             <div className="individualCategoryFilterSectionHeaders">
