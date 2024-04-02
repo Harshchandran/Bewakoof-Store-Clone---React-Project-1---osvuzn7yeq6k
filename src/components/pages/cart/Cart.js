@@ -82,6 +82,8 @@ const Cart = ({ updateCartItemNumber }) => {
       setToken(JWTToken);
 
       getCartProducts();
+    } else {
+      setLoader(false);
     }
   }, [projectId]);
 
