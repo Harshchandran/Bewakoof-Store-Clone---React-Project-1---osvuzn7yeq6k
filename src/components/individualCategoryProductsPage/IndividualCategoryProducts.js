@@ -17,6 +17,8 @@ export const IndividualCategoryProducts = () => {
 
   const filterData = location.state && location.state.filter;
 
+  const searchData = location.state && location.state.search;
+
   const [notFound, setNotFound] = useState(false);
 
   const [notDataFound, setNotDataFound] = useState(false);
@@ -59,7 +61,41 @@ export const IndividualCategoryProducts = () => {
 
       getCategoryData(categoryDataApi);
     }
-  }, [filterData]);
+
+    if (searchData) {
+      const SearchUrl = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search=${encodeURIComponent(
+        JSON.stringify(searchData)
+      )}`;
+
+      const projectId = "f104bi07c490";
+
+      async function getSearchData(api) {
+        try {
+          const response = await fetch(api, {
+            method: "GET",
+            headers: {
+              projectId: projectId,
+            },
+          });
+
+          const data = await response.json();
+
+          setLoader(false);
+          if (data.status === "success") {
+            setNotDataFound(false);
+          } else if (data.status === "fail") {
+            setNotDataFound(true);
+          }
+
+          setCategoryData(data.data);
+        } catch (error) {
+          console.error("Error fetching Category Data:", error);
+        }
+      }
+
+      getSearchData(SearchUrl);
+    }
+  }, [filterData, searchData]);
 
   const projectId = "f104bi07c490";
 

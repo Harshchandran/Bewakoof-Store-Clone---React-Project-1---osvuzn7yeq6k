@@ -71,91 +71,23 @@ export default function Search() {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      navigate("/productPage", { state: { filter: { subCategory: "jeans" } } });
+      console.log(inputSearchData);
+      navigate("/productPage", {
+        state: {
+          search: {
+            name: inputSearchData,
+            description: inputSearchData,
+          },
+        },
+      });
     }
   };
-
-  const [searchFieldOptions, setSearchFieldOptions] = useState(" Options");
 
   return (
     <>
       <div className="searchDataContainer">
         <SearchIcon fontSize="small" className="searchIcon" />
-        {/* <div>
-          <Button
-            id="demo-customized-button"
-            aria-controls={open ? "demo-customized-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            variant="contained"
-            disableElevation
-            onClick={handleClick}
-            endIcon={<KeyboardArrowDownIcon sx={{ fontSize: "0.5rem" }} />}
-            sx={{
-              fontSize: "0.5rem",
-              background: "#eeeeee",
-              color: "#717171",
-              padding: "0.1rem 0.4rem",
-              fontWeight: 600,
-              "&:hover": {
-                fontSize: "0.5rem",
-                background: "#eeeeee",
-                color: "#717171",
-                padding: "0.1rem 0.4rem",
-                fontWeight: 600,
-              },
-            }}
-          >
-            {searchFieldOptions}
-          </Button>
-          <StyledMenu
-            id="demo-customized-menu"
-            MenuListProps={{
-              "aria-labelledby": "demo-customized-button",
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem
-              onClick={(e) => {
-                handleClose();
-                setSearchFieldOptions("Gender");
-              }}
-              disableRipple
-            >
-              Gender
-            </MenuItem>
-            <MenuItem
-              onClick={(e) => {
-                handleClose();
-                setSearchFieldOptions("Color");
-              }}
-              disableRipple
-            >
-              Color
-            </MenuItem>
-             <Divider sx={{ my: 0.5 }} /> 
-            <MenuItem
-              onClick={(e) => {
-                handleClose();
-                setSearchFieldOptions("Category");
-              }}
-              disableRipple
-            >
-              Category
-            </MenuItem>
-            <MenuItem
-              onClick={(e) => {
-                handleClose();
-                setSearchFieldOptions("Size");
-              }}
-              disableRipple
-            >
-              Size
-            </MenuItem>
-          </StyledMenu>
-        </div> */}
+
         <input
           type="text"
           id="searchData"

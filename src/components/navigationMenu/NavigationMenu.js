@@ -13,6 +13,51 @@ import Search from "../pages/Search";
 import { DrawerComponent } from "./DrawerComponent";
 import "./NavigationMenu.css";
 import Logo from "./bwkf-trademark-logo.svg";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+
+const StyledSearch = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  width: "100%",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    [theme.breakpoints.up("sm")]: {
+      width: "0ch",
+      "&:focus": {
+        width: "15ch",
+      },
+    },
+  },
+}));
 
 export default function NavigationMenu({
   noOfItemsInCart,
@@ -52,6 +97,28 @@ export default function NavigationMenu({
       setNoOfItemsInCart(ItemsInCart);
     }
   }, []);
+
+  const [inputSearchData, setSearchInput] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      console.log(inputSearchData);
+      navigate("/productPage", {
+        state: {
+          search: {
+            name: inputSearchData,
+            description: inputSearchData,
+          },
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -163,9 +230,18 @@ export default function NavigationMenu({
         <div>
           <ul className="navigationBarMini">
             <li>
-              <Link to="/">
-                <SearchRoundedIcon />
-              </Link>
+              <StyledSearch>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search by product, category or collection"
+                  inputProps={{ "aria-label": "search" }}
+                  value={inputSearchData}
+                  onChange={handleChange}
+                  onKeyPress={handleKeyPress}
+                />
+              </StyledSearch>
             </li>
             {/* <li>
               <Link to="/wishlist">

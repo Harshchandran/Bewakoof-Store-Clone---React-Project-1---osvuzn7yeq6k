@@ -87,9 +87,9 @@
 }
 
 .bestSellerHeadingTag {
-  color: #333333;
-  font-size: 0.875rem;
-  font-weight: 500;
+  color: #000;
+  font-size: calc(0.55vw + 0.55vh + 1vmin);
+  font-weight: 900;
   text-align: center;
 }
 

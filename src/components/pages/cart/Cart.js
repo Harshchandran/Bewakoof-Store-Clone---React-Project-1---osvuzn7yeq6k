@@ -84,6 +84,7 @@ const Cart = ({ updateCartItemNumber }) => {
       getCartProducts();
     } else {
       setLoader(false);
+      setToken("");
     }
   }, [projectId]);
 
@@ -234,9 +235,7 @@ const Cart = ({ updateCartItemNumber }) => {
           </Snackbar>
         </div>
         {token ? (
-          cartProducts?.data?.totalPrice === 0 ||
-          deleteItemResponse?.data?.totalPrice === 0 ||
-          clearingCartResponse?.data?.totalPrice === 0 ? (
+          cartProducts.results === 0 ? (
             <EmptyCart />
           ) : (
             <div className="cartProductAdded">
