@@ -44,13 +44,11 @@ export const IndividualCategoryProducts = () => {
 
           const data = await response.json();
 
+          setLoader(false);
           if (data.status === "success") {
             setNotDataFound(false);
-            console.log(data.data);
-            setLoader(false);
           } else if (data.status === "fail") {
             setNotDataFound(true);
-            setLoader(false);
           }
 
           setCategoryData(data.data);
@@ -86,10 +84,8 @@ export const IndividualCategoryProducts = () => {
       setLoader(false);
       if (data.status === "success") {
         setNotFound(false);
-        // setLoader(false);
       } else if (data.status === "fail") {
         setNotFound(true);
-        // setLoader(false);
       }
     } catch (error) {
       console.error("Error updating Filter Data:", error);
@@ -159,7 +155,6 @@ export const IndividualCategoryProducts = () => {
                         className="individualCategoryDataNotFoundClearButton"
                         onClick={() => setNotDataFound(false)}
                       >
-                        {console.log("notDataFound", notDataFound)}
                         Continue Shopping
                       </button>
                     </Link>
@@ -169,7 +164,6 @@ export const IndividualCategoryProducts = () => {
                         className="individualCategoryDataNotFoundClearButton"
                         onClick={handleClearAllFilter}
                       >
-                        {console.log("notFound", notFound)}
                         Clear
                       </button>
                     )

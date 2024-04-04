@@ -78,11 +78,11 @@ export default function NavigationMenu({
                   handleDropdown();
                 }}
                 onMouseLeave={handleDropdownClose}
-                // onClick={() => setGender("Men")}
               >
                 MEN
               </Link>
             </li>
+
             <li>
               <Link
                 // to="/women-clothing"
@@ -98,7 +98,6 @@ export default function NavigationMenu({
                   handleDropdown();
                 }}
                 onMouseLeave={handleDropdownClose}
-                // onClick={() => setGender("Women")}
               >
                 WOMEN
               </Link>
