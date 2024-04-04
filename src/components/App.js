@@ -46,12 +46,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="campaign/mens-home" element={<CampaignMen />} />
           <Route path="campaign/womens-home" element={<CampaignWomen />} />
-          <Route path="/bewakoof-air" element={<BewakoofAir />} />
           <Route path="/campaign/plus-size-store" element={<PlusSize />} />
           <Route path="/login/email" element={<LoginPage />} />
         </Route>
-        {/* <Route path="/men-clothing" element={<Men />} />
-        <Route path="/women-clothing" element={<Women />} /> */}
+
         <Route path="/login" element={<Login />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route
@@ -69,7 +67,6 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      {/* <Footer /> */}
       {pagePath.pathname === "/cart" ? null : <Footer />}
     </>
   );

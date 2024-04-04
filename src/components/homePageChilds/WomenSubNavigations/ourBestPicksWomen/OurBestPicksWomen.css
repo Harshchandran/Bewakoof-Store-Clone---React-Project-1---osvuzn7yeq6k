@@ -6,7 +6,7 @@
 
 .ourBestPicksWomen h5 {
   margin: 0.5rem 0rem;
-  font-size: 1.25rem;
+  font-size: calc(0.7rem + 0.55vw + 0.55vh);
   text-align: center;
 }
 

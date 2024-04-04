@@ -1,4 +1,5 @@
 .MenMiniSubNavigation {
+  margin: 1.5rem 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -33,4 +34,24 @@
   font-size: calc(0.2vw + 0.2vh + 1vmin);
   text-align: center;
   font-weight: bolder;
+}
+
+@media only screen and (max-width: 991px) {
+  .MenMiniSubNavigation {
+    margin: 0.8rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .MenMiniSubNavigationContainer {
+    padding: 0rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    overflow: hidden;
+  }
 }

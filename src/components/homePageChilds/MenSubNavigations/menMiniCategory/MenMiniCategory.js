@@ -44,7 +44,6 @@ export const MenMiniCategory = () => {
 
   return (
     <>
-      <div>MenMiniCategory</div>
       <section className="MenMiniSubNavigation">
         <div className="MenMiniSubNavigationContainer">
           {MenMiniSubNavigationImages.map((data, index) => (

@@ -86,9 +86,8 @@ export const WomenTrendingCategory = () => {
   ];
   return (
     <>
-      <div>WomenTrendingCategory</div>
       <section>
-        <div className="womenTrendingCategoryText">TrendingCategory</div>
+        <div className="womenTrendingCategoryText">TRENDING CATEGORIES</div>
         <div className="womenTrendingCategoryContainer">
           <div className="womenTrendingCategoryBox">
             {CategoryData.slice(0, 5).map((data, index) => (

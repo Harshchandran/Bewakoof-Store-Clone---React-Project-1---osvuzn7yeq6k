@@ -300,7 +300,7 @@ export const FiltersSection = ({
         </AccordionDetails>
       </Accordion>
 
-      <Accordion sx={accordionStyle}>
+      {/* <Accordion sx={accordionStyle}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel11-content"
@@ -359,7 +359,7 @@ export const FiltersSection = ({
             Price : Low to High
           </Typography>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       <Accordion sx={accordionStyle}>
         <AccordionSummary

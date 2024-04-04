@@ -45,7 +45,6 @@ export const IndividualCategoryProducts = () => {
           }
 
           const data = await response.json();
-          console.log(data.data);
 
           setLoader(false);
 
@@ -75,9 +74,6 @@ export const IndividualCategoryProducts = () => {
           projectId: projectId,
         },
       });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
 
       const data = await response.json();
 
@@ -86,7 +82,7 @@ export const IndividualCategoryProducts = () => {
       if (data.status === "success") {
         setNotFound(false);
         setLoader(false);
-      } else {
+      } else if (data.status === "fail") {
         setNotFound(true);
       }
     } catch (error) {
@@ -144,19 +140,21 @@ export const IndividualCategoryProducts = () => {
               />
             </div>
             {notFound ? (
-              <div className="individualCategoryDataNotFoundBox">
-                <h2 className="individualCategoryDataNotFound">
-                  Sorry, We couldn’t Find any matches!
-                </h2>
+              <div className="individualCategoryDataNotFoundContainer">
+                <div className="individualCategoryDataNotFoundBox">
+                  <h2 className="individualCategoryDataNotFound">
+                    Sorry, We couldn’t Find any matches!
+                  </h2>
 
-                {filterClearButton && (
-                  <button
-                    className="individualCategoryDataNotFoundClearButton"
-                    onClick={handleClearAllFilter}
-                  >
-                    Clear
-                  </button>
-                )}
+                  {filterClearButton && (
+                    <button
+                      className="individualCategoryDataNotFoundClearButton"
+                      onClick={handleClearAllFilter}
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
               </div>
             ) : (
               <div className="individualCategoryDataContainer01">
