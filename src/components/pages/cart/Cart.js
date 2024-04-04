@@ -437,7 +437,6 @@ const Cart = ({ updateCartItemNumber }) => {
           <EmptyCart />
         )}
       </section>
-      <div>{/* <Payment /> */}</div>
     </>
   );
 };
