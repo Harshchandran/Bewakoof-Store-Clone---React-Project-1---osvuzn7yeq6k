@@ -108,7 +108,6 @@ export default function NavigationMenu({
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      console.log(inputSearchData);
       navigate("/productPage", {
         state: {
           search: {

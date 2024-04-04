@@ -90,23 +90,25 @@ export const ProductDetails = ({
   const projectId = "f105bi07c590";
 
   const updateItemToCart = async (e) => {
-    try {
-      const response = await fetch(UpdateCartItemsApi, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          projectId: projectId,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(AddingItemToCart),
-      });
+    if (token) {
+      try {
+        const response = await fetch(UpdateCartItemsApi, {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            projectId: projectId,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(AddingItemToCart),
+        });
 
-      const data = await response.json();
-      setUpdateResponse(data);
+        const data = await response.json();
+        setUpdateResponse(data);
 
-      setUpdateSize("");
-    } catch (error) {
-      console.error("Error updating item to cart:", error);
+        setUpdateSize("");
+      } catch (error) {
+        console.error("Error updating item to cart:", error);
+      }
     }
   };
 
