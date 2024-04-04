@@ -31,8 +31,6 @@ export const ProductReviewRatings = ({
   five,
   totalCount,
 }) => {
-  // console.log(starCounts);
-
   return (
     <>
       <section className="ProductReviewRatingsContainer">
