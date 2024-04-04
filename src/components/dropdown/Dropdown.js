@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Dropdown.css";
 
-const Dropdown = ({ show, setShow }) => {
+const Dropdown = ({ gender, show, setShow }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -59,6 +59,7 @@ const Dropdown = ({ show, setShow }) => {
                 state={{
                   filter: {
                     subCategory: individualData,
+                    gender: gender,
                   },
                 }}
               >

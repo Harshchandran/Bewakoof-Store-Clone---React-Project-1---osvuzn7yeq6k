@@ -21,6 +21,8 @@ export default function NavigationMenu({
   const [showDropdown, setShowDropdown] = useState(false);
   // const [noOfItemsInCart, setNoOfItemsInCart] = useState("");
 
+  const [gender, setGender] = useState("");
+
   const [userName, setUserName] = useState("");
   const Navigate = useNavigate();
 
@@ -71,8 +73,12 @@ export default function NavigationMenu({
                   },
                 }}
                 className="navigationBarData"
-                onMouseOver={handleDropdown}
+                onMouseOver={() => {
+                  setGender("Men");
+                  handleDropdown();
+                }}
                 onMouseLeave={handleDropdownClose}
+                // onClick={() => setGender("Men")}
               >
                 MEN
               </Link>
@@ -87,8 +93,12 @@ export default function NavigationMenu({
                   },
                 }}
                 className="navigationBarData"
-                onMouseOver={handleDropdown}
+                onMouseOver={() => {
+                  setGender("Women");
+                  handleDropdown();
+                }}
                 onMouseLeave={handleDropdownClose}
+                // onClick={() => setGender("Women")}
               >
                 WOMEN
               </Link>
@@ -131,7 +141,11 @@ export default function NavigationMenu({
 
         <hr className="navigationBarLine"></hr>
 
-        <Dropdown show={showDropdown} setShow={setShowDropdown} />
+        <Dropdown
+          gender={gender}
+          show={showDropdown}
+          setShow={setShowDropdown}
+        />
       </nav>
 
       <nav className="navigationBarMobileContainer">

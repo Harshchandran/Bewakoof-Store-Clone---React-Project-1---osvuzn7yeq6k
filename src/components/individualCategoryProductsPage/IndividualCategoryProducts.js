@@ -19,6 +19,8 @@ export const IndividualCategoryProducts = () => {
 
   const [notFound, setNotFound] = useState(false);
 
+  const [notDataFound, setNotDataFound] = useState(false);
+
   const [filterClearButton, setFilterClearButton] = useState(false);
 
   const [loader, setLoader] = useState(true);
@@ -40,13 +42,16 @@ export const IndividualCategoryProducts = () => {
             },
           });
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-
           const data = await response.json();
 
-          setLoader(false);
+          if (data.status === "success") {
+            setNotDataFound(false);
+            console.log(data.data);
+            setLoader(false);
+          } else if (data.status === "fail") {
+            setNotDataFound(true);
+            setLoader(false);
+          }
 
           setCategoryData(data.data);
         } catch (error) {
@@ -78,12 +83,13 @@ export const IndividualCategoryProducts = () => {
       const data = await response.json();
 
       setCategoryData(data.data);
-
+      setLoader(false);
       if (data.status === "success") {
         setNotFound(false);
-        setLoader(false);
+        // setLoader(false);
       } else if (data.status === "fail") {
         setNotFound(true);
+        // setLoader(false);
       }
     } catch (error) {
       console.error("Error updating Filter Data:", error);
@@ -139,20 +145,34 @@ export const IndividualCategoryProducts = () => {
                 setFiltersApplied={setFiltersApplied}
               />
             </div>
-            {notFound ? (
+            {notFound || notDataFound ? (
               <div className="individualCategoryDataNotFoundContainer">
                 <div className="individualCategoryDataNotFoundBox">
                   <h2 className="individualCategoryDataNotFound">
-                    Sorry, We couldn’t Find any matches!
+                    {notDataFound
+                      ? "Sorry, No Data is Found!"
+                      : "Sorry, We couldn’t Find any matches!"}
                   </h2>
-
-                  {filterClearButton && (
-                    <button
-                      className="individualCategoryDataNotFoundClearButton"
-                      onClick={handleClearAllFilter}
-                    >
-                      Clear
-                    </button>
+                  {notDataFound ? (
+                    <Link to="/">
+                      <button
+                        className="individualCategoryDataNotFoundClearButton"
+                        onClick={() => setNotDataFound(false)}
+                      >
+                        {console.log("notDataFound", notDataFound)}
+                        Continue Shopping
+                      </button>
+                    </Link>
+                  ) : (
+                    filterClearButton && (
+                      <button
+                        className="individualCategoryDataNotFoundClearButton"
+                        onClick={handleClearAllFilter}
+                      >
+                        {console.log("notFound", notFound)}
+                        Clear
+                      </button>
+                    )
                   )}
                 </div>
               </div>
