@@ -89,13 +89,11 @@ export default function NavigationMenu({
   useEffect(() => {
     if (localStorage.getItem("userData")) {
       const userData = JSON.parse(localStorage.getItem("userData"));
-      console.log("userData : ", userData);
       setUserName(userData.name);
     }
 
     if (localStorage.getItem("cartItemsNumber")) {
       const ItemsInCart = JSON.parse(localStorage.getItem("cartItemsNumber"));
-      console.log("items no in cart :", ItemsInCart);
       setNoOfItemsInCart(ItemsInCart);
     }
   }, []);
