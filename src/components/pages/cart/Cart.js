@@ -311,10 +311,10 @@ const Cart = ({ updateCartItemNumber }) => {
                           >
                             Remove
                           </button>
-                          <hr className="cartProductButtonDividerLine"></hr>
+                          {/* <hr className="cartProductButtonDividerLine"></hr>
                           <button className="cartProductButtonMyWishList">
                             Move to Wishlist
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     ))}
