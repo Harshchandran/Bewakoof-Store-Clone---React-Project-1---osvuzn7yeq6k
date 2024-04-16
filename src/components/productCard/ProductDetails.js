@@ -315,7 +315,10 @@ export const ProductDetails = ({
         <div className="productDetailsSizesContainer">
           <div className="productDetailsSizesTitle">
             <h6>SELECT SIZE</h6>
-            <h6 onClick={handleOpenSize} style={{ color: "#42a2a2" }}>
+            <h6
+              onClick={handleOpenSize}
+              style={{ color: "#42a2a2", cursor: "pointer" }}
+            >
               Size Guide
             </h6>
             <Modal
