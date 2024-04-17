@@ -221,7 +221,7 @@ export const LoginPage = () => {
                   }}
                 >
                   {" "}
-                  Click Here to SignUp!
+                  Click Here to Login!
                 </button>
               </div>
             ) : (
@@ -234,7 +234,7 @@ export const LoginPage = () => {
                     }}
                     type="submit"
                   >
-                    Click Here to Login!
+                    Click Here to SignUp!
                   </button>
                 </div>
               </div>
