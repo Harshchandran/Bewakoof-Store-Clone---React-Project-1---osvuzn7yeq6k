@@ -69,6 +69,8 @@ export default function NavigationMenu({
   const [gender, setGender] = useState("");
 
   const [userName, setUserName] = useState("");
+
+  const [token, setToken] = useState("");
   const Navigate = useNavigate();
 
   const handleDropdown = () => {
@@ -87,9 +89,19 @@ export default function NavigationMenu({
   };
 
   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const JWTToken = JSON.parse(localStorage.getItem("token"));
+      setToken(JWTToken);
+    }
+
     if (localStorage.getItem("userData")) {
-      const userData = JSON.parse(localStorage.getItem("userData"));
-      setUserName(userData.name);
+      const storedData = JSON.parse(localStorage.getItem("userData"));
+
+      if (storedData && storedData.user) {
+        const userData = storedData.user;
+
+        setUserName(userData.name);
+      }
     }
 
     if (localStorage.getItem("cartItemsNumber")) {
@@ -176,7 +188,7 @@ export default function NavigationMenu({
             </li>
             <li>|</li>
             <li>
-              {userName ? (
+              {token ? (
                 <NavigationLoginDropdown userName={userName} />
               ) : (
                 <Link to="/login">Login</Link>

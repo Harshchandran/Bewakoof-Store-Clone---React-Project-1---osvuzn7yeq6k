@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -31,7 +32,10 @@ export const AddSizeToUpdateCart = ({
   handleClick,
   updateCartItemNumber,
 }) => {
-  useEffect;
+  const [goToBag, setGoToBag] = useState(false);
+
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
 
   const [localStorageCartCount, setLocalStorageCartCount] = useState("");
@@ -47,6 +51,9 @@ export const AddSizeToUpdateCart = ({
     if (localStorage.getItem("cartItemsNumber")) {
       const ItemsInCart = JSON.parse(localStorage.getItem("cartItemsNumber"));
       setLocalStorageCartCount(ItemsInCart);
+    }
+    if (goToBag) {
+      setGoToBag(false);
     }
   }, []);
 
@@ -84,27 +91,41 @@ export const AddSizeToUpdateCart = ({
     setSelectedColor(color);
   };
 
+  const handleGoToBag = () => {
+    navigate("/cart");
+  };
+
   return (
     <React.Fragment>
-      <button
-        variant="outlined"
-        onClick={() => {
-          if (updateSize === "") {
-            handleClickOpen();
-          } else {
-            updateItemToCart();
-
-            handleClick();
-            setTimeout(() => {
-              getCartProducts();
-            }, 2000);
-          }
-        }}
-        className="productDetailsButtonAddToBagButton"
-      >
-        <ShoppingBagOutlinedIcon />
-        ADD TO BAG
-      </button>
+      {goToBag ? (
+        <button
+          className="productDetailsButtonAddToBagButton"
+          onClick={handleGoToBag}
+        >
+          <ShoppingBagOutlinedIcon />
+          GO TO BAG
+        </button>
+      ) : (
+        <button
+          variant="outlined"
+          onClick={() => {
+            if (updateSize === "") {
+              handleClickOpen();
+            } else {
+              updateItemToCart();
+              handleClick();
+              setGoToBag(true);
+              setTimeout(() => {
+                getCartProducts();
+              }, 2000);
+            }
+          }}
+          className="productDetailsButtonAddToBagButton"
+        >
+          <ShoppingBagOutlinedIcon />
+          ADD TO BAG
+        </button>
+      )}
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -159,7 +180,7 @@ export const AddSizeToUpdateCart = ({
           }}
           onClick={() => {
             updateItemToCart();
-
+            setGoToBag(true);
             handleClose();
             handleClick();
 

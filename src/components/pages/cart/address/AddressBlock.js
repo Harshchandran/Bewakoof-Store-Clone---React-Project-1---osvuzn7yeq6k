@@ -45,8 +45,13 @@ export const AddressBlock = ({
 
   useEffect(() => {
     if (localStorage.getItem("userData")) {
-      const userData = JSON.parse(localStorage.getItem("userData"));
-      setName(userData.name);
+      const storedData = JSON.parse(localStorage.getItem("userData"));
+
+      if (storedData && storedData.user) {
+        const userData = storedData.user;
+
+        setName(userData.name);
+      }
     }
     setLoader(false);
   }, []);
@@ -143,6 +148,16 @@ export const AddressBlock = ({
     navigate("/payment");
   };
 
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    handleClose();
+    handleLoginSubmit();
+    handlePaymentNavigate();
+    handleClearCart();
+    setLoader(true);
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -172,8 +187,9 @@ export const AddressBlock = ({
               sx={{
                 "& .MuiTextField-root": { m: 1, width: "95%" },
               }}
-              noValidate
+              // noValidate
               autoComplete="off"
+              onSubmit={handleFormSubmit}
             >
               <div>
                 <TextField
@@ -259,53 +275,44 @@ export const AddressBlock = ({
                   // onChange={handleChange}
                 />
               </div>
-            </Box>
-            <FormControl>
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Save Address As
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="addressType"
-                value={addressData.addressType}
-                onChange={handleChange}
-              >
-                <FormControlLabel
-                  value="HOME"
-                  control={<Radio />}
-                  label="HOME"
-                />
-                <FormControlLabel
+
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  Save Address As
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="addressType"
+                  value={addressData.addressType}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value="HOME"
+                    control={<Radio />}
+                    label="HOME"
+                  />
+                  {/* <FormControlLabel
                   value="OTHER"
                   control={<Radio />}
                   label="OFFICE"
-                />
-                <FormControlLabel
-                  value="OTHER"
-                  control={<Radio />}
-                  label="Other"
-                />
-              </RadioGroup>
-            </FormControl>
-            <div className="addressSubmitButtonBox">
-              <button
-                className="addressSubmitButton"
-                type="submit"
-                onClick={() => {
-                  handleClose();
-                  handleLoginSubmit();
-                  handlePaymentNavigate();
-                  handleClearCart();
-                  setLoader(true);
-                }}
-              >
-                SAVE ADDRESS
-              </button>
-              <button className="addressCancelButton" onClick={handleClose}>
-                CANCEL
-              </button>
-            </div>
+                /> */}
+                  <FormControlLabel
+                    value="OTHER"
+                    control={<Radio />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+              <div className="addressSubmitButtonBox">
+                <button className="addressSubmitButton" type="submit">
+                  SAVE ADDRESS
+                </button>
+                <button className="addressCancelButton" onClick={handleClose}>
+                  CANCEL
+                </button>
+              </div>
+            </Box>
           </DialogContentText>
         </DialogContent>
       </Dialog>

@@ -34,8 +34,8 @@ export const LoginPage = () => {
 
   const [action, setAction] = useState("Log in to your account");
 
-  const handleLoginSubmit = async () => {
-    // e.preventDefault();
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch(LoginApi, {
         method: "Post",
@@ -47,6 +47,8 @@ export const LoginPage = () => {
       });
 
       const data = await response.json();
+
+      console.log(data);
 
       if (
         data.status === "fail" &&
@@ -73,8 +75,8 @@ export const LoginPage = () => {
     }
   };
 
-  const handleSignUpSubmit = async () => {
-    // e.preventDefault();
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch(SignUpApi, {
         method: "Post",
@@ -109,15 +111,9 @@ export const LoginPage = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (action === "Log in to your account") {
-      setLoginValues({
-        ...LoginValues,
-        [name]: value,
-      });
+      setLoginValues((prev) => ({ ...prev, [name]: value }));
     } else {
-      setSignUpValues({
-        ...SignUpValues,
-        [name]: value,
-      });
+      setSignUpValues((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -133,54 +129,61 @@ export const LoginPage = () => {
               </p>
             </div>
 
-            <div className="inputs">
-              {action === "Log in to your account" ? (
-                <div> </div>
-              ) : (
+            <form
+              onSubmit={
+                action === "Log in to your account"
+                  ? handleLoginSubmit
+                  : handleSignUpSubmit
+              }
+            >
+              <div className="inputs">
+                {action === "Log in to your account" ? (
+                  <div> </div>
+                ) : (
+                  <div className="input">
+                    <input
+                      type="text"
+                      name="name"
+                      value={SignUpValues.name}
+                      onChange={handleChange}
+                      placeholder="Name"
+                      required
+                    />
+                  </div>
+                )}
+
                 <div className="input">
                   <input
-                    type="text"
-                    name="name"
-                    value={SignUpValues.name}
+                    type="email"
+                    name="email"
+                    value={
+                      action === "Log in to your account"
+                        ? LoginValues.email
+                        : SignUpValues.email
+                    }
                     onChange={handleChange}
-                    placeholder="Name"
+                    placeholder="Email"
                     required
                   />
                 </div>
-              )}
 
-              <div className="input">
-                <input
-                  type="email"
-                  name="email"
-                  value={
-                    action === "Log in to your account"
-                      ? LoginValues.email
-                      : SignUpValues.email
-                  }
-                  onChange={handleChange}
-                  placeholder="Email"
-                  required
-                />
+                <div className="input">
+                  <input
+                    type="password"
+                    name="password"
+                    value={
+                      action === "Log in to your account"
+                        ? LoginValues.password
+                        : SignUpValues.password
+                    }
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="input">
-                <input
-                  type="password"
-                  name="password"
-                  value={
-                    action === "Log in to your account"
-                      ? LoginValues.password
-                      : SignUpValues.password
-                  }
-                  onChange={handleChange}
-                  placeholder="Password"
-                  required
-                />
-              </div>
-            </div>
-
-            {/* {action === "Sign Up" ? null : (
+              {/* {action === "Sign Up" ? null : (
               <div>
                 <div className="forgot-password">
                   Lost Password? <span>Click Here!</span>
@@ -188,57 +191,39 @@ export const LoginPage = () => {
               </div>
             )} */}
 
-            <div className="submit-container">
-              {action === "Sign Up" ? (
-                <button
-                  className="submit"
-                  type="submit"
-                  onClick={() => {
-                    handleSignUpSubmit();
-                  }}
-                >
-                  Sign Up
-                </button>
-              ) : (
-                <button
-                  className="submit"
-                  type="submit "
-                  onClick={() => {
-                    handleLoginSubmit();
-                  }}
-                >
-                  Login
-                </button>
-              )}
-            </div>
-
-            {action === "Sign Up" ? (
-              <div className="LoginSinUpToggle">
-                <p>Already have an Account ? </p>
-                <button
-                  onClick={() => {
-                    setAction("Log in to your account");
-                  }}
-                >
-                  {" "}
-                  Click Here to Login!
+              <div className="submit-container">
+                <button className="submit" type="submit">
+                  {action === "Sign Up" ? "Sign Up" : "Login"}
                 </button>
               </div>
-            ) : (
-              <div>
+
+              {action === "Sign Up" ? (
                 <div className="LoginSinUpToggle">
-                  <p>New User ?</p>
+                  <p>Already have an Account ? </p>
                   <button
                     onClick={() => {
-                      setAction("Sign Up");
+                      setAction("Log in to your account");
                     }}
-                    type="submit"
                   >
-                    Click Here to SignUp!
+                    Click Here to Login!
                   </button>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div>
+                  <div className="LoginSinUpToggle">
+                    <p>New User ?</p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAction("Sign Up");
+                      }}
+                    >
+                      Click Here to SignUp!
+                    </button>
+                  </div>
+                </div>
+              )}
+            </form>
           </div>
         </div>
       </section>
