@@ -21,6 +21,8 @@ export const LoginPage = () => {
     appType: "ecommerce",
   });
 
+  const [errors, setErrors] = useState({ name: "", email: "", password: "" });
+
   const navigateRouteLogin = () => {
     // Navigate("/");
     window.location.href = "/";
@@ -110,10 +112,41 @@ export const LoginPage = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    let localErrors = { ...errors };
+
+    if (name === "email") {
+      let emailRegex = new RegExp("[a-z0-9._%+\\-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
+      localErrors.email = emailRegex.test(value)
+        ? ""
+        : "Please enter a valid email address.";
+    }
+
+    if (name === "password") {
+      if (value.length < 4 || value.length > 60) {
+        localErrors.password =
+          "Your password must contain between 4 and 60 characters.";
+      } else {
+        localErrors.password = "";
+      }
+    }
+
+    if (name === "name" && action === "Log in to your account") {
+      localErrors.name =
+        value.length >= 4 ? "" : "Name must be at least 4 characters long.";
+    }
+
+    setErrors(localErrors);
+
     if (action === "Log in to your account") {
-      setLoginValues((prev) => ({ ...prev, [name]: value }));
+      setLoginValues({
+        ...LoginValues,
+        [name]: value,
+      });
     } else {
-      setSignUpValues((prev) => ({ ...prev, [name]: value }));
+      setSignUpValues({
+        ...SignUpValues,
+        [name]: value,
+      });
     }
   };
 
@@ -140,16 +173,21 @@ export const LoginPage = () => {
                 {action === "Log in to your account" ? (
                   <div> </div>
                 ) : (
-                  <div className="input">
-                    <input
-                      type="text"
-                      name="name"
-                      value={SignUpValues.name}
-                      onChange={handleChange}
-                      placeholder="Name"
-                      required
-                    />
-                  </div>
+                  <>
+                    <div className="input">
+                      <input
+                        type="text"
+                        name="name"
+                        value={SignUpValues.name}
+                        onChange={handleChange}
+                        placeholder="Name"
+                        required
+                        minLength={4}
+                        maxLength={50}
+                      />
+                    </div>
+                    <div className="error">{errors.name}</div>
+                  </>
                 )}
 
                 <div className="input">
@@ -164,8 +202,10 @@ export const LoginPage = () => {
                     onChange={handleChange}
                     placeholder="Email"
                     required
+                    pattern="[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                   />
                 </div>
+                <div className="error">{errors.email}</div>
 
                 <div className="input">
                   <input
@@ -181,6 +221,7 @@ export const LoginPage = () => {
                     required
                   />
                 </div>
+                <div className="error">{errors.password}</div>
               </div>
 
               {/* {action === "Sign Up" ? null : (

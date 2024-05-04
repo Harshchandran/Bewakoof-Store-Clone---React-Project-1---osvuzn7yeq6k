@@ -13,6 +13,9 @@ import React, { useEffect, useState } from "react";
 import "./AddressBlock.css";
 import { useNavigate } from "react-router-dom";
 import { LoaderPage } from "../../pageLoader/LoaderPage";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 export const AddressBlock = ({
   productIds,
@@ -25,6 +28,7 @@ export const AddressBlock = ({
   const [scroll, setScroll] = React.useState("paper");
   const [addressProductId, setAddressProductId] = useState("");
   const [name, setName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
 
   const [updateAddress, setUpdateAddress] = useState([]);
 
@@ -43,15 +47,20 @@ export const AddressBlock = ({
     },
   });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    mobileNumber: "",
+    zipCode: "",
+    street: "",
+    city: "",
+    state: "",
+    country: "",
+  });
+
   useEffect(() => {
     if (localStorage.getItem("userData")) {
-      const storedData = JSON.parse(localStorage.getItem("userData"));
-
-      if (storedData && storedData.user) {
-        const userData = storedData.user;
-
-        setName(userData.name);
-      }
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      setName(userData.name);
     }
     setLoader(false);
   }, []);
@@ -106,23 +115,42 @@ export const AddressBlock = ({
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (["street", "city", "state", "country", "zipCode"].includes(name)) {
+    if (name === "name") {
+      setName(value);
+    } else if (name === "mobileNumber") {
+      setMobileNumber(value);
+    } else if (name in addressData.address) {
       setAddressData((prevState) => ({
         ...prevState,
-
         address: {
           ...prevState.address,
-
           [name]: value,
         },
       }));
     } else {
       setAddressData((prevState) => ({
         ...prevState,
-
         [name]: value,
       }));
     }
+
+    let error = "";
+    switch (name) {
+      case "mobileNumber":
+        error = /^[9678][0-9]{9}$/.test(value)
+          ? ""
+          : "Invalid phone number (starts with 9, 6, 7, or 8 and 10 digits)";
+        break;
+      case "zipCode":
+        error = /^[0-9]{6}$/.test(value) ? "" : "Invalid zip code (6 digits)";
+        break;
+      case "name":
+        error = value.trim() ? "" : "Name is required";
+        break;
+      default:
+        break;
+    }
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
   };
 
   const handleClickOpen = (scrollType) => () => {
@@ -151,11 +179,18 @@ export const AddressBlock = ({
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    handleClose();
-    handleLoginSubmit();
-    handlePaymentNavigate();
-    handleClearCart();
-    setLoader(true);
+    const hasErrors = Object.values(errors).some((error) => error !== "");
+
+    if (!name || !mobileNumber || hasErrors) {
+      alert("Please complete all required fields and correct any errors.");
+    } else {
+      // Process the submission if everything is correct
+      handleClose();
+      handleLoginSubmit();
+      handlePaymentNavigate();
+      handleClearCart();
+      setLoader(true);
+    }
   };
 
   return (
@@ -187,7 +222,6 @@ export const AddressBlock = ({
               sx={{
                 "& .MuiTextField-root": { m: 1, width: "95%" },
               }}
-              // noValidate
               autoComplete="off"
               onSubmit={handleFormSubmit}
             >
@@ -198,14 +232,21 @@ export const AddressBlock = ({
                   label="Full Name"
                   variant="outlined"
                   value={name}
-                  required
+                  onChange={handleChange}
+                  error={!!errors.name}
+                  helperText={errors.name}
                 />
                 <TextField
-                  id="outlined-basic"
+                  id="outlined-mobileNumber"
+                  type="tel"
+                  name="mobileNumber"
                   label="Mobile Number"
                   variant="outlined"
-                  type="tel"
-                  required
+                  value={mobileNumber}
+                  onChange={handleChange}
+                  error={!!errors.mobileNumber}
+                  helperText={errors.mobileNumber}
+                  inputProps={{ pattern: "[9678][0-9]{9}", maxLength: 10 }}
                 />
                 <hr className="dividerAddressBox"></hr>
                 <TextField
@@ -215,11 +256,14 @@ export const AddressBlock = ({
                   inputProps={{
                     min: 100000,
                     max: 999999,
+                    pattern: "[0-9]{6}",
                   }}
                   label="Pincode/Postal Code/Zipcode"
                   variant="outlined"
                   value={addressData.zipCode}
                   onChange={handleChange}
+                  error={!!errors.zipCode}
+                  helperText={errors.zipCode}
                   required
                 />
                 <div
@@ -229,24 +273,52 @@ export const AddressBlock = ({
                     justifyContent: "space-between",
                   }}
                 >
-                  <TextField
-                    id="country"
-                    name="country"
-                    label="Country"
-                    variant="outlined"
-                    value={addressData.address.country}
-                    onChange={handleChange}
-                    required
-                  />
-                  <TextField
-                    id="state"
-                    name="state"
-                    label="State"
-                    variant="outlined"
-                    value={addressData.address.state}
-                    onChange={handleChange}
-                    required
-                  />
+                  <FormControl sx={{ m: 1, minWidth: "40%" }}>
+                    <InputLabel id="demo-simple-select-helper-label">
+                      Country
+                    </InputLabel>
+                    <Select
+                      id="country"
+                      name="country"
+                      label="Country"
+                      variant="outlined"
+                      value={addressData.address.country}
+                      onChange={handleChange}
+                      error={!!errors.country}
+                      helperText={errors.country}
+                      required
+                    >
+                      <MenuItem value={"INDIA"}>INDIA</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <FormControl sx={{ m: 1, minWidth: "50%" }}>
+                    <InputLabel id="demo-simple-select-helper-label">
+                      State
+                    </InputLabel>
+                    <Select
+                      id="state"
+                      name="state"
+                      label="State"
+                      variant="outlined"
+                      value={addressData.address.state}
+                      onChange={handleChange}
+                      error={!!errors.state}
+                      helperText={errors.state}
+                      required
+                    >
+                      <MenuItem value={"Andhra Pradesh"}>
+                        Andhra Pradesh
+                      </MenuItem>
+                      <MenuItem value={"Gujarat"}>Gujarat</MenuItem>
+                      <MenuItem value={"Karnataka"}>Karnataka</MenuItem>
+                      <MenuItem value={"Kerala"}>Kerala</MenuItem>
+                      <MenuItem value={"Madhya Pradesh"}>
+                        Madhya Pradesh
+                      </MenuItem>
+                      <MenuItem value={"Tamil Nadu"}>Tamil Nadu</MenuItem>
+                      <MenuItem value={"Telangana"}>Telangana</MenuItem>
+                    </Select>
+                  </FormControl>
                 </div>
                 <TextField
                   id="city"
@@ -255,6 +327,8 @@ export const AddressBlock = ({
                   variant="outlined"
                   value={addressData.address.city}
                   onChange={handleChange}
+                  error={!!errors.city}
+                  helperText={errors.city}
                   required
                 />
 
@@ -265,6 +339,8 @@ export const AddressBlock = ({
                   variant="outlined"
                   value={addressData.address.street}
                   onChange={handleChange}
+                  error={!!errors.street}
+                  helperText={errors.street}
                   required
                 />
 
@@ -292,11 +368,11 @@ export const AddressBlock = ({
                     control={<Radio />}
                     label="HOME"
                   />
-                  {/* <FormControlLabel
-                  value="OTHER"
-                  control={<Radio />}
-                  label="OFFICE"
-                /> */}
+                  <FormControlLabel
+                    value="OTHER"
+                    control={<Radio />}
+                    label="OFFICE"
+                  />
                   <FormControlLabel
                     value="OTHER"
                     control={<Radio />}

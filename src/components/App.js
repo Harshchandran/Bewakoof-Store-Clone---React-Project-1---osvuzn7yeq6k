@@ -3,7 +3,6 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import CampaignMen from "../components/homePageChilds/MenSubNavigations/Men";
 import "../components/styles/App.css";
 import { Footer } from "./footer/Footer";
-import BewakoofAir from "./homePageChilds/BewakoofAirSubNavigations/BewakoofAir";
 import { PlusSize } from "./homePageChilds/PlusSizeSubNavigations/PlusSize";
 import CampaignWomen from "./homePageChilds/WomenSubNavigations/Women";
 import { IndividualCategoryProducts } from "./individualCategoryProductsPage/IndividualCategoryProducts";
@@ -42,6 +41,7 @@ function App() {
       <ScrollToTop />
 
       <Routes>
+        <Route path="*" element={<PageNotFound />} />
         <Route path="/">
           <Route index element={<Home />} />
           <Route path="campaign/mens-home" element={<CampaignMen />} />
@@ -64,7 +64,6 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/orders" element={<OrderHistory />} />
         <Route path="/orders/Individual" element={<IndividualOrderCard />} />
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
       {pagePath.pathname === "/cart" ? null : <Footer />}

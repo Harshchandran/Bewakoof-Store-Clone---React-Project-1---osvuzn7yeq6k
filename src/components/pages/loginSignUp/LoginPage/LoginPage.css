@@ -121,6 +121,18 @@
   font-weight: bolder;
 }
 
+.error {
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 80%;
+
+  font-size: 0.6rem;
+  color: red;
+  font-weight: 600;
+}
+
 @media only screen and (max-width: 991px) {
   .loginFormHeader {
     display: flex;

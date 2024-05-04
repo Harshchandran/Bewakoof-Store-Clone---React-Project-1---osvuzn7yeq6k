@@ -77,6 +77,76 @@ export const PaymentPage = () => {
 
   const [orderPlacedStatus, setOrderPlacedStatus] = useState(false);
 
+  const [cardDetails, setCardDetails] = useState({
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
+    nameOnCard: "",
+  });
+
+  const [upiId, setUpiId] = useState("");
+
+  const [cardErrors, setCardErrors] = useState({
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
+    nameOnCard: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChangeCard = (prop) => (event) => {
+    let { value } = event.target;
+    if (prop === "cardNumber") {
+      value = value
+        .replace(/\s?/g, "")
+        .replace(/(\d{4})/g, "$1 ")
+        .trim();
+    }
+    setCardDetails({ ...cardDetails, [prop]: value });
+  };
+
+  const handleCardSubmit = (event) => {
+    event.preventDefault();
+
+    let formValid = true;
+    const newCardErrors = {
+      cardNumber: "",
+      expiry: "",
+      cvv: "",
+      nameOnCard: "",
+    };
+
+    if (!cardDetails.cardNumber.match(/^\d{4} \d{4} \d{4} \d{4}$/)) {
+      newCardErrors.cardNumber =
+        "Invalid card number. Format: XXXX XXXX XXXX XXXX";
+      formValid = false;
+    }
+
+    if (!cardDetails.expiry.match(/^(0[1-9]|1[0-2]) \d{2}$/)) {
+      newCardErrors.expiry = "Invalid expiry date. Format: MM YY";
+      formValid = false;
+    }
+
+    if (!cardDetails.cvv.match(/^\d{3}$/)) {
+      newCardErrors.cvv = "Invalid CVV. Must be 3 digits.";
+      formValid = false;
+    }
+
+    if (!cardDetails.nameOnCard.match(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)) {
+      newCardErrors.nameOnCard =
+        "Invalid name. Only alphabets and spaces allowed.";
+      formValid = false;
+    }
+
+    setCardErrors(newCardErrors);
+
+    if (formValid) {
+      handleOrderStatus();
+      handlePay();
+    }
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -107,6 +177,37 @@ export const PaymentPage = () => {
     }
 
     setOrderPlacedStatus(false);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log(cardDetails);
+    alert("Submitted");
+    handleOrderStatus();
+  };
+
+  const validateUpiId = (value) => {
+    const regex = /^[\w.-]+@[\w.-]+$/;
+    if (!regex.test(value)) {
+      setError("Please enter a valid UPI ID (e.g., username@bank)");
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  const handleUPIChange = (e) => {
+    const { value } = e.target;
+    setUpiId(value);
+  };
+
+  const handleUPISubmit = () => {
+    if (upiId && validateUpiId(upiId)) {
+      handleOrderStatus();
+      handlePay();
+    } else {
+      setError("Please enter a valid UPI ID (e.g., username@bank)");
+    }
   };
 
   return (
@@ -251,33 +352,50 @@ export const PaymentPage = () => {
                   m: 1,
                   width: "25ch",
                   "@media only screen and (max-width: 991px)": {
-                    width: "10ch",
+                    width: "80%",
                   },
                 },
               }}
-              noValidate
               autoComplete="off"
+              onSubmit={handleFormSubmit}
             >
               <TextField
                 id="standard-basic"
                 label="Card Number"
                 variant="standard"
+                value={cardDetails.cardNumber}
+                error={!!cardErrors.cardNumber}
+                helperText={cardErrors.cardNumber}
+                onChange={handleChangeCard("cardNumber")}
                 InputLabelProps={{
                   sx: { color: "#737373", fontSize: "0.75rem" },
                 }}
                 required
+                inputProps={{
+                  maxLength: 19, // 16 digits + 3 spaces
+                  pattern: "\\d{4}\\s\\d{4}\\s\\d{4}\\s\\d{4}",
+                }}
               />
               <div className="cardDetailsBox">
                 <TextField
                   id="standard-basic"
-                  label="Valid through(MM/YY)"
+                  label="Valid through(MM YY)"
                   variant="standard"
                   sx={{ width: "14ch" }}
                   InputLabelProps={{
                     sx: { color: "#737373", fontSize: "0.75rem" },
                   }}
+                  error={!!cardErrors.expiry}
+                  helperText={cardErrors.expiry}
+                  value={cardDetails.expiry}
+                  onChange={handleChangeCard("expiry")}
                   required
+                  inputProps={{
+                    maxLength: 5,
+                    // pattern: "(?:0[1-9]|1[0-2])/[0-9]{2}",
+                  }}
                 />
+
                 <TextField
                   label="CVV"
                   id="filled-start-adornment"
@@ -290,8 +408,16 @@ export const PaymentPage = () => {
                     ),
                   }}
                   variant="standard"
+                  value={cardDetails.cvv}
+                  onChange={handleChangeCard("cvv")}
+                  error={!!cardErrors.cvv}
+                  helperText={cardErrors.cvv}
                   InputLabelProps={{
                     sx: { color: "#737373", fontSize: "0.75rem" },
+                  }}
+                  inputProps={{
+                    maxLength: 3,
+                    pattern: "\\d{3}",
                   }}
                   required
                 />
@@ -301,39 +427,44 @@ export const PaymentPage = () => {
                 id="standard-basic"
                 label="Name On Card"
                 variant="standard"
+                value={cardDetails.nameOnCard}
+                onChange={handleChangeCard("nameOnCard")}
+                inputProps={{
+                  pattern: "[a-zA-Z]+(?: [a-zA-Z]+)*",
+                }}
                 InputLabelProps={{
                   sx: { color: "#737373", fontSize: "0.75rem" },
                 }}
                 required
+                error={!!cardErrors.nameOnCard}
+                helperText={cardErrors.nameOnCard}
               />
-            </Box>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Save card details for later"
-                sx={{
-                  color: "#525252",
-                  fontSize: "0.875rem",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                }}
-              />
-            </FormGroup>
-            <p className="paymentPageUPIText">
-              This transaction you make is totally secure. We don't save your
-              CVV number. Pay ₹799
-            </p>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Save card details for later"
+                  sx={{
+                    color: "#525252",
+                    fontSize: "0.875rem",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                  }}
+                />
+              </FormGroup>
+              <p className="paymentPageUPIText">
+                This transaction you make is totally secure. We don't save your
+                CVV number. Pay ₹799
+              </p>
 
-            <button
-              className="paymentPageButton"
-              onClick={() => {
-                handlePay();
-                handleOrderStatus();
-              }}
-            >
-              pay
-            </button>
+              <button
+                className="paymentPageButton"
+                type="submit"
+                onClick={handleCardSubmit}
+              >
+                pay
+              </button>
+            </Box>
           </div>
         </TabPanel>
         <TabPanel value={value} index={1} sx={{ width: "calc(60% - 1rem)" }}>
@@ -472,24 +603,41 @@ export const PaymentPage = () => {
             </div>
             <div className="paymentPageUPIDetailsBox">
               <div>
-                <Box
+                {/* <Box
                   component="form"
                   sx={{
                     "& > :not(style)": { m: 1, width: "calc(60% - 0.2rem)" },
                   }}
                   noValidate
                   autoComplete="off"
-                >
-                  <TextField
-                    id="standard-basic"
-                    label="UPI"
-                    variant="standard"
-                    InputLabelProps={{
-                      sx: { color: "#737373", fontSize: "0.75rem" },
+                > */}
+                <input
+                  name="upiId"
+                  id="upiId"
+                  type="text"
+                  placeholder="Enter UPI ID. Eg: 987654321@upi"
+                  value={upiId}
+                  onChange={handleUPIChange}
+                  pattern="[\w.-]+@[\w.-]+"
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "0.4rem 0.5rem ",
+                    margin: "0.5rem 0",
+                  }}
+                />
+                {error && (
+                  <div
+                    style={{
+                      color: "red",
+                      fontWeight: "500",
+                      fontSize: "0.6rem",
                     }}
-                    required
-                  />
-                </Box>
+                  >
+                    {error}
+                  </div>
+                )}
+                {/* </Box> */}
               </div>
               <p className="paymentPageUPIText">
                 UPI ID is in the format of yourname@bankname or
@@ -503,13 +651,7 @@ export const PaymentPage = () => {
                 />
               </FormGroup>
 
-              <button
-                className="paymentPageButton"
-                onClick={() => {
-                  handleOrderStatus();
-                  handlePay();
-                }}
-              >
+              <button className="paymentPageButton" onClick={handleUPISubmit}>
                 VERIFY
               </button>
             </div>
@@ -645,7 +787,6 @@ export const PaymentPage = () => {
               <button
                 className="paymentPageButton"
                 onClick={() => {
-                  handleOrderStatus();
                   handlePay();
                 }}
               >
