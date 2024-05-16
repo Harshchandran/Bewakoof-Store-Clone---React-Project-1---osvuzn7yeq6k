@@ -25,7 +25,7 @@ export default function Wishlist() {
 
       const data = await response.json();
 
-      setCartProducts(data);
+      console.log(data);
 
       localStorage.setItem("wishlistItemsNumber", JSON.stringify(data.results));
 
@@ -45,12 +45,10 @@ export default function Wishlist() {
   }, [projectId]);
   return (
     <>
-      <div>Wishlist</div>
-
       <section>
         {token ? (
           <div>
-            <div>hi</div>
+            <div>Wishlist</div>
           </div>
         ) : (
           <EmptyWishList />

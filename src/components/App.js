@@ -51,7 +51,7 @@ function App() {
         </Route>
 
         <Route path="/login" element={<Login />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        {/* <Route path="/wishlist" element={<Wishlist />} /> */}
         <Route
           path="/cart"
           element={<Cart updateCartItemNumber={updateCartItemNumber} />}
@@ -61,6 +61,7 @@ function App() {
           path="/productCard/:id"
           element={<ProductCard updateCartItemNumber={updateCartItemNumber} />}
         />
+
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/orders" element={<OrderHistory />} />
         <Route path="/orders/Individual" element={<IndividualOrderCard />} />

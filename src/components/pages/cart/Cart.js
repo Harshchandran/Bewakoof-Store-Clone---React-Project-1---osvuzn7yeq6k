@@ -57,7 +57,12 @@ const Cart = ({ updateCartItemNumber }) => {
       const data = await response.json();
       setCartProducts(data);
 
-      localStorage.setItem("cartItemsNumber", JSON.stringify(data.results));
+      console.log(data);
+
+      localStorage.setItem(
+        "cartItemsNumber",
+        JSON.stringify(data.data.items.length)
+      );
       setLoader(false);
 
       setCartItems(data.data.items);

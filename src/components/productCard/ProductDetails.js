@@ -73,6 +73,8 @@ export const ProductDetails = ({
     size: "",
   });
 
+  const [addingItemToWishlist, setAddingItemToWishlist] = useState(null);
+
   const [UpdateResponse, setUpdateResponse] = useState([]);
 
   const [UpdateWishlistResponse, setUpdateWishlistResponse] = useState([]);
@@ -106,8 +108,43 @@ export const ProductDetails = ({
         setUpdateResponse(data);
 
         setUpdateSize("");
+
+        getCartProducts();
       } catch (error) {
         console.error("Error updating item to cart:", error);
+      }
+    }
+  };
+
+  const GetCartItemsURL =
+    "https://academics.newtonschool.co/api/v1/ecommerce/cart";
+
+  const getCartProducts = async () => {
+    if (localStorage.getItem("token")) {
+      const JWTToken = JSON.parse(localStorage.getItem("token"));
+
+      try {
+        const response = await fetch(GetCartItemsURL, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${JWTToken}`,
+            projectId: projectId,
+          },
+        });
+
+        const data = await response.json();
+
+        localStorage.setItem(
+          "cartItemsNumber",
+          JSON.stringify(data.data.items.length)
+        );
+
+        console.log(data);
+        console.log(data.data.items.length);
+
+        updateCartItemNumber();
+      } catch (error) {
+        console.error("Error fetching Cart Items:", error);
       }
     }
   };
@@ -125,6 +162,46 @@ export const ProductDetails = ({
       ...prevState,
       quantity: newQuantity,
     }));
+  };
+
+  const addProductToWishList = async (productId) => {
+    const UpdateWishlistApi =
+      "https://academics.newtonschool.co/api/v1/ecommerce/wishlist/";
+    const projectId = "f105bi07c590";
+
+    if (token) {
+      const requestBody = JSON.stringify({
+        productId: productId,
+      });
+      console.log(requestBody);
+
+      try {
+        const response = await fetch(UpdateWishlistApi, {
+          method: "PATCH",
+          headers: {
+            projectId: projectId,
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Methods": "*",
+          },
+          body: requestBody,
+          redirect: "follow",
+        });
+        console.log("response from wishlist api  : ", response);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(
+          "Error occurred while updating the wishlist:",
+          error.message
+        );
+      }
+    }
   };
 
   const [open, setOpen] = React.useState(false);
@@ -427,12 +504,11 @@ export const ProductDetails = ({
             updateSize={updateSize}
             handleSizeChange={handleSizeChange}
             handleClick={handleClick}
-            updateCartItemNumber={updateCartItemNumber}
           />
           {/* <button
             className="productDetailsButtonWishListsButton"
             onClick={() => {
-              updateWishlist();
+              addProductToWishList(productDetails._id);
             }}
           >
             <FavoriteBorderSharpIcon style={{ color: "#4f5362 [500] " }} />

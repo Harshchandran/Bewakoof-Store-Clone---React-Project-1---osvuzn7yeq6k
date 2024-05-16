@@ -16,6 +16,8 @@ import Logo from "./bwkf-trademark-logo.svg";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const StyledSearch = styled("div")(({ theme }) => ({
   position: "relative",
@@ -65,6 +67,7 @@ export default function NavigationMenu({
 }) {
   const [showDropdown, setShowDropdown] = useState(false);
   // const [noOfItemsInCart, setNoOfItemsInCart] = useState("");
+  console.log(noOfItemsInCart);
 
   const [gender, setGender] = useState("");
 
@@ -129,6 +132,16 @@ export default function NavigationMenu({
         },
       });
     }
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleMouseEnter = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    setAnchorEl(null);
   };
 
   return (

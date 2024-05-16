@@ -32,6 +32,11 @@ import ICICI from "./icici-1556185960.webp";
 import Kotak from "./kotak-1556185967.webp";
 import PaytmBank from "./paytm-payment-wallet.webp";
 import SBI from "./sbi-1556185961.webp";
+import dayjs from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField } from "@mui/x-date-pickers/DateField";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -79,7 +84,7 @@ export const PaymentPage = () => {
 
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
-    expiry: "",
+    expiry: null,
     cvv: "",
     nameOnCard: "",
   });
@@ -96,18 +101,28 @@ export const PaymentPage = () => {
   const [error, setError] = useState("");
 
   const handleChangeCard = (prop) => (event) => {
-    let { value } = event.target;
-    if (prop === "cardNumber") {
-      value = value
-        .replace(/\s?/g, "")
-        .replace(/(\d{4})/g, "$1 ")
-        .trim();
+    if (event && event.target) {
+      const { value } = event.target;
+      let updatedValue = value;
+      if (prop === "cardNumber") {
+        updatedValue = value
+          .replace(/\s?/g, "")
+          .replace(/(\d{4})/g, "$1 ")
+          .trim();
+      } else if (prop === "expiry") {
+        updatedValue = value
+          .replace(/\s?/g, "")
+          .replace(/(\d{2})(\d{2})/, "$1/$2")
+          .trim();
+      }
+      setCardDetails({ ...cardDetails, [prop]: updatedValue });
     }
-    setCardDetails({ ...cardDetails, [prop]: value });
   };
 
   const handleCardSubmit = (event) => {
     event.preventDefault();
+
+    console.log(cardDetails);
 
     let formValid = true;
     const newCardErrors = {
@@ -123,10 +138,10 @@ export const PaymentPage = () => {
       formValid = false;
     }
 
-    if (!cardDetails.expiry.match(/^(0[1-9]|1[0-2]) \d{2}$/)) {
-      newCardErrors.expiry = "Invalid expiry date. Format: MM YY";
-      formValid = false;
-    }
+    // if (!cardDetails.expiry.match(/^(0[1-9]|1[0-2]) \d{2}$/)) {
+    //   newCardErrors.expiry = "Invalid expiry date. Format: MM YY";
+    //   formValid = false;
+    // }
 
     if (!cardDetails.cvv.match(/^\d{3}$/)) {
       newCardErrors.cvv = "Invalid CVV. Must be 3 digits.";
@@ -377,7 +392,7 @@ export const PaymentPage = () => {
                 }}
               />
               <div className="cardDetailsBox">
-                <TextField
+                {/* <TextField
                   id="standard-basic"
                   label="Valid through(MM YY)"
                   variant="standard"
@@ -394,12 +409,34 @@ export const PaymentPage = () => {
                     maxLength: 5,
                     // pattern: "(?:0[1-9]|1[0-2])/[0-9]{2}",
                   }}
-                />
+                /> */}
+
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DateField"]}>
+                    <DateField
+                      variant="standard"
+                      label="MM/YY"
+                      sx={{ width: "60%" }}
+                      InputLabelProps={{
+                        sx: { color: "#737373", fontSize: "0.75rem" },
+                      }}
+                      value={
+                        cardDetails.expiry
+                          ? dayjs(cardDetails.expiry, "MM/YY").toDate()
+                          : null
+                      }
+                      error={!!cardErrors.expiry}
+                      helperText={cardErrors.expiry}
+                      required
+                      format="MM/YY"
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
 
                 <TextField
                   label="CVV"
                   id="filled-start-adornment"
-                  sx={{ width: "8ch" }}
+                  sx={{ width: "30%" }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">

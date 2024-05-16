@@ -30,7 +30,6 @@ export const AddSizeToUpdateCart = ({
   updateSize,
   handleSizeChange,
   handleClick,
-  updateCartItemNumber,
 }) => {
   const [goToBag, setGoToBag] = useState(false);
 
@@ -56,34 +55,6 @@ export const AddSizeToUpdateCart = ({
       setGoToBag(false);
     }
   }, []);
-
-  const GetCartItemsURL =
-    "https://academics.newtonschool.co/api/v1/ecommerce/cart";
-  const projectId = "f105bi07c590";
-
-  const getCartProducts = async () => {
-    if (localStorage.getItem("token")) {
-      const JWTToken = JSON.parse(localStorage.getItem("token"));
-
-      try {
-        const response = await fetch(GetCartItemsURL, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${JWTToken}`,
-            projectId: projectId,
-          },
-        });
-
-        const data = await response.json();
-
-        localStorage.setItem("cartItemsNumber", JSON.stringify(data.results));
-
-        updateCartItemNumber();
-      } catch (error) {
-        console.error("Error fetching Cart Items:", error);
-      }
-    }
-  };
 
   const [selectedColor, setSelectedColor] = useState("");
 
@@ -115,9 +86,9 @@ export const AddSizeToUpdateCart = ({
               updateItemToCart();
               handleClick();
               setGoToBag(true);
-              setTimeout(() => {
-                getCartProducts();
-              }, 2000);
+              // setTimeout(() => {
+              // getCartProducts();
+              // }, 2000);
             }
           }}
           className="productDetailsButtonAddToBagButton"
@@ -184,9 +155,9 @@ export const AddSizeToUpdateCart = ({
             handleClose();
             handleClick();
 
-            setTimeout(() => {
-              getCartProducts();
-            }, 2000);
+            // setTimeout(() => {
+            // getCartProducts();
+            // }, 2000);
           }}
         >
           Done

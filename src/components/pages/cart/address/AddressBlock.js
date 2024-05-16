@@ -59,8 +59,13 @@ export const AddressBlock = ({
 
   useEffect(() => {
     if (localStorage.getItem("userData")) {
-      const userData = JSON.parse(localStorage.getItem("userData"));
-      setName(userData.name);
+      const storedData = JSON.parse(localStorage.getItem("userData"));
+
+      if (storedData && storedData.user) {
+        const userData = storedData.user;
+
+        setName(userData.name);
+      }
     }
     setLoader(false);
   }, []);
@@ -179,9 +184,13 @@ export const AddressBlock = ({
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
+    console.log(" errors 1 ", errors);
+
     const hasErrors = Object.values(errors).some((error) => error !== "");
 
-    if (!name || !mobileNumber || hasErrors) {
+    console.log("has errors", errors);
+
+    if (name != undefined && mobileNumber != undefined && hasErrors) {
       alert("Please complete all required fields and correct any errors.");
     } else {
       // Process the submission if everything is correct
@@ -252,7 +261,7 @@ export const AddressBlock = ({
                 <TextField
                   id="zipCode"
                   name="zipCode"
-                  type="number"
+                  type="text"
                   inputProps={{
                     min: 100000,
                     max: 999999,

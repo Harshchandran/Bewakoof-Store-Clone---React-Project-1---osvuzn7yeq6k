@@ -13,6 +13,7 @@ export default function Home() {
     <>
       <HomeNavigation />
       <HeroBanner />
+
       <HomePageCategory />
       <HomePageCoverImage />
 
