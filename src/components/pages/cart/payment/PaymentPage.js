@@ -425,6 +425,7 @@ export const PaymentPage = () => {
                           ? dayjs(cardDetails.expiry, "MM/YY").toDate()
                           : null
                       }
+                      onChange={handleChangeCard("expiry")}
                       error={!!cardErrors.expiry}
                       helperText={cardErrors.expiry}
                       required
