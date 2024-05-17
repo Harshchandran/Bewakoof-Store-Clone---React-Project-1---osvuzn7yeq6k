@@ -40,7 +40,6 @@ export const IndividualOrderCard = () => {
 
           const data = await response.json();
           setLoader(false);
-          console.log(data.data);
 
           setOrderProductDetails(data.data);
         }

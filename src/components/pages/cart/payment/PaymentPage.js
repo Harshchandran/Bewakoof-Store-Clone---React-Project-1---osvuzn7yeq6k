@@ -122,8 +122,6 @@ export const PaymentPage = () => {
   const handleCardSubmit = (event) => {
     event.preventDefault();
 
-    console.log(cardDetails);
-
     let formValid = true;
     const newCardErrors = {
       cardNumber: "",
@@ -196,7 +194,7 @@ export const PaymentPage = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(cardDetails);
+
     alert("Submitted");
     handleOrderStatus();
   };

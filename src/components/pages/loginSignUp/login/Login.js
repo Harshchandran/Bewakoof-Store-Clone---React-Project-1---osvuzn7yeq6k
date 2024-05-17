@@ -27,8 +27,6 @@ export default function Login() {
     } else {
       navigate("/login/email");
     }
-
-    console.log("Phone Number:", phoneNumber);
   };
 
   return (

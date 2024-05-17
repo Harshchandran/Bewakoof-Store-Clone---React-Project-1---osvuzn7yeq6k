@@ -184,8 +184,6 @@ export const AddressBlock = ({
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    console.log(" errors 1 ", errors);
-
     const hasErrors = Object.values(errors).some((error) => error !== "");
 
     console.log("has errors", errors);

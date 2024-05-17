@@ -50,8 +50,6 @@ export const LoginPage = () => {
 
       const data = await response.json();
 
-      console.log(data);
-
       if (
         data.status === "fail" &&
         data.message === "Incorrect EmailId or Password"
