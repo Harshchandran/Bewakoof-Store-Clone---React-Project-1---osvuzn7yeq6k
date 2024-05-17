@@ -398,14 +398,17 @@ export const IndividualCategoryProducts = () => {
                         <div className="individualCategorySingleProductProductFavIconBox">
                           {wishlistData.includes(data._id) ? (
                             <FavoriteIcon
-                              style={{ color: "red" }}
+                              style={{ color: "red", cursor: "pointer" }}
                               onClick={() => {
                                 removeProductFromWishList(data._id);
                               }}
                             />
                           ) : (
                             <FavoriteBorderSharpIcon
-                              style={{ color: "#4f5362 [500] " }}
+                              style={{
+                                color: "#4f5362 [500] ",
+                                cursor: "pointer",
+                              }}
                               onClick={() => {
                                 addProductToWishList(data._id);
                               }}

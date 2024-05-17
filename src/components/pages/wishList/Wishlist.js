@@ -5,6 +5,7 @@ import StarIcon from "@mui/icons-material/Star";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
+import { Link } from "react-router-dom";
 
 export default function Wishlist({ updateCartItemNumber }) {
   const [token, setToken] = useState("");
@@ -189,18 +190,24 @@ export default function Wishlist({ updateCartItemNumber }) {
                         color: "#5d5d5d",
                         background: "#ffff",
                         borderRadius: "100%",
+                        cursor: "pointer",
                       }}
                       onClick={() => {
                         removeProductFromWishList(item?.products?._id);
                       }}
                     />
-                    <div className="wishlistImageBox">
+                    <Link
+                      to={`/productCard/${item?.products?._id}`}
+                      state={{ id: item?.products?._id }}
+                      className="wishlistImageBox"
+                    >
                       <img
                         className="wishlistImage"
                         src={item?.products?.displayImage}
                         alt={item?.products?.name}
                       />
-                    </div>
+                    </Link>
+
                     <div className="wishlistTextBox">
                       <div className="wishlistBrandName">Bewakoof® </div>
                       <div className="wishlistProductName">
