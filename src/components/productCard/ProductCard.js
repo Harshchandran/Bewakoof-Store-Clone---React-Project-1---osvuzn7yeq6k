@@ -89,8 +89,8 @@ export const ProductCard = ({ updateCartItemNumber }) => {
             <div className="cardProductMainImageBox">
               <img
                 className="cardProductMainImage"
-                src={mainImage || productDetails.displayImage}
-                alt={productDetails.title}
+                src={mainImage || productDetails?.displayImage}
+                alt={productDetails?.title}
               />
             </div>
           </div>

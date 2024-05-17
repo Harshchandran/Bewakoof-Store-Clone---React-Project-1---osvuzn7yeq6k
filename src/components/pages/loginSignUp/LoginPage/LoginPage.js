@@ -32,7 +32,7 @@ export const LoginPage = () => {
 
   const SignUpApi = "https://academics.newtonschool.co/api/v1/user/signup";
 
-  const projectId = "f105bi07c590";
+  const projectId = "f104bi07c490";
 
   const [action, setAction] = useState("Log in to your account");
 

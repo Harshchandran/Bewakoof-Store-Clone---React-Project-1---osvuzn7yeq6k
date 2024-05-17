@@ -28,6 +28,7 @@ import { AddSizeToUpdateCart } from "./addSizeToCart/AddSizeToUpdateCart";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const style = {
   position: "absolute",
@@ -73,23 +74,60 @@ export const ProductDetails = ({
     size: "",
   });
 
-  const [addingItemToWishlist, setAddingItemToWishlist] = useState(null);
+  const [wishlistData, setWishlistData] = useState([]);
+
+  const [isProductInWishList, setIsProductInWishlist] = useState(false);
 
   const [UpdateResponse, setUpdateResponse] = useState([]);
 
-  const [UpdateWishlistResponse, setUpdateWishlistResponse] = useState([]);
-
   const productDetailsSize = productDetails?.size;
+
+  const getWishlistData = async (JWTToken) => {
+    const GetWishlistItemsApi =
+      "https://academics.newtonschool.co/api/v1/ecommerce/wishlist";
+
+    try {
+      const response = await fetch(GetWishlistItemsApi, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token || JWTToken}`,
+          projectId: projectId,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const productIds = data.data.items.map((item) => item.products._id);
+      setWishlistData(productIds);
+
+      const specificId = productDetails?._id;
+      const isInWishlist = productIds.includes(specificId);
+
+      setIsProductInWishlist(isInWishlist);
+    } catch (error) {
+      console.error(
+        "Error occurred during the Fetching Wishlist Data in Product Details : ",
+        error
+      );
+    }
+  };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       const JWTToken = JSON.parse(localStorage.getItem("token"));
       setToken(JWTToken);
+
+      if (JWTToken) {
+        getWishlistData(JWTToken);
+      }
     }
   }, []);
 
   const UpdateCartItemsApi = `https://academics.newtonschool.co/api/v1/ecommerce/cart/${SingleProductId}`;
-  const projectId = "f105bi07c590";
+  const projectId = "f104bi07c490";
 
   const updateItemToCart = async (e) => {
     if (token) {
@@ -139,9 +177,6 @@ export const ProductDetails = ({
           JSON.stringify(data.data.items.length)
         );
 
-        console.log(data);
-        console.log(data.data.items.length);
-
         updateCartItemNumber();
       } catch (error) {
         console.error("Error fetching Cart Items:", error);
@@ -166,14 +201,13 @@ export const ProductDetails = ({
 
   const addProductToWishList = async (productId) => {
     const UpdateWishlistApi =
-      "https://academics.newtonschool.co/api/v1/ecommerce/wishlist/";
-    const projectId = "f105bi07c590";
+      "https://academics.newtonschool.co/api/v1/ecommerce/wishlist";
+    const projectId = "f104bi07c490";
 
     if (token) {
       const requestBody = JSON.stringify({
         productId: productId,
       });
-      console.log(requestBody);
 
       try {
         const response = await fetch(UpdateWishlistApi, {
@@ -187,18 +221,48 @@ export const ProductDetails = ({
           body: requestBody,
           redirect: "follow",
         });
-        console.log("response from wishlist api  : ", response);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log(data);
+
+        getWishlistData();
+      } catch (error) {
+        console.error("Error occurred while updating the wishlist:", error);
+      }
+    } else {
+      handleClick();
+    }
+  };
+
+  const removeProductFromWishList = async (productId) => {
+    const removeWishlistApi = `https://academics.newtonschool.co/api/v1/ecommerce/wishlist/${productId}`;
+    const projectId = "f104bi07c490";
+
+    if (token) {
+      try {
+        const response = await fetch(removeWishlistApi, {
+          method: "DELETE",
+          headers: {
+            projectId: projectId,
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        getWishlistData();
       } catch (error) {
         console.error(
-          "Error occurred while updating the wishlist:",
-          error.message
+          "Error occurred while Removing product the wishlist:",
+          error
         );
       }
     }
@@ -246,7 +310,7 @@ export const ProductDetails = ({
           >
             {token
               ? "Product Added to Cart Successfully..!"
-              : " Log in / Sign up to add products to cart"}
+              : " Log in / Sign up to add products to cart / Favorites"}
           </Alert>
         </Snackbar>
       </div>
@@ -504,16 +568,28 @@ export const ProductDetails = ({
             updateSize={updateSize}
             handleSizeChange={handleSizeChange}
             handleClick={handleClick}
-          />
-          {/* <button
-            className="productDetailsButtonWishListsButton"
-            onClick={() => {
-              addProductToWishList(productDetails._id);
-            }}
-          >
-            <FavoriteBorderSharpIcon style={{ color: "#4f5362 [500] " }} />
-            WISHLIST
-          </button> */}
+          />{" "}
+          {isProductInWishList ? (
+            <button
+              className="productDetailsButtonWishListsButton"
+              onClick={() => {
+                removeProductFromWishList(productDetails._id);
+              }}
+            >
+              <FavoriteIcon style={{ color: "red" }} />
+              WISHLISTED
+            </button>
+          ) : (
+            <button
+              className="productDetailsButtonWishListsButton"
+              onClick={() => {
+                addProductToWishList(productDetails._id);
+              }}
+            >
+              <FavoriteBorderSharpIcon style={{ color: "#4f5362 [500] " }} />
+              WISHLIST
+            </button>
+          )}
         </div>
 
         <hr className="productDetailsSizesDividerLine"></hr>

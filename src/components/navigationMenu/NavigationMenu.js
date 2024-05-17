@@ -67,7 +67,6 @@ export default function NavigationMenu({
 }) {
   const [showDropdown, setShowDropdown] = useState(false);
   // const [noOfItemsInCart, setNoOfItemsInCart] = useState("");
-  console.log(noOfItemsInCart);
 
   const [gender, setGender] = useState("");
 
@@ -207,11 +206,11 @@ export default function NavigationMenu({
                 <Link to="/login">Login</Link>
               )}
             </li>
-            {/* <li>
+            <li>
               <Link to="/wishlist">
                 <FavoriteBorderOutlinedIcon />
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/cart">
                 <div className="NavigationBarCartBox">
@@ -267,11 +266,11 @@ export default function NavigationMenu({
                 />
               </StyledSearch>
             </li>
-            {/* <li>
+            <li>
               <Link to="/wishlist">
                 <FavoriteBorderRoundedIcon />
               </Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/cart">
                 <div className="NavigationBarCartBox">

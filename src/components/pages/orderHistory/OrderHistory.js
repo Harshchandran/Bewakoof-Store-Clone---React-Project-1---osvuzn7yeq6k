@@ -15,7 +15,7 @@ export const OrderHistory = () => {
 
   const GetOrderHistoryURL =
     "https://academics.newtonschool.co/api/v1/ecommerce/order/";
-  const projectId = "f105bi07c590";
+  const projectId = "f104bi07c490";
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

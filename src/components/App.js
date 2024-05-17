@@ -51,7 +51,10 @@ function App() {
         </Route>
 
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/wishlist" element={<Wishlist />} /> */}
+        <Route
+          path="/wishlist"
+          element={<Wishlist updateCartItemNumber={updateCartItemNumber} />}
+        />
         <Route
           path="/cart"
           element={<Cart updateCartItemNumber={updateCartItemNumber} />}

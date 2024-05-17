@@ -1,0 +1,136 @@
+.wishlistSection {
+  margin: 6rem 10% 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 80%;
+}
+
+.wishlistContainer {
+  width: calc(100% - 0.5rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.individualWishlistCard {
+  width: calc(25% - 1rem);
+  position: relative;
+  border: 0.1rem solid rgb(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.wishlistCardRemoveIcon {
+  display: flex;
+  position: absolute;
+  top: 2%;
+  right: 3%;
+}
+
+.wishlistImageBox {
+  width: 100%;
+}
+
+.wishlistImage {
+  width: 100%;
+}
+
+.wishlistTextBox {
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.wishlistBrandName {
+  font-weight: 700;
+  color: #4e5664;
+  font-size: 0.75rem;
+}
+
+.wishlistProductName {
+  color: #8f98a9;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wishlistProductPrice {
+  color: #292d35;
+  font-weight: 700;
+}
+
+.wishlistProductRating {
+  padding: 0 0.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
+  font-weight: 500;
+  font-size: 0.825rem;
+  position: absolute;
+  top: 65%;
+  background: #f9f9f9;
+}
+
+.wishlistProductAddToCart {
+  padding: 0.5rem;
+  width: 100%;
+  color: #207bb4;
+  font-size: 0.625rem;
+  font-weight: 900;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.wishlistProductAddToCart:hover {
+  background: #e6e6e6;
+  color: #333333;
+}
+
+.clearAllWishlistButton {
+  width: fit-content;
+  padding: 0.8rem 2rem;
+  border-radius: 0.2rem;
+  border: none;
+  background: #ffc700;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #000;
+}
+
+@media only screen and (max-width: 991px) {
+  .wishlistSection {
+    margin: 4rem 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 96%;
+  }
+  .wishlistContainer {
+    width: calc(100% - 0.5rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .individualWishlistCard {
+    width: calc(50% - 1rem);
+    position: relative;
+    border: 0.1rem solid rgb(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+}

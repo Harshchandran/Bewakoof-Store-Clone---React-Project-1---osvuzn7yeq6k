@@ -40,7 +40,7 @@ const Cart = ({ updateCartItemNumber }) => {
 
   const GetCartItemsURL =
     "https://academics.newtonschool.co/api/v1/ecommerce/cart";
-  const projectId = "f105bi07c590";
+  const projectId = "f104bi07c490";
 
   const getCartProducts = async () => {
     const JWTToken = JSON.parse(localStorage.getItem("token"));
@@ -56,8 +56,6 @@ const Cart = ({ updateCartItemNumber }) => {
 
       const data = await response.json();
       setCartProducts(data);
-
-      console.log(data);
 
       localStorage.setItem(
         "cartItemsNumber",
@@ -152,6 +150,41 @@ const Cart = ({ updateCartItemNumber }) => {
       // );
     } catch (error) {
       console.error("Error deleting item from cart:", error);
+    }
+  };
+
+  const addProductToWishList = async (productId) => {
+    const UpdateWishlistApi =
+      "https://academics.newtonschool.co/api/v1/ecommerce/wishlist";
+    const projectId = "f104bi07c490";
+
+    if (token) {
+      const requestBody = JSON.stringify({
+        productId: productId,
+      });
+
+      try {
+        const response = await fetch(UpdateWishlistApi, {
+          method: "PATCH",
+          headers: {
+            projectId: projectId,
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Methods": "*",
+          },
+          body: requestBody,
+          redirect: "follow",
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        handleRemoveProductFromCart(productId);
+      } catch (error) {
+        console.error("Error occurred while updating the wishlist:", error);
+      }
     }
   };
 
@@ -316,10 +349,15 @@ const Cart = ({ updateCartItemNumber }) => {
                           >
                             Remove
                           </button>
-                          {/* <hr className="cartProductButtonDividerLine"></hr>
-                          <button className="cartProductButtonMyWishList">
+                          <hr className="cartProductButtonDividerLine"></hr>
+                          <button
+                            className="cartProductButtonMyWishList"
+                            onClick={() => {
+                              addProductToWishList(item.product._id);
+                            }}
+                          >
                             Move to Wishlist
-                          </button> */}
+                          </button>
                         </div>
                       </div>
                     ))}

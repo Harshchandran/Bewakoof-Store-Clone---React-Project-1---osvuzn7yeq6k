@@ -77,7 +77,7 @@ export const AddressBlock = ({
         const JWTToken = JSON.parse(localStorage.getItem("token"));
         const AddressUrl =
           "https://academics.newtonschool.co/api/v1/ecommerce/order";
-        const projectId = "f105bi07c590";
+        const projectId = "f104bi07c490";
 
         const productId = productIds[i];
 
@@ -382,11 +382,11 @@ export const AddressBlock = ({
                     control={<Radio />}
                     label="OFFICE"
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     value="OTHER"
                     control={<Radio />}
                     label="Other"
-                  />
+                  /> */}
                 </RadioGroup>
               </FormControl>
               <div className="addressSubmitButtonBox">

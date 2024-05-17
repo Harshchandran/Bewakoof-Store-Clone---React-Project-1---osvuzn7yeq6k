@@ -76,7 +76,7 @@
   gap: 0.2rem;
 }
 .individualCategorySingleProductDetail {
-  width: 100%;
+  width: 80%;
   /* if heart icon is added change width to 80% */
   display: flex;
   flex-direction: column;
@@ -121,7 +121,7 @@
 
 .individualCategoryFilterSectionHeaders {
   display: flex;
-  flex-direction: rows;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -158,6 +158,41 @@
 
 @media only screen and (max-width: 991px) {
   .individualCategorySection {
-    margin: 3rem 2%;
+    margin: 2rem 0%;
+  }
+
+  .individualCategoryContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .individualCategoryLeftContainer {
+    width: calc(35% - 0rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+  }
+
+  .individualCategoryFilterHeading {
+    color: #2d2d2d;
+    opacity: 50%;
+    font-size: 0.75rem;
+  }
+
+  .individualCategoryRightContainer {
+    width: calc(60% - 0rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .individualCategoryDataBox03 {
+    width: calc(100% - 1rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0.5rem 0.5rem;
   }
 }

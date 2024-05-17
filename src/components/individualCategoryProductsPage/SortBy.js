@@ -23,7 +23,7 @@ export const SortBy = ({
   const [sortedData, setSortedData] = useState([]);
 
   const SortingUrl = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?sort={"rating":-1}`;
-  const projectId = "f105bi07c590";
+  const projectId = "f104bi07c490";
 
   async function getSortingFilters(api) {
     try {

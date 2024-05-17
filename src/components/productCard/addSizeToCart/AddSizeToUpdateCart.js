@@ -35,6 +35,8 @@ export const AddSizeToUpdateCart = ({
 
   const navigate = useNavigate();
 
+  const [token, setToken] = useState("");
+
   const [open, setOpen] = useState(false);
 
   const [localStorageCartCount, setLocalStorageCartCount] = useState("");
@@ -53,6 +55,10 @@ export const AddSizeToUpdateCart = ({
     }
     if (goToBag) {
       setGoToBag(false);
+    }
+    if (localStorage.getItem("token")) {
+      const JWTToken = JSON.parse(localStorage.getItem("token"));
+      setToken(JWTToken);
     }
   }, []);
 
@@ -85,10 +91,9 @@ export const AddSizeToUpdateCart = ({
             } else {
               updateItemToCart();
               handleClick();
-              setGoToBag(true);
-              // setTimeout(() => {
-              // getCartProducts();
-              // }, 2000);
+              {
+                token ? setGoToBag(true) : setGoToBag(false);
+              }
             }
           }}
           className="productDetailsButtonAddToBagButton"
@@ -151,13 +156,11 @@ export const AddSizeToUpdateCart = ({
           }}
           onClick={() => {
             updateItemToCart();
-            setGoToBag(true);
+            {
+              token ? setGoToBag(true) : setGoToBag(false);
+            }
             handleClose();
             handleClick();
-
-            // setTimeout(() => {
-            // getCartProducts();
-            // }, 2000);
           }}
         >
           Done

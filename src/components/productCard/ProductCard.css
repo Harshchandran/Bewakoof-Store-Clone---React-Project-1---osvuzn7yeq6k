@@ -68,7 +68,7 @@
 @media only screen and (max-width: 991px) {
   .productCart {
     margin: auto;
-    padding: 2rem 2rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
   }
@@ -135,6 +135,6 @@
   .cardProductDetailsContainer {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 1rem);
+    width: calc(100% - 0rem);
   }
 }

@@ -61,7 +61,7 @@ export const ProductReviews = ({ productReview, overallRatings }) => {
       fourCount = 0,
       fiveCount = 0;
 
-    productReview.forEach((data) => {
+    productReview?.forEach((data) => {
       switch (data?.ratings) {
         case 1:
           oneCount++;
