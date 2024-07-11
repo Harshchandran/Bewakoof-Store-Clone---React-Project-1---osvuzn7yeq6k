@@ -44,7 +44,7 @@
   color: rgb(58, 58, 58);
   font-size: large;
   font-weight: 100;
-  background-color: rgba(170, 169, 169, 0.4);
+  background-color: rgba(255, 255, 255, 0.83);
   position: absolute;
   top: 48%;
   left: 0.5%;
@@ -58,7 +58,7 @@
   align-items: center;
   color: rgb(58, 58, 58);
   font-weight: 100;
-  background-color: rgba(170, 169, 169, 0.4);
+  background-color: rgba(255, 255, 255, 0.83);
   position: absolute;
   top: 48%;
   right: 0.5%;

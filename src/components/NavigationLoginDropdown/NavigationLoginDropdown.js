@@ -54,7 +54,10 @@ export const NavigationLoginDropdown = ({ userName }) => {
           sx={{ color: "#949494", fontSize: "0.875rem" }}
           // onClick={handleClose}
         >
-          Hi, {userName}
+          Hi,{" "}
+          {userName
+            ? userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase()
+            : ""}
         </MenuItem>
 
         <MenuItem sx={{ fontSize: "0.875rem" }} onClick={handleClose}>

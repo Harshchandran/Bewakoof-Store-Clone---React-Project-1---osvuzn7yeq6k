@@ -70,7 +70,10 @@ function App() {
         <Route path="/orders/Individual" element={<IndividualOrderCard />} />
       </Routes>
 
-      {pagePath.pathname === "/cart" ? null : <Footer />}
+      {pagePath.pathname === "/cart" ||
+      pagePath.pathname === "/login" ? null : (
+        <Footer />
+      )}
     </>
   );
 }

@@ -198,7 +198,9 @@ export default function NavigationMenu({
             <li>
               <Search />
             </li>
-            <li>|</li>
+            <li className="navBarDividerLine">
+              <hr></hr>
+            </li>
             <li>
               {token ? (
                 <NavigationLoginDropdown userName={userName} />
@@ -207,9 +209,15 @@ export default function NavigationMenu({
               )}
             </li>
             <li>
-              <Link to="/wishlist">
-                <FavoriteBorderOutlinedIcon />
-              </Link>
+              {token ? (
+                <Link to="/wishlist">
+                  <FavoriteBorderOutlinedIcon />
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <FavoriteBorderOutlinedIcon />
+                </Link>
+              )}
             </li>
             <li>
               <Link to="/cart">
@@ -267,9 +275,15 @@ export default function NavigationMenu({
               </StyledSearch>
             </li>
             <li>
-              <Link to="/wishlist">
-                <FavoriteBorderRoundedIcon />
-              </Link>
+              {token ? (
+                <Link to="/wishlist">
+                  <FavoriteBorderOutlinedIcon />
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <FavoriteBorderOutlinedIcon />
+                </Link>
+              )}
             </li>
             <li>
               <Link to="/cart">

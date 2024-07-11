@@ -238,10 +238,16 @@ export const AddressBlock = ({
                   name="fullName"
                   label="Full Name"
                   variant="outlined"
-                  value={name}
+                  value={
+                    name
+                      ? name.charAt(0).toUpperCase() +
+                        name.slice(1).toLowerCase()
+                      : ""
+                  }
                   onChange={handleChange}
                   error={!!errors.name}
                   helperText={errors.name}
+                  disabled
                 />
                 <TextField
                   id="outlined-mobileNumber"

@@ -15,6 +15,7 @@ import CartQuality from "./quality-check.svg";
 import Payments from "./secure-payments-image.webp";
 import Alert from "@mui/material/Alert";
 import { LoaderPage } from "../pageLoader/LoaderPage";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -341,12 +342,13 @@ const Cart = ({ updateCartItemNumber }) => {
                         <div className="cartProductDividerLine"></div>
                         <div className="cartProductButtonBox">
                           <button
-                            className="cartProductButton"
+                            className="cartProductButton cartProductButtonRemoveButton"
                             onClick={() => {
                               handleRemoveProductFromCart(item.product._id);
                               handleClick();
                             }}
                           >
+                            <DeleteOutlineIcon />
                             Remove
                           </button>
                           <hr className="cartProductButtonDividerLine"></hr>
