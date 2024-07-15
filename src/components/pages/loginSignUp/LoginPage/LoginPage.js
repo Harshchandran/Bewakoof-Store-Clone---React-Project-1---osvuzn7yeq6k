@@ -1,3 +1,8 @@
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
@@ -5,6 +10,12 @@ import "./LoginPage.css";
 export const LoginPage = () => {
   const [Login, setLogin] = useState([]);
   const [signUp, setSignUp] = useState([]);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const Navigate = useNavigate();
 
@@ -22,6 +33,8 @@ export const LoginPage = () => {
   });
 
   const [errors, setErrors] = useState({ name: "", email: "", password: "" });
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigateRouteLogin = () => {
     // Navigate("/");
@@ -47,19 +60,19 @@ export const LoginPage = () => {
         },
         body: JSON.stringify(LoginValues),
       });
-
       const data = await response.json();
 
       if (
         data.status === "fail" &&
         data.message === "Incorrect EmailId or Password"
       ) {
-        alert("Incorrect EmailId or Password");
+        setErrorMessage("Incorrect EmailId or Password");
       }
 
       if (data.status === "success") {
         localStorage.setItem("token", JSON.stringify(data.token));
         localStorage.setItem("userData", JSON.stringify(data.data));
+        setErrorMessage("");
         navigateRouteLogin();
       }
 
@@ -71,6 +84,7 @@ export const LoginPage = () => {
         appType: "ecommerce",
       });
     } catch (error) {
+      setErrorMessage("Incorrect EmailId or Password");
       console.error("Error fetching Login Data:", error);
     }
   };
@@ -89,9 +103,14 @@ export const LoginPage = () => {
 
       const data = await response.json();
 
+      if (data.status === "fail" && data.message === "User already exists") {
+        setErrorMessage("User already exists. Please login.");
+      }
+
       if (data.status === "success") {
         localStorage.setItem("token", JSON.stringify(data.token));
         localStorage.setItem("userData", JSON.stringify(data.data.user));
+        setErrorMessage("");
         navigateRouteLogin();
       }
 
@@ -206,8 +225,8 @@ export const LoginPage = () => {
                 <div className="error">{errors.email}</div>
 
                 <div className="input">
-                  <input
-                    type="password"
+                  <TextField
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={
                       action === "Log in to your account"
@@ -217,6 +236,29 @@ export const LoginPage = () => {
                     onChange={handleChange}
                     placeholder="Password"
                     required
+                    fullWidth
+                    variant="standard"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={togglePasswordVisibility}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      disableUnderline: true,
+                    }}
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        border: "none",
+                      },
+                      "& .MuiInputBase-input": {
+                        padding: "8px 0",
+                      },
+                    }}
                   />
                 </div>
                 <div className="error">{errors.password}</div>
@@ -230,6 +272,10 @@ export const LoginPage = () => {
               </div>
             )} */}
 
+              {errorMessage && (
+                <div className="login-error-message"> {errorMessage} </div>
+              )}
+
               <div className="submit-container">
                 <button className="submit" type="submit">
                   {action === "Sign Up" ? "Sign Up" : "Login"}
@@ -242,6 +288,7 @@ export const LoginPage = () => {
                   <button
                     onClick={() => {
                       setAction("Log in to your account");
+                      setErrorMessage("");
                     }}
                   >
                     Click Here to Login!
@@ -255,6 +302,7 @@ export const LoginPage = () => {
                       type="button"
                       onClick={() => {
                         setAction("Sign Up");
+                        setErrorMessage("");
                       }}
                     >
                       Click Here to SignUp!

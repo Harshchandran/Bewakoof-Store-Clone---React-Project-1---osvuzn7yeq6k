@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
@@ -37,6 +37,22 @@ export const SubFooter = () => {
     }
 
     setOpen(false);
+  };
+
+  const [email, setEmail] = useState("");
+
+  const handleClickAlert = () => {
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (isValidEmail) {
+      handleClick();
+    } else {
+      alert("Please enter a valid email address");
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -146,7 +162,7 @@ export const SubFooter = () => {
               </div>
             </div>
             <div>
-              <div className="subFooterHeading">KEEP UP TO DATE Enter</div>
+              <div className="subFooterHeading">KEEP UP TO DATE ENTER</div>
               <Box
                 component="form"
                 sx={{
@@ -161,13 +177,23 @@ export const SubFooter = () => {
                 <Input
                   required
                   placeholder="Email Id"
-                  inputProps={ariaLabel}
+                  type="email"
+                  value={email}
+                  onChange={handleInputChange}
+                  inputProps={{
+                    "aria-label": "email",
+                    pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}",
+                  }}
                   sx={{
                     color: "#ffff",
                     fontSize: "0.75rem",
                   }}
                 />
-                <button className="subFooterEmailSubmitButton">
+                <button
+                  className="subFooterEmailSubmitButton"
+                  type="button"
+                  onClick={handleClickAlert}
+                >
                   SUBSCRIBE
                 </button>
               </Box>

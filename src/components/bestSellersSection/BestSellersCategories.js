@@ -81,6 +81,7 @@ export const BestSellersCategories = () => {
                     className="bestSellersImage"
                     src={data.displayImage}
                     alt={`hero${index}`}
+                    loading="lazy"
                   />
                   <div className="bestSellersNameContainer">
                     <div className="bestSellerNameBox">

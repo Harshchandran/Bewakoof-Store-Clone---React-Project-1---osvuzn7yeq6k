@@ -134,6 +134,16 @@
   font-weight: 600;
 }
 
+.login-error-message {
+  color: red;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media only screen and (max-width: 991px) {
   .loginFormHeader {
     display: flex;

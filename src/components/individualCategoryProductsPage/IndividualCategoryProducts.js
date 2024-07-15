@@ -103,6 +103,7 @@ export const IndividualCategoryProducts = () => {
 
           setCategoryData(data.data);
         } catch (error) {
+          setNotDataFound(true);
           console.error("Error fetching Category Data:", error);
         }
       }
@@ -137,6 +138,7 @@ export const IndividualCategoryProducts = () => {
 
           setCategoryData(data.data);
         } catch (error) {
+          setNotDataFound(true);
           console.error("Error fetching Category Data:", error);
         }
       }
@@ -168,8 +170,6 @@ export const IndividualCategoryProducts = () => {
       setLoader(false);
       if (data.status === "success") {
         setNotFound(false);
-      } else if (data.status === "fail") {
-        setNotFound(true);
       }
     } catch (error) {
       console.error("Error updating Filter Data:", error);
@@ -380,6 +380,7 @@ export const IndividualCategoryProducts = () => {
                           className="individualCategorySingleProductImage"
                           src={data.displayImage}
                           alt={`Image ${index}`}
+                          loading="lazy"
                         />
                       </Link>
                       <div className="individualCategorySingleProductBox">
